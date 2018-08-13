@@ -38,9 +38,6 @@ public class PlayerMovement : MonoBehaviour
                     return;
             }
         }
-        else {
-           // currentClickTarget = transform.position;
-        }
         var playerToClickPoint = currentClickTarget - transform.position;
 
         if (playerToClickPoint.magnitude >= walkMoveStopRadius)
