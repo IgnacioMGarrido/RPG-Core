@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         m_Character = GetComponent<ThirdPersonCharacter>();
         currentClickTarget = transform.position;
     }
+    //TODO: Fix conflict between click movement and WASD movement
 
     // Fixed update is called in sync with physics
     private void FixedUpdate()
