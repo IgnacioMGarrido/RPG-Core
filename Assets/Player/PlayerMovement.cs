@@ -8,32 +8,32 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float walkMoveStopRadius = .2f;
 
-    ThirdPersonCharacter m_Character;   // A reference to the ThirdPersonCharacter on the object
+    ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
     CameraRaycaster cameraRaycaster;
     Vector3 currentClickTarget;
 
 
-    bool m_Jump = false;
-    bool isInDirectMode = false; //TODO: Consider make it Static later
+    bool bJump = false;
+    bool isInDirectMode = false; 
 
 
     private void Start()
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-        m_Character = GetComponent<ThirdPersonCharacter>();
+        thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
         currentClickTarget = transform.position;
     }
-    //TODO: Fix conflict between click movement and WASD movement
     private void Update()
     {
-        /*  if (!m_Jump)
+        /*  if (!jump)
           {
-              m_Jump = Input.GetButtonDown("Jump");
+              jump = Input.GetButtonDown("Jump");
           }*/
         //TODO: Let the user map later or add to menu
         if (Input.GetKeyDown(KeyCode.G)) 
         {
             isInDirectMode = !isInDirectMode;
+            currentClickTarget = transform.position;
         }
     }
     // Fixed update is called in sync with physics
@@ -51,8 +51,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            print("Cursor raycast hit" + cameraRaycaster.layerHit);//hit.collider.gameObject.name.ToString());
-            switch (cameraRaycaster.layerHit)
+            print("Cursor raycast hit" + cameraRaycaster.currentLayerHit);//hit.collider.gameObject.name.ToString());
+            switch (cameraRaycaster.currentLayerHit)
             {
                 case Layer.Walkable:
                     currentClickTarget = cameraRaycaster.hit.point;
@@ -69,11 +69,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerToClickPoint.magnitude >= walkMoveStopRadius)
         {
-            m_Character.Move(playerToClickPoint, crouch, false);
+            thirdPersonCharacter.Move(playerToClickPoint, crouch, false);
         }
         else
         {
-            m_Character.Move(Vector3.zero, crouch, false);
+            thirdPersonCharacter.Move(Vector3.zero, crouch, false);
         }
     }
 
@@ -82,12 +82,11 @@ public class PlayerMovement : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 m_CamForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 m_Move = v * m_CamForward + h * Camera.main.transform.right;
+        Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 move = v * camForward + h * Camera.main.transform.right;
 
-        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
-        m_Character.Move(m_Move, crouch, m_Jump);
-
+        if (Input.GetKey(KeyCode.LeftShift)) move *= 0.5f;
+        thirdPersonCharacter.Move(move, crouch, bJump);
     }
 }
 
