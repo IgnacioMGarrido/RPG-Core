@@ -372,6 +372,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1293746489127714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4452389523393758}
+  - component: {fileID: 114652752928784488}
+  m_Layer: 10
+  m_Name: UI Socket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1309734254758670
 GameObject:
   m_ObjectHideFlags: 1
@@ -818,6 +834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4672525168258730}
   - component: {fileID: 95279411739128738}
+  - component: {fileID: 114648818640909970}
   m_Layer: 10
   m_Name: Enemy_prototype1
   m_TagString: Untagged
@@ -1772,6 +1789,19 @@ Transform:
   m_Father: {fileID: 4626295100925104}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4452389523393758
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1293746489127714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.867, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4672525168258730}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4470995505810306
 Transform:
   m_ObjectHideFlags: 1
@@ -2030,12 +2060,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1664573201131656}
   m_LocalRotation: {x: -0, y: 0.9621581, z: -0, w: 0.2724921}
-  m_LocalPosition: {x: -9.124413, y: -9.082435, z: 11.705817}
-  m_LocalScale: {x: 1.3515012, y: 0.7, z: 1}
+  m_LocalPosition: {x: -9.67, y: 0, z: 12.12}
+  m_LocalScale: {x: 1.3515011, y: 0.7, z: 1.000001}
   m_Children:
   - {fileID: 4691003103193870}
   - {fileID: 4157967637554518}
   - {fileID: 4992976841503066}
+  - {fileID: 4452389523393758}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 148.375, z: 0}
@@ -2468,6 +2499,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114648818640909970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1664573201131656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c214d763287ad3d4dbaeba9224692f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+--- !u!114 &114652752928784488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1293746489127714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1946e1c1bae1c34ba2666ebb3463952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCanvasPrefab: {fileID: 1311539807392560, guid: 9a9d70d10b9331d469e57254147e0430,
+    type: 2}
 --- !u!136 &136724668394475058
 CapsuleCollider:
   m_ObjectHideFlags: 1
