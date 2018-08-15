@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    // Use this for initialization
-    GameObject player;
+	[SerializeField] GameObject gameCanvasPrefab = null;
+	[SerializeField] GameObject eventSystemPrefab = null;
+
+	GameObject player;
+
+	// Use this for initialization
 	void Start () {
-		if(player == null)
-            player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+		Instantiate (gameCanvasPrefab);
+		Instantiate (eventSystemPrefab);
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        this.transform.position = player.transform.position;
+        transform.position = player.transform.position;
 	}
 }

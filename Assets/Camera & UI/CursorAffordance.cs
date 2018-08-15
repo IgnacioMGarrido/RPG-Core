@@ -5,34 +5,44 @@ using UnityEngine;
 [RequireComponent(typeof(CameraRaycaster))]
 public class CursorAffordance : MonoBehaviour {
 
-    CameraRaycaster cameraRaycaster;
-    [SerializeField] Texture2D[] cursorTextures;
-    [SerializeField] Vector2 hotSpot = new Vector2(0, 0);
+    [SerializeField] Texture2D walkCursor = null;
+    [SerializeField] Texture2D unknownCursor = null;
+	[SerializeField] Texture2D targetCursor = null;
+	[SerializeField] Texture2D buttonCursor = null;
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField] Vector2 cursorHotspot = new Vector2(0, 0);
+
+    CameraRaycaster cameraRaycaster;
+
+    [SerializeField]const int uiLayerNumber = 5;
+    [SerializeField]const int walkableLayerNumber = 9;
+    [SerializeField]const int enemyLayerNumber = 10;
+
+
+
+    // Use this for initialization
+    void Start () {
         cameraRaycaster = GetComponent<CameraRaycaster>();
-        cameraRaycaster.onLayerChange += OnDelegateCalled; // register delegates
+        cameraRaycaster.notifyLayerChangeObservers += OnLayerChanged; // registering
 	}
-	// Update is called once per frame
-	void OnDelegateCalled(Layer newLayer) {
+
+    void OnLayerChanged(int newLayer) {
         switch (newLayer)
         {
-            case Layer.Walkable:
-                Cursor.SetCursor(cursorTextures[0], hotSpot, CursorMode.Auto);
-                break;
-            case Layer.Enemy:
-                Cursor.SetCursor(cursorTextures[1], hotSpot, CursorMode.Auto);
-                break;
-            case Layer.RaycastEndStop:
-                Cursor.SetCursor(cursorTextures[2], hotSpot, CursorMode.Auto);
-                break;
-            default:
-                Cursor.SetCursor(cursorTextures[2], hotSpot, CursorMode.Auto);
-                Debug.LogError("Don't know what cursor to show");
-                break;
+		case uiLayerNumber: // TODO make cameraRaycaster member variables
+			Cursor.SetCursor (buttonCursor, cursorHotspot, CursorMode.Auto);
+			break;
+		case walkableLayerNumber:
+            Cursor.SetCursor(walkCursor, cursorHotspot, CursorMode.Auto);
+            break;
+        case enemyLayerNumber:
+            Cursor.SetCursor(targetCursor, cursorHotspot, CursorMode.Auto);
+            break;
+        default:
+			Cursor.SetCursor(unknownCursor, cursorHotspot, CursorMode.Auto);
+            return;
         }
     }
 
-    //TODO: Consider de-registering OnLayerChanged on leaving game scenes.
+    // TODO consider de-registering OnLayerChanged on leaving all game scenes
 }

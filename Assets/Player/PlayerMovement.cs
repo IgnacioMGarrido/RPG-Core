@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
     Vector3 clickPoint;
 
 
-
-    bool bJump = false;
     bool isInDirectMode = false; 
 
 
@@ -26,13 +24,12 @@ public class PlayerMovement : MonoBehaviour
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
         currentDestination = transform.position;
+
+        cameraRaycaster.notifyMouseClickObservers += ProcessIndirectMouseMovement;
+
     }
     private void Update()
     {
-        /*  if (!jump)
-          {
-              jump = Input.GetButtonDown("Jump");
-          }*/
         //TODO: Let the user map later or add to menu
         if (Input.GetKeyDown(KeyCode.G)) 
         {
@@ -41,50 +38,60 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     // Fixed update is called in sync with physics
-    private void FixedUpdate()
+      private void FixedUpdate()
+      {
+
+          if (isInDirectMode == true)
+              ProcessDirectMovement();
+         // else
+              //ProcessIndirectMouseMovement();
+      }
+
+      private void ProcessIndirectMouseMovement(RaycastHit raycastHit, int layerHit)
+      {
+          if (Input.GetMouseButton(0))
+          {
+              clickPoint = raycastHit.point;
+              switch (layerHit)
+              {
+                  case 9:
+                      currentDestination = clickPoint;
+                      currentDestination = ShortDestination(clickPoint, walkMoveStopRadius);
+                      break;
+                  case 10:
+                      currentDestination = ShortDestination(clickPoint, attackMoveStopRadius);
+                      Debug.Log("Not moving to enemy");
+                      break;
+                  default:
+                      Debug.Log("Unexpected Layer Found.");
+                      return;
+              }
+          }
+          WalkToDestination();
+      }
+  
+    private void ProcessDirectMovement()
     {
-        bool crouch = Input.GetKey(KeyCode.C);
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-        if (isInDirectMode == true)
-            ProcessDirectMovement(crouch);
-        else
-            ProcessIndirectMouseMovement(crouch);
+        Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 move = v * camForward + h * Camera.main.transform.right;
+
+        if (Input.GetKey(KeyCode.LeftShift)) move *= 0.5f;
+        thirdPersonCharacter.Move(move, false, false);
     }
-
-    private void ProcessIndirectMouseMovement(bool crouch)
-    {
-        if (Input.GetMouseButton(0))
-        {
-            clickPoint = cameraRaycaster.hit.point;
-            switch (cameraRaycaster.currentLayerHit)
-            {
-                case Layer.Walkable:
-                    currentDestination = clickPoint;
-                    currentDestination = ShortDestination(clickPoint, walkMoveStopRadius);
-                    break;
-                case Layer.Enemy:
-                    currentDestination = ShortDestination(clickPoint, attackMoveStopRadius);
-                    Debug.Log("Not moving to enemy");
-                    break;
-                default:
-                    Debug.Log("Unexpected Layer Found.");
-                    return;
-            }
-        }
-        WalkToDestination(crouch);
-    }
-
-    private void WalkToDestination(bool crouch)
+    private void WalkToDestination()
     {
         var playerToClickPoint = currentDestination - transform.position;
 
         if (playerToClickPoint.magnitude >= 0)
         {
-            thirdPersonCharacter.Move(playerToClickPoint, crouch, false);
+            thirdPersonCharacter.Move(playerToClickPoint, false, false);
         }
         else
         {
-            thirdPersonCharacter.Move(Vector3.zero, crouch, false);
+            thirdPersonCharacter.Move(Vector3.zero, false, false);
         }
     }
 
@@ -94,17 +101,7 @@ public class PlayerMovement : MonoBehaviour
         return destination - reductionVector;
     }
 
-    private void ProcessDirectMovement(bool crouch)
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
 
-        Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 move = v * camForward + h * Camera.main.transform.right;
-
-        if (Input.GetKey(KeyCode.LeftShift)) move *= 0.5f;
-        thirdPersonCharacter.Move(move, crouch, bJump);
-    }
 
     private void OnDrawGizmos()
     {
