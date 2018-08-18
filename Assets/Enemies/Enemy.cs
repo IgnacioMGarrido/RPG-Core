@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float stopChasingRadius = 20.0f;
     [SerializeField] GameObject projectileToUse_1;
     [SerializeField] GameObject projectileToUse_2;
+    [SerializeField] Vector3 AimOffset = new Vector3(0f,1f,0f);
     int projectileCont = 0;
 
     [SerializeField] GameObject projectileSocket;
@@ -66,7 +67,6 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     private void SpawnProjectile()
     {
-        Vector3 unitVectorToPlayer = (player.transform.position - projectileSocket.transform.position).normalized;
         GameObject newProjectile;
         if (projectileCont == 3)
         {
@@ -77,8 +77,10 @@ public class Enemy : MonoBehaviour, IDamageable
             newProjectile = Instantiate(projectileToUse_1, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));
             projectileCont++;
         }
+
+        Vector3 unitVectorToPlayer = (player.transform.position + AimOffset - projectileSocket.transform.position).normalized;
         var projectileComponent = newProjectile.GetComponent<Projectile>();
-        projectileComponent.damageCaused = damagePerShot;
+        projectileComponent.SetDamage(damagePerShot);
         float projectileSpeed = projectileComponent.projectileSpeed;
 
         
