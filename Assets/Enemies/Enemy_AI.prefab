@@ -965,6 +965,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1978953641744484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4472038792258804}
+  m_Layer: 10
+  m_Name: ProjectileSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1991489372784172
 GameObject:
   m_ObjectHideFlags: 1
@@ -1398,6 +1413,19 @@ Transform:
   m_Father: {fileID: 4575441722068498}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4472038792258804
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978953641744484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847105658860994}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4485789477695686
 Transform:
   m_ObjectHideFlags: 1
@@ -1773,16 +1801,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264434816376686}
-  m_LocalRotation: {x: -0, y: -0.9380764, z: -0, w: 0.34642866}
-  m_LocalPosition: {x: -142.1464, y: 9.913452, z: -233.8489}
+  m_LocalRotation: {x: -0, y: -0.4163442, z: -0, w: 0.9092071}
+  m_LocalPosition: {x: -149.03296, y: 9.998169, z: -240.58629}
   m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 4625059442940886}
   - {fileID: 4485789477695686}
   - {fileID: 4554459288566258}
+  - {fileID: 4472038792258804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -139.462, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -49.208004, z: 0}
 --- !u!4 &4847955735434550
 Transform:
   m_ObjectHideFlags: 1
@@ -2022,7 +2051,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
+  damagePerShot: 15
+  secondsBetweenShots: 0.5
   chaseRadius: 5
+  attackRadius: 7
+  stopChasingRadius: 20
+  projectileToUse_1: {fileID: 1983299024820686, guid: 12afe62582921c546a2fb1bcd767cbd8,
+    type: 2}
+  projectileToUse_2: {fileID: 1522964959674780, guid: 3b9d952ae25a01546861ddae589e3ad4,
+    type: 2}
+  projectileSocket: {fileID: 1978953641744484}
 --- !u!136 &136602723243205100
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -7,34 +7,84 @@ public class Enemy : MonoBehaviour, IDamageable
 {
 
     [SerializeField] float maxHealthPoints = 100f;
+    [SerializeField] float damagePerShot = 15.0f;
+    [SerializeField] float secondsBetweenShots = 0.5f;
+
     [SerializeField] float chaseRadius = 5.0f;
+    [SerializeField] float attackRadius = 7.0f;
+    [SerializeField] float stopChasingRadius = 20.0f;
+    [SerializeField] GameObject projectileToUse_1;
+    [SerializeField] GameObject projectileToUse_2;
+    int projectileCont = 0;
+
+    [SerializeField] GameObject projectileSocket;
+
+
+    bool isAttacking = false;
 
     AICharacterControl aiCharacterController = null;
     Transform originalTransform;
     GameObject player = null;
     float currenthealthPoints = 100f;
 
+    GameObject spawnPosition;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         aiCharacterController = GetComponent<AICharacterControl>();
+        spawnPosition = new GameObject("SpawnPosition");
+        spawnPosition.transform.position = transform.position;
+        spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform; // TODO: Change this so is the enemy empty gameObject who creates this object
 
     }
 
     private void Update()
     {
         float distanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
+        float spawnDistanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, spawnPosition.transform.position));
+
+        if (distanceToPlayer <= attackRadius && !isAttacking)
+        {
+            isAttacking = true;
+            InvokeRepeating("SpawnProjectile", 0f, secondsBetweenShots); //TODO: Switch to coroutines
+        }
+        if (distanceToPlayer > attackRadius)
+        {
+            isAttacking = false;
+            CancelInvoke();
+        }
+
         if (distanceToPlayer <= chaseRadius)
         {
             aiCharacterController.SetTarget(player.transform);
         }
-        else
+        else if (spawnDistanceToPlayer >= stopChasingRadius)
         {
-            aiCharacterController.SetTarget(originalTransform);
+            aiCharacterController.SetTarget(spawnPosition.transform);
         }
     }
+    private void SpawnProjectile()
+    {
+        Vector3 unitVectorToPlayer = (player.transform.position - projectileSocket.transform.position).normalized;
+        GameObject newProjectile;
+        if (projectileCont == 3)
+        {
+            projectileCont = 0;
+            newProjectile = Instantiate(projectileToUse_2, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));
+        }
+        else {
+            newProjectile = Instantiate(projectileToUse_1, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));
+            projectileCont++;
+        }
+        var projectileComponent = newProjectile.GetComponent<Projectile>();
+        projectileComponent.damageCaused = damagePerShot;
+        float projectileSpeed = projectileComponent.projectileSpeed;
 
+        
+
+        newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
+    }
     public void TakeDamage(float damage)
     {
         currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
@@ -47,5 +97,22 @@ public class Enemy : MonoBehaviour, IDamageable
             return currenthealthPoints / (float)maxHealthPoints;
         }
 
+    }
+
+    void OnDrawGizmos()
+    {
+
+        Gizmos.color = new Color(0f, 255f, 0f, .5f);
+        Gizmos.DrawWireSphere(transform.position, chaseRadius);
+
+        Gizmos.color = new Color(255f, 0f, 0f, .5f);
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+
+        /*   if (spawnPosition != null)
+           {
+               Gizmos.color = new Color(255f, 255f, 0f, .5f);
+               Gizmos.DrawWireSphere(spawnPosition.transform.position, stopChasingRadius);
+           }
+       */
     }
 }
