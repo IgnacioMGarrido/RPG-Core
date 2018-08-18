@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IDamageable
+{
 
     // Use this for initialization
     [SerializeField] float maxHealthPoints = 100f;
@@ -15,6 +16,11 @@ public class Player : MonoBehaviour {
             return currenthealthPoints / (float) maxHealthPoints;
         }
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
     }
 
     void Start () {
