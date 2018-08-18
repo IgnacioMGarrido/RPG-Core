@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IDamageable
     float lastHitTime = 0f;
     void Start()
     {
+        currenthealthPoints = maxHealthPoints;
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
     }

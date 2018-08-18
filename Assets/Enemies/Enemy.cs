@@ -13,8 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float chaseRadius = 5.0f;
     [SerializeField] float attackRadius = 7.0f;
     [SerializeField] float stopChasingRadius = 20.0f;
-    [SerializeField] GameObject projectileToUse_1;
-    [SerializeField] GameObject projectileToUse_2;
+    [SerializeField] GameObject projectileToUse;
     [SerializeField] Vector3 AimOffset = new Vector3(0f,1f,0f);
     int projectileCont = 0;
 
@@ -67,16 +66,10 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     private void SpawnProjectile()
     {
+
         GameObject newProjectile;
-        if (projectileCont == 3)
-        {
-            projectileCont = 0;
-            newProjectile = Instantiate(projectileToUse_2, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));
-        }
-        else {
-            newProjectile = Instantiate(projectileToUse_1, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));
-            projectileCont++;
-        }
+        
+        newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));        
 
         Vector3 unitVectorToPlayer = (player.transform.position + AimOffset - projectileSocket.transform.position).normalized;
         var projectileComponent = newProjectile.GetComponent<Projectile>();
@@ -104,11 +97,12 @@ public class Enemy : MonoBehaviour, IDamageable
     void OnDrawGizmos()
     {
 
-        Gizmos.color = new Color(0f, 255f, 0f, .5f);
+        Gizmos.color = new Color(0f, 0f, 255f, .5f);
         Gizmos.DrawWireSphere(transform.position, chaseRadius);
 
         Gizmos.color = new Color(255f, 0f, 0f, .5f);
         Gizmos.DrawWireSphere(transform.position, attackRadius);
+        
 
         /*   if (spawnPosition != null)
            {
