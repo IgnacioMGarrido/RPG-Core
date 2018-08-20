@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 136602723243205100}
   - component: {fileID: 195746039115602316}
   - component: {fileID: 114830126605199230}
+  - component: {fileID: 114098239761594236}
   - component: {fileID: 114782369065082676}
   - component: {fileID: 114937122672973552}
   m_Layer: 10
@@ -1899,9 +1900,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264434816376686}
-  m_LocalRotation: {x: -0, y: -0.78322667, z: -0, w: 0.62173635}
-  m_LocalPosition: {x: -138.184, y: 9.998169, z: -241.961}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.9380764, z: -0, w: 0.34642866}
+  m_LocalPosition: {x: -142.1464, y: 9.913452, z: -233.8489}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4625059442940886}
   - {fileID: 4485789477695686}
@@ -1909,7 +1910,7 @@ Transform:
   - {fileID: 4472038792258804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -124.912, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -72.939, z: 0}
 --- !u!4 &4847955735434550
 Transform:
   m_ObjectHideFlags: 1
@@ -2310,6 +2311,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114098239761594236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264434816376686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6ff589c7e0a164c87b8c7f0fd3705c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  might: 13
+  constitution: 14
+  dexterity: 5
+  perception: 13
+  intellect: 6
+  resolve: 12
+  fortitude: 0
+  reflex: 0
+  deflection: 0
+  will: 0
+  classHealthMutiplier: 5
+  endurance: 20
+  health: 0
+  concentration: 33
+  damage: 10
+  healing: 7
+  actionSpeed: 3
+  interrupt: 0
+  accuarcy: 0
+  areaOfEffect: 7
+  duration: 3
 --- !u!114 &114602810326833552
 MonoBehaviour:
   m_ObjectHideFlags: 1

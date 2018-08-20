@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable
     bool isAttacking = false;
 
     AICharacterControl aiCharacterController = null;
+    CharacterStats characterStats;
     Transform originalTransform;
     GameObject player = null;
     float currenthealthPoints = 100f;
@@ -33,6 +34,13 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         player = GameObject.FindGameObjectWithTag("Player");
         aiCharacterController = GetComponent<AICharacterControl>();
+        characterStats = GetComponent<CharacterStats>();
+        if (characterStats) {
+            maxHealthPoints = characterStats.Health;
+            damagePerShot = characterStats.Damage;
+            secondsBetweenShots = characterStats.ActionSpeed;
+        }
+        currenthealthPoints = maxHealthPoints;
         spawnPosition = new GameObject("SpawnPosition");
         spawnPosition.transform.position = transform.position;
         spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform; // TODO: Change this so is the enemy empty gameObject who creates this object

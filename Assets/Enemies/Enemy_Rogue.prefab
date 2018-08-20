@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 136173172759739566}
   - component: {fileID: 195758765267784360}
   - component: {fileID: 114963175317652990}
+  - component: {fileID: 114471146982969502}
   - component: {fileID: 114436087945459482}
   - component: {fileID: 114658463110107228}
   m_Layer: 10
@@ -1159,7 +1160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706424491471086}
   m_LocalRotation: {x: -0, y: -0.88665694, z: -0, w: 0.4624279}
-  m_LocalPosition: {x: -179.19751, y: 0, z: -191.8429}
+  m_LocalPosition: {x: -119.04, y: 6.0062256, z: -217.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4005028905796442}
@@ -2457,6 +2458,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCanvasPrefab: {fileID: 1311539807392560, guid: 9a9d70d10b9331d469e57254147e0430,
     type: 2}
+--- !u!114 &114471146982969502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706424491471086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6ff589c7e0a164c87b8c7f0fd3705c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  might: 13
+  constitution: 6
+  dexterity: 14
+  perception: 16
+  intellect: 10
+  resolve: 17
+  fortitude: 0
+  reflex: 0
+  deflection: 0
+  will: 0
+  classHealthMutiplier: 5
+  endurance: 20
+  health: 0
+  concentration: 33
+  damage: 10
+  healing: 7
+  actionSpeed: 3
+  interrupt: 0
+  accuarcy: 0
+  areaOfEffect: 7
+  duration: 3
 --- !u!114 &114658463110107228
 MonoBehaviour:
   m_ObjectHideFlags: 1

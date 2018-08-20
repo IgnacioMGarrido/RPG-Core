@@ -2370,12 +2370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6ff589c7e0a164c87b8c7f0fd3705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  might: 17
-  constitution: 16
-  dexterity: 14
-  perception: 15
-  intellect: 16
-  resolve: 11
+  might: 18
+  constitution: 20
+  dexterity: 18
+  perception: 17
+  intellect: 13
+  resolve: 15
   fortitude: 0
   reflex: 0
   deflection: 0
@@ -2419,6 +2419,7 @@ MonoBehaviour:
   damagePerHit: 10
   minTimeBetweenHits: 0.5
   maxAttackRange: 1.5
+  currenthealthPoints: 100
 --- !u!114 &114855332588998430
 MonoBehaviour:
   m_ObjectHideFlags: 1

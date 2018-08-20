@@ -618,6 +618,7 @@ GameObject:
   - component: {fileID: 136185542681292376}
   - component: {fileID: 195375929582366912}
   - component: {fileID: 114499141438552120}
+  - component: {fileID: 114381227734228466}
   - component: {fileID: 114344004384430588}
   - component: {fileID: 114102777092373638}
   m_Layer: 10
@@ -1259,8 +1260,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562004814779772}
-  m_LocalRotation: {x: -0, y: -0.4163442, z: -0, w: 0.9092071}
-  m_LocalPosition: {x: -165.90688, y: 0, z: -190.66779}
+  m_LocalRotation: {x: -0, y: -0.54885226, z: -0, w: 0.8359194}
+  m_LocalPosition: {x: -108.60124, y: 8.002197, z: -236.82849}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4217805354203844}
@@ -1269,7 +1270,7 @@ Transform:
   - {fileID: 4400255676876198}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -174.90001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -66.577, z: 0}
 --- !u!4 &4168607813865802
 Transform:
   m_ObjectHideFlags: 1
@@ -2258,6 +2259,38 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.9
   m_AnimSpeedMultiplier: 0.9
   m_GroundCheckDistance: 0.9
+--- !u!114 &114381227734228466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562004814779772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6ff589c7e0a164c87b8c7f0fd3705c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  might: 7
+  constitution: 8
+  dexterity: 10
+  perception: 14
+  intellect: 8
+  resolve: 6
+  fortitude: 0
+  reflex: 0
+  deflection: 0
+  will: 0
+  classHealthMutiplier: 5
+  endurance: 20
+  health: 0
+  concentration: 33
+  damage: 10
+  healing: 7
+  actionSpeed: 3
+  interrupt: 0
+  accuarcy: 0
+  areaOfEffect: 7
+  duration: 3
 --- !u!114 &114499141438552120
 MonoBehaviour:
   m_ObjectHideFlags: 1

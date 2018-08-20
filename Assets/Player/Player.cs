@@ -25,6 +25,8 @@ public class Player : MonoBehaviour, IDamageable
         characterStats = GetComponent<CharacterStats>();
         if (characterStats != null) {
             maxHealthPoints = characterStats.Health;
+            damagePerHit = characterStats.Damage;
+            minTimeBetweenHits = characterStats.ActionSpeed;
         }
         currenthealthPoints = maxHealthPoints;
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();

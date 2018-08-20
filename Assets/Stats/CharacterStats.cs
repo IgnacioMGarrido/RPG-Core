@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour {
+    private enum OperationAction {
+        Addition,
+        Substraction
+    }
 
+    OperationAction oa = OperationAction.Addition;
     // Attributes
     [SerializeField] int might = 10;
     [SerializeField] int constitution = 10;
@@ -318,27 +323,49 @@ public class CharacterStats : MonoBehaviour {
 
         //Passive Stats
         health = classHealthMutiplier * endurance;
-        endurance = CalculatePercentage(endurance, might, 0.05f);
-        health = CalculatePercentage(health, might, 0.05f);
+        endurance = CalculatePercentage(endurance, constitution, 0.05f, OperationAction.Addition);
+        health = CalculatePercentage(health, constitution, 0.05f, OperationAction.Addition);
         concentration = resolve * 3;
 
         //Action Stats
-        damage = CalculatePercentage(damage, might, 0.03f);
-        healing = CalculatePercentage(healing, might, 0.03f);
-        actionSpeed = CalculatePercentage(actionSpeed, dexterity, 0.03f);
+        damage = CalculatePercentage(damage, might, 0.03f, OperationAction.Addition);
+        healing = CalculatePercentage(healing, might, 0.03f, OperationAction.Addition);
+        actionSpeed = CalculatePercentage(actionSpeed, dexterity, 0.06f, OperationAction.Substraction);
         interrupt = perception * 3;
         accuarcy = perception * 1;
-        areaOfEffect = CalculatePercentage(areaOfEffect, intellect, 0.06f);
-        duration = CalculatePercentage(duration, intellect, 0.05f);
+        areaOfEffect = CalculatePercentage(areaOfEffect, intellect, 0.06f, OperationAction.Addition);
+        duration = CalculatePercentage(duration, intellect, 0.05f, OperationAction.Addition);
 
 
     }
 
-    float CalculatePercentage(float stateToCalculate, int attribute, float percentage) {
-        for (int i = 0; i < attribute; i++)
-        {
-            stateToCalculate += stateToCalculate * percentage;
+    float CalculatePercentage(float stateToCalculate, int attribute, float percentage, OperationAction _oa) {
+
+        //if it is less than the neutral point then we do the opposite operation
+        if (attribute < 10) {
+            if (_oa == OperationAction.Addition)
+                _oa = OperationAction.Substraction;
+            else
+                _oa = OperationAction.Substraction;
         }
+
+        switch (_oa)
+        {
+            case OperationAction.Addition:
+                for (int i = 0; i < attribute; i++)
+                {
+                    stateToCalculate += stateToCalculate * percentage;
+                }
+                break;
+            case OperationAction.Substraction:
+                for (int i = 0; i < attribute; i++)
+                {
+                    stateToCalculate -= stateToCalculate * percentage;
+                }
+                stateToCalculate = Mathf.Clamp(stateToCalculate, 0.5f, stateToCalculate);
+                break;
+        }
+
 
         return stateToCalculate;
 
