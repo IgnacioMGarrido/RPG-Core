@@ -16,11 +16,16 @@ public class Player : MonoBehaviour, IDamageable
 
     GameObject currentTarget = null;
     CameraRaycaster cameraRaycaster;
+    CharacterStats characterStats;
 
-    float currenthealthPoints = 100f;
+    [SerializeField] float currenthealthPoints = 100f;
     float lastHitTime = 0f;
     void Start()
     {
+        characterStats = GetComponent<CharacterStats>();
+        if (characterStats != null) {
+            maxHealthPoints = characterStats.Health;
+        }
         currenthealthPoints = maxHealthPoints;
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;

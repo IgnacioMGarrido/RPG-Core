@@ -1459,8 +1459,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939841245054686}
-  m_LocalRotation: {x: -0, y: -0.4163442, z: -0, w: 0.9092071}
-  m_LocalPosition: {x: -170.2663, y: 0, z: -203.79668}
+  m_LocalRotation: {x: -0, y: -0.7104142, z: -0, w: 0.7037839}
+  m_LocalPosition: {x: -140.17368, y: 9.998169, z: -239.06502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4286144864016366}
@@ -1469,7 +1469,7 @@ Transform:
   - {fileID: 4458801874204998}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -124.912, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.537, z: 0}
 --- !u!4 &4390907910385580
 Transform:
   m_ObjectHideFlags: 1
@@ -2240,9 +2240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 85
-  damagePerShot: 20
+  damagePerShot: 40
   secondsBetweenShots: 4
-  chaseRadius: 10
+  chaseRadius: 4
   attackRadius: 1.5
   stopChasingRadius: 15
   projectileToUse: {fileID: 1983299024820686, guid: 12afe62582921c546a2fb1bcd767cbd8,
@@ -2872,7 +2872,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 2
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
