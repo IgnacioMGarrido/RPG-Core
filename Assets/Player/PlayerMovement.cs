@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
   
-    //TODO: Make this called again.
+    //TODO: Make this called again. (Don't know yet if I want to implement gamepad movement)
     private void ProcessDirectMovement()
     {
         float h = Input.GetAxis("Horizontal");
