@@ -2370,7 +2370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6ff589c7e0a164c87b8c7f0fd3705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  might: 18
+  might: 23
   constitution: 20
   dexterity: 18
   perception: 17

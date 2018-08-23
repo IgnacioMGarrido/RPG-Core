@@ -2323,9 +2323,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   might: 13
-  constitution: 14
+  constitution: 10
   dexterity: 5
-  perception: 13
+  perception: 9
   intellect: 6
   resolve: 12
   fortitude: 0
