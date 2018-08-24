@@ -23,4 +23,5 @@ sysinfo.txt
 #Folders
 *Assets/Standard Assets
 *Assets/_World Objects
-*Assets/RPG Character Animation
+*Assets/_CameraUI/Characters/Animations
+*Assets/_CameraUI/Characters/Animation

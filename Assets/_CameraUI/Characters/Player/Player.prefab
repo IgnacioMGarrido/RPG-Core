@@ -448,7 +448,6 @@ GameObject:
   - component: {fileID: 54107926589142042}
   - component: {fileID: 136682139063410000}
   - component: {fileID: 195818527551339128}
-  - component: {fileID: 114855332588998430}
   - component: {fileID: 114517200868660366}
   - component: {fileID: 114764510337010976}
   - component: {fileID: 114640396583501420}
@@ -2328,19 +2327,8 @@ MonoBehaviour:
   maxAttackRange: 1.5
   animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
     type: 2}
-  weaponInUse: {fileID: 11400000, guid: 7279c885c67f45348a07832d49e64cfc, type: 2}
+  weaponInUse: {fileID: 11400000, guid: 9a59e110d0efb8c49a6c802477876497, type: 2}
   currenthealthPoints: 100
---- !u!114 &114855332588998430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406900039251628}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114928364904231760
 MonoBehaviour:
   m_ObjectHideFlags: 1
