@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 223482854617080494}
   - component: {fileID: 114352185840439852}
   - component: {fileID: 114299979998413088}
-  - component: {fileID: 114129319994257118}
   m_Layer: 0
   m_Name: Enemy Canvas
   m_TagString: Untagged
@@ -48,17 +47,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114129319994257118
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1311539807392560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb220b45747f1984d85dd4ac32dcf896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114299979998413088
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 using RPG.Weapons;
+using RPG.Core;
+
 namespace RPG.Characters
 {
     public class Enemy : MonoBehaviour, IDamageable

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using RPG.Core;
+
 namespace RPG.Weapons
 {
     public class Projectile : MonoBehaviour
@@ -15,7 +17,7 @@ namespace RPG.Weapons
 
         private void OnTriggerEnter(Collider collision) //Maybe change this to actual collision instead of triggers
         {
-            if (collision.gameObject.layer != shooter.layer)
+            if (shooter && collision.gameObject.layer != shooter.layer)
             {
                 DamageIfDamageable(collision);
             }

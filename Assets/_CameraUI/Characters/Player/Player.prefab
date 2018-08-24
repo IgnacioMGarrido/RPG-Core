@@ -2326,7 +2326,8 @@ MonoBehaviour:
   damagePerHit: 10
   actionSpeed: 0.5
   maxAttackRange: 1.5
-  weaponSlot: {fileID: 4182674154916866}
+  animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
+    type: 2}
   weaponInUse: {fileID: 11400000, guid: 7279c885c67f45348a07832d49e64cfc, type: 2}
   currenthealthPoints: 100
 --- !u!114 &114855332588998430

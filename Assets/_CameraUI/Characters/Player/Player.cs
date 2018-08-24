@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 
 using RPG.CameraUI;
 using RPG.Weapons;
+using RPG.Core;
 
 namespace RPG.Characters
 {
@@ -18,6 +19,7 @@ namespace RPG.Characters
         [SerializeField] float damagePerHit = 10f;
         [SerializeField] float actionSpeed = 0.5f;
         [SerializeField] float maxAttackRange = 1.5f;
+        [SerializeField] AnimatorOverrideController animatorOverrideController;
 
         [SerializeField] Weapon weaponInUse = null;
 
@@ -29,19 +31,39 @@ namespace RPG.Characters
         float lastHitTime = 0f;
         void Start()
         {
+            PutWeaponInHand();
+            InitializeCharacterStats();
+
+            NotifyListeners();
+            OverrideAnimatorController();
+        }
+
+        private void NotifyListeners()
+        {
+            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
+        }
+
+        private void InitializeCharacterStats()
+        {
+            currenthealthPoints = maxHealthPoints;
             characterStats = GetComponent<CharacterStats>();
             if (characterStats != null)
             {
                 maxHealthPoints = characterStats.Health;
+                currenthealthPoints = maxHealthPoints;
                 damagePerHit = characterStats.Damage;
                 actionSpeed = characterStats.ActionSpeed;
             }
-            PutWeaponInHand();
-
-            currenthealthPoints = maxHealthPoints;
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
         }
+
+        private void OverrideAnimatorController()
+        {
+            var Animator = GetComponent<Animator>();
+            Animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController["DEFAULT ATTACK"] = weaponInUse.GetAttackAnimClip(); //remove const
+        }
+
         void PutWeaponInHand()
         {
 
