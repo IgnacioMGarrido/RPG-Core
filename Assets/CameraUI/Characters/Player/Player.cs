@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Assertions;
 public class Player : MonoBehaviour, IDamageable
 {
 
@@ -12,7 +13,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float actionSpeed = 0.5f;
     [SerializeField] float maxAttackRange = 1.5f;
 
-    [SerializeField] Transform weaponSlot = null;
     [SerializeField] Weapon weaponInUse = null;
 
     GameObject currentTarget = null;
@@ -29,25 +29,43 @@ public class Player : MonoBehaviour, IDamageable
             damagePerHit = characterStats.Damage;
             actionSpeed = characterStats.ActionSpeed;
         }
-        if (weaponSlot == null) { Debug.LogError("Player has not assigned a weapon Slot. Assign it on inspector"); }
-        InstantiateWeapon();
+        PutWeaponInHand();
 
         currenthealthPoints = maxHealthPoints;
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
     }
-    void InstantiateWeapon() {
+    void PutWeaponInHand() {
 
-        GameObject currentWeapon = Instantiate(weaponInUse.WeaponPrefab, weaponSlot.position, weaponSlot.rotation) as GameObject;
-        currentWeapon.transform.SetParent(weaponSlot);
+        GameObject weapon = Instantiate(weaponInUse.WeaponPrefab);//, weaponSlot.position, weaponSlot.rotation) as GameObject;
+        GameObject dominantHandSocket = RequestDominantHand();
+        weapon.transform.SetParent(dominantHandSocket.transform);
+        weapon.transform.localPosition = weaponInUse.Grip.localPosition;
+        weapon.transform.localRotation = weaponInUse.Grip.localRotation;
+
         SetWeaponModifiersToPlayer();
     }
+
+    private GameObject RequestDominantHand()
+    {
+        var dominantHands = GetComponentsInChildren<DominantHand>();
+        int numDominantHands = dominantHands.Length;
+        //Handle 0 hands
+        Assert.IsFalse(numDominantHands <= 0, "No dominant hand found on Player. Please add one");
+        //handle more than one hand
+        Assert.IsFalse(numDominantHands > 1, "Multiple Dominant hand Scripts on player, pleasse remove one");
+
+        return dominantHands[0].gameObject;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
 
     }
 
+    //TODO: Refactor to reduce number of lines.
     void OnMouseClick(RaycastHit raycastHit, int layerHit)
     {
         //TODO: check dependencies.

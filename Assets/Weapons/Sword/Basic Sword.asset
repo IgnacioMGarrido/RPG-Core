@@ -14,5 +14,6 @@ MonoBehaviour:
   weaponPrefab: {fileID: 1564150445615628, guid: f9b42a3d7c7f48944b041279ef1b0683,
     type: 2}
   attackAnimation: {fileID: 0}
+  grip: {fileID: 4134010774920244, guid: 1b009033ae2c0324b8dfd80ef8908c60, type: 2}
   attackPercentageModifier: 0.33
-  speedPenaltyPercentageModifier: 1
+  speedPenaltyPercentageModifier: 0.05

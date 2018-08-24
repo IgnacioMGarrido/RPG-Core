@@ -191,6 +191,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1188593290135008
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4182674154916866}
+  - component: {fileID: 114305219025236312}
+  m_Layer: 0
+  m_Name: PT_Medieval_Right_Hand_Weapon_slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1197227539390990
 GameObject:
   m_ObjectHideFlags: 1
@@ -434,10 +450,10 @@ GameObject:
   - component: {fileID: 195818527551339128}
   - component: {fileID: 114855332588998430}
   - component: {fileID: 114517200868660366}
+  - component: {fileID: 114764510337010976}
   - component: {fileID: 114640396583501420}
   - component: {fileID: 114928364904231760}
   - component: {fileID: 114966950527665414}
-  - component: {fileID: 114764510337010976}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -700,21 +716,6 @@ GameObject:
   - component: {fileID: 4033983021439902}
   m_Layer: 0
   m_Name: PT_Medieval_LeftFoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1751033588703248
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4199729932957840}
-  m_Layer: 0
-  m_Name: PT_Medieval_Right_Hand_Weapon_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1290,6 +1291,19 @@ Transform:
   m_Father: {fileID: 4610268322353870}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4182674154916866
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188593290135008}
+  m_LocalRotation: {x: 0.65023524, y: 0.7249253, z: -0.18280254, w: 0.1351323}
+  m_LocalPosition: {x: -0.0193496, y: -0.099109754, z: -0.023399422}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4610268322353870}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4192270527989534
 Transform:
   m_ObjectHideFlags: 1
@@ -1315,19 +1329,6 @@ Transform:
   m_Children:
   - {fileID: 4033983021439902}
   m_Father: {fileID: 4773551071721422}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4199729932957840
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751033588703248}
-  m_LocalRotation: {x: 0.65023524, y: 0.7249253, z: -0.18280254, w: 0.1351323}
-  m_LocalPosition: {x: -0.0193496, y: -0.099109754, z: -0.023399422}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4610268322353870}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4231144515184894
@@ -1689,7 +1690,7 @@ Transform:
   m_LocalPosition: {x: -0.0007224663, y: -0.26493663, z: 0.0032230935}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4199729932957840}
+  - {fileID: 4182674154916866}
   - {fileID: 4181311068407850}
   - {fileID: 4459672988715332}
   - {fileID: 4232585126157986}
@@ -2254,6 +2255,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114305219025236312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188593290135008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcd18a6820a3f742822b8e05adb6a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114517200868660366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2312,8 +2324,10 @@ MonoBehaviour:
   enemyLayer: 10
   maxHealthPoints: 100
   damagePerHit: 10
-  minTimeBetweenHits: 0.5
+  actionSpeed: 0.5
   maxAttackRange: 1.5
+  weaponSlot: {fileID: 4182674154916866}
+  weaponInUse: {fileID: 11400000, guid: 7279c885c67f45348a07832d49e64cfc, type: 2}
   currenthealthPoints: 100
 --- !u!114 &114855332588998430
 MonoBehaviour:
