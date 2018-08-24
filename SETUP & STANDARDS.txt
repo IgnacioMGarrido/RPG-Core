@@ -1,0 +1,13 @@
+# Setup and Standards Doc
+
+## The world Scale & Origin
+We use Unity's default Terrain (1 m = 1 Unity Unit). Note animations don't scale well. 
+Y = 100m is the deepest water bottom. All Terrains at Y =-100, flattern land = 100.
+
+##Layers
+So far the layers are 'Walkable' = 9 and 'Enemy' = 10.
+Note the collider is the one that receives the raycast so apply this layer to children objects.
+
+##Labels
+The SceneSetup label contains prefabs that MUST be added to new Scenes.
+

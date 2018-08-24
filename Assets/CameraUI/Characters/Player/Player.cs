@@ -9,10 +9,11 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] int enemyLayer = 10;
     [SerializeField] float maxHealthPoints = 100f;
     [SerializeField] float damagePerHit = 10f;
-    [SerializeField] float minTimeBetweenHits = 0.5f;
+    [SerializeField] float actionSpeed = 0.5f;
     [SerializeField] float maxAttackRange = 1.5f;
 
-
+    [SerializeField] Transform weaponSlot = null;
+    [SerializeField] Weapon weaponInUse = null;
 
     GameObject currentTarget = null;
     CameraRaycaster cameraRaycaster;
@@ -26,13 +27,21 @@ public class Player : MonoBehaviour, IDamageable
         if (characterStats != null) {
             maxHealthPoints = characterStats.Health;
             damagePerHit = characterStats.Damage;
-            minTimeBetweenHits = characterStats.ActionSpeed;
+            actionSpeed = characterStats.ActionSpeed;
         }
+        if (weaponSlot == null) { Debug.LogError("Player has not assigned a weapon Slot. Assign it on inspector"); }
+        InstantiateWeapon();
+
         currenthealthPoints = maxHealthPoints;
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
     }
+    void InstantiateWeapon() {
 
+        GameObject currentWeapon = Instantiate(weaponInUse.WeaponPrefab, weaponSlot.position, weaponSlot.rotation) as GameObject;
+        currentWeapon.transform.SetParent(weaponSlot);
+        SetWeaponModifiersToPlayer();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -53,7 +62,7 @@ public class Player : MonoBehaviour, IDamageable
             currentTarget = enemy;
             var enemyComponent = currentTarget.GetComponent<Enemy>();
 
-            if (Time.time - lastHitTime > minTimeBetweenHits)
+            if (Time.time - lastHitTime > actionSpeed)
             {
                 enemyComponent.TakeDamage(damagePerHit);
                 lastHitTime = Time.time;
@@ -75,5 +84,11 @@ public class Player : MonoBehaviour, IDamageable
         currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
     }
 
+    void SetWeaponModifiersToPlayer() { //TODO we may want to modify the player stats instead?
+        damagePerHit = damagePerHit + damagePerHit * weaponInUse.AttackPercentageModifier;
+        actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
+    }
 
+
+    
 }
