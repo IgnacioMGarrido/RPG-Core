@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
         if (currenthealthPoints <= 0) {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 
