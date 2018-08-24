@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] float stopChasingRadius = 20.0f;
     [SerializeField] GameObject projectileToUse;
     [SerializeField] Vector3 AimOffset = new Vector3(0f,1f,0f);
-    int projectileCont = 0;
 
     [SerializeField] GameObject projectileSocket;
 

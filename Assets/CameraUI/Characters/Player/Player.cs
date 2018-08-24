@@ -35,9 +35,9 @@ public class Player : MonoBehaviour, IDamageable
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
     }
-    void PutWeaponInHand() {
+    void PutWeaponInHand() { 
 
-        GameObject weapon = Instantiate(weaponInUse.WeaponPrefab);//, weaponSlot.position, weaponSlot.rotation) as GameObject;
+        GameObject weapon = Instantiate(weaponInUse.WeaponPrefab); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
         GameObject dominantHandSocket = RequestDominantHand();
         weapon.transform.SetParent(dominantHandSocket.transform);
         weapon.transform.localPosition = weaponInUse.Grip.localPosition;

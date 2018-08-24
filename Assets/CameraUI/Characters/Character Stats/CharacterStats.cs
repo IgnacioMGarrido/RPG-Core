@@ -8,7 +8,6 @@ public class CharacterStats : MonoBehaviour {
         Substraction
     }
 
-    OperationAction oa = OperationAction.Addition;
     // Attributes
     [SerializeField] int might = 10;
     [SerializeField] int constitution = 10;
