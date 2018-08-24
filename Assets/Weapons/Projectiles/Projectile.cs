@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    public float projectileSpeed = 10f;
-    [SerializeField] float damageCaused = 10f;
+    const float DESTROY_DELAY = 0.05f;
 
-    private void OnTriggerEnter(Collider other)
+    [SerializeField]private float projectileSpeed = 10f;
+    [SerializeField] float damageCaused = 10f;
+    [SerializeField] GameObject shooter; 
+
+    private void OnTriggerEnter(Collider collision) //Maybe change this to actual collision instead of triggers
     {
-        Component damagable = other.gameObject.GetComponent(typeof(IDamageable));
-        if (damagable) {
-            (damagable as IDamageable).TakeDamage(damageCaused);
+        if (collision.gameObject.layer != shooter.layer)
+        {
+            DamageIfDamageable(collision);
         }
     }
 
+    private void DamageIfDamageable(Collider collision)
+    {
+        Component damagable = collision.gameObject.GetComponent(typeof(IDamageable));
+        if (damagable && damagable.gameObject.layer != shooter.layer)
+        {
+            (damagable as IDamageable).TakeDamage(damageCaused);
+        }
+        Destroy(this.gameObject, DESTROY_DELAY);
+    }
+
+    public float getDefaultLaunchSpeed() {
+        return projectileSpeed;
+    }
     public void SetDamage(float damage) {
         damageCaused = damage;
+    }
+
+    public void SetShooter(GameObject _Shooter) {
+        this.shooter = _Shooter;
     }
 }
