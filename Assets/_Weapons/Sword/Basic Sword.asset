@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d49e3422bbd7b4b824a984eade1daf, type: 3}
+  m_Name: Basic Sword
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 1564150445615628, guid: f9b42a3d7c7f48944b041279ef1b0683,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 388866d801cf0f34daa7a600517209b2, type: 3}
+  grip: {fileID: 4134010774920244, guid: 1b009033ae2c0324b8dfd80ef8908c60, type: 2}
+  attackPercentageModifier: 0.33
+  speedPenaltyPercentageModifier: 0.05

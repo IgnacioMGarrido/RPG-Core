@@ -22,8 +22,5 @@ sysinfo.txt
 
 #Folders
 *Assets/Standard Assets
-*Assets/FBX_Models
-*Assets/World Objects
-*Assets/Blends & FBX
-*Assets/Polytope Studio
-*Assets/Warrior Pack Animations
+*Assets/_World Objects
+*Assets/RPG Character Animation
