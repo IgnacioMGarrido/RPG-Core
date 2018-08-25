@@ -32,8 +32,8 @@ namespace RPG.Characters
         float lastHitTime = 0f;
         void Start()
         {
-            PutWeaponInHand();
             InitializeCharacterStats();
+            PutWeaponInHand();
 
             NotifyListeners();
             SetupRuntimeAnimator();
@@ -144,7 +144,7 @@ namespace RPG.Characters
 
         void SetWeaponModifiersToPlayer()
         { //TODO we may want to modify the player stats instead?
-            //damagePerHit = damagePerHit + damagePerHit * weaponInUse.AttackPercentageModifier;
+            damagePerHit = damagePerHit + damagePerHit * weaponInUse.AttackPercentageModifier;
             //actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
         }
 

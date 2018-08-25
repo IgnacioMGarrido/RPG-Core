@@ -25,7 +25,7 @@ GameObject:
   m_Name: Back_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1235415849357576
@@ -42,7 +42,7 @@ GameObject:
   m_Name: Chimney
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1263874649358096
@@ -59,7 +59,7 @@ GameObject:
   m_Name: Left_Windowed_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1364230570395568
@@ -76,7 +76,7 @@ GameObject:
   m_Name: Front_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1574785241151032
@@ -92,7 +92,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 118
   m_IsActive: 1
 --- !u!1 &1583687394946080
 GameObject:
@@ -108,7 +108,7 @@ GameObject:
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1648837130928382
@@ -125,7 +125,7 @@ GameObject:
   m_Name: Right_Windowed_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1679640615087924
@@ -142,7 +142,7 @@ GameObject:
   m_Name: Main_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1975140054596588
@@ -159,7 +159,7 @@ GameObject:
   m_Name: Front_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4012010464859738
@@ -207,8 +207,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1574785241151032}
-  m_LocalRotation: {x: -0, y: 0.7697999, z: -0, w: -0.6382854}
-  m_LocalPosition: {x: -135.22, y: 0, z: -193.66}
+  m_LocalRotation: {x: -0, y: 0.722553, z: -0, w: 0.6913156}
+  m_LocalPosition: {x: -193.2, y: 0, z: -172.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4441979292683634}
@@ -221,7 +221,7 @@ Transform:
   - {fileID: 4014619517866514}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 92.531006, z: 0}
 --- !u!4 &4441979292683634
 Transform:
   m_ObjectHideFlags: 1

@@ -25,7 +25,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1059652941317790
@@ -42,7 +42,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1069650761941084
@@ -58,7 +58,7 @@ GameObject:
   m_Name: PickettFence (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1069710415976880
@@ -75,7 +75,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1078888692540604
@@ -92,7 +92,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1084122986350914
@@ -108,7 +108,7 @@ GameObject:
   m_Name: PickettFence (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1092586084106888
@@ -124,7 +124,7 @@ GameObject:
   m_Name: PickettFence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1096402252202266
@@ -172,7 +172,7 @@ GameObject:
   m_Name: Right_Windowed_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1200154970894836
@@ -189,7 +189,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1218537374236798
@@ -206,7 +206,7 @@ GameObject:
   m_Name: Chimney
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1232416845578848
@@ -239,7 +239,7 @@ GameObject:
   m_Name: Front_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1250074782749652
@@ -255,7 +255,7 @@ GameObject:
   m_Name: PickettFence (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1267327822954430
@@ -272,7 +272,7 @@ GameObject:
   m_Name: Front_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1268568199570568
@@ -289,7 +289,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1281348595404586
@@ -306,7 +306,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1309106096502674
@@ -322,7 +322,7 @@ GameObject:
   m_Name: PickettFence (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1311778642553042
@@ -339,7 +339,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1317797220988676
@@ -356,7 +356,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1352887477327700
@@ -373,7 +373,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1354548229515560
@@ -390,7 +390,7 @@ GameObject:
   m_Name: Back_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1357260670656830
@@ -423,7 +423,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1426016217428554
@@ -440,7 +440,7 @@ GameObject:
   m_Name: Main_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1492764111027670
@@ -456,7 +456,7 @@ GameObject:
   m_Name: PickettFence (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1524815409040524
@@ -488,7 +488,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1564675817065200
@@ -505,7 +505,7 @@ GameObject:
   m_Name: Left_Windowed_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1586919578261286
@@ -521,7 +521,7 @@ GameObject:
   m_Name: PickettFence (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1606498781889644
@@ -538,7 +538,7 @@ GameObject:
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1714336095307954
@@ -554,7 +554,7 @@ GameObject:
   m_Name: PickettFence (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1756700988045658
@@ -571,7 +571,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1774127309887978
@@ -587,7 +587,7 @@ GameObject:
   m_Name: PickettFence (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1796207916044906
@@ -603,7 +603,7 @@ GameObject:
   m_Name: PickettFence (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1815821030215620
@@ -619,7 +619,7 @@ GameObject:
   m_Name: PickettFence (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1839238593689322
@@ -635,7 +635,7 @@ GameObject:
   m_Name: PickettFence (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1868505214524536
@@ -652,7 +652,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1874206701510446
@@ -668,7 +668,7 @@ GameObject:
   m_Name: PickettFence (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1907958774251200
@@ -685,7 +685,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1928056858239156
@@ -701,7 +701,7 @@ GameObject:
   m_Name: PickettFence (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!1 &1988145911243318
@@ -718,7 +718,7 @@ GameObject:
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4003233876964490
