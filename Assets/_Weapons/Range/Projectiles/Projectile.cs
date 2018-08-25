@@ -9,7 +9,7 @@ namespace RPG.Weapons
     public class Projectile : MonoBehaviour
     {
 
-        const float DESTROY_DELAY = 0.05f;
+        const float DESTROY_DELAY = 0.5f;
 
         [SerializeField] private float projectileSpeed = 10f;
         [SerializeField] float damageCaused = 10f;
