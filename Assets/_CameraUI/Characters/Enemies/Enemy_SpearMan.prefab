@@ -71,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1083607542274632
 GameObject:
   m_ObjectHideFlags: 1
@@ -2353,10 +2353,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip:
-  - {fileID: 8300000, guid: 5579cf53124e3d343996563c62b82f7e, type: 3}
+  - {fileID: 8300000, guid: 3b42903c9d9dd444097e604a5f4b30bd, type: 3}
   layerFilter: 11
   triggerRadius: 5
-  isOneTimeOnly: 0
+  isOneTimeOnly: 1
   hasPlayed: 0
 --- !u!114 &114098239761594236
 MonoBehaviour:
