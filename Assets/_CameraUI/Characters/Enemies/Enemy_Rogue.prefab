@@ -350,6 +350,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1298463364500008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4514736535402430}
+  - component: {fileID: 114762270394129076}
+  m_Layer: 0
+  m_Name: Audio Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1301958510055692
 GameObject:
   m_ObjectHideFlags: 1
@@ -1159,14 +1175,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706424491471086}
-  m_LocalRotation: {x: 3.1373703e-18, y: 0.4646465, z: 5.979018e-18, w: 0.88549626}
-  m_LocalPosition: {x: -124.03, y: 6.0842495, z: -225.81}
+  m_LocalRotation: {x: -0, y: -0.88665694, z: -0, w: 0.4624279}
+  m_LocalPosition: {x: -179.19751, y: 0, z: -191.8429}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4005028905796442}
   - {fileID: 4343166751069516}
   - {fileID: 4073475885521794}
   - {fileID: 4634368484932706}
+  - {fileID: 4514736535402430}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -124.912, z: 0}
@@ -1600,6 +1617,19 @@ Transform:
   - {fileID: 4746676048434460}
   m_Father: {fileID: 4729179789669310}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4514736535402430
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1298463364500008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4026495403804662}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4515688434145848
 Transform:
@@ -2511,6 +2541,23 @@ MonoBehaviour:
     type: 2}
   AimOffset: {x: 0, y: 1, z: 0}
   projectileSocket: {fileID: 1252791080606198}
+--- !u!114 &114762270394129076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1298463364500008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd5c2c86d90ad24a8cd318454bf6ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip:
+  - {fileID: 8300000, guid: 5579cf53124e3d343996563c62b82f7e, type: 3}
+  layerFilter: 11
+  triggerRadius: 5
+  isOneTimeOnly: 0
+  hasPlayed: 0
 --- !u!114 &114963175317652990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2529,7 +2576,7 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706424491471086}
-  m_Material: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
