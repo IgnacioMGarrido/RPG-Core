@@ -17,9 +17,10 @@ namespace RPG.Characters
         [SerializeField] int enemyLayer = 10;
         [SerializeField] float maxHealthPoints = 100f;
         [SerializeField] float damagePerHit = 10f;
-        [SerializeField] float actionSpeed = 0.5f;
-        [SerializeField] float maxAttackRange = 1.5f;
+
+
         [SerializeField] AnimatorOverrideController animatorOverrideController;
+        Animator animator;
 
         [SerializeField] Weapon weaponInUse = null;
 
@@ -35,7 +36,7 @@ namespace RPG.Characters
             InitializeCharacterStats();
 
             NotifyListeners();
-            OverrideAnimatorController();
+            SetupRuntimeAnimator();
         }
 
         private void NotifyListeners()
@@ -53,14 +54,15 @@ namespace RPG.Characters
                 maxHealthPoints = characterStats.Health;
                 currenthealthPoints = maxHealthPoints;
                 damagePerHit = characterStats.Damage;
-                actionSpeed = characterStats.ActionSpeed;
+                //weaponInUse.ActionSpeed += characterStats.ActionSpeedPercentage;
             }
         }
 
-        private void OverrideAnimatorController()
+        private void SetupRuntimeAnimator()
         {
-            var Animator = GetComponent<Animator>();
-            Animator.runtimeAnimatorController = animatorOverrideController;
+            
+            animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
             animatorOverrideController["DEFAULT ATTACK"] = weaponInUse.GetAttackAnimClip(); //remove const
         }
 
@@ -94,7 +96,10 @@ namespace RPG.Characters
         {
 
         }
-
+        public void TakeDamage(float damage)
+        {
+            currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
+        }
         //TODO: Refactor to reduce number of lines.
         void OnMouseClick(RaycastHit raycastHit, int layerHit)
         {
@@ -102,22 +107,30 @@ namespace RPG.Characters
             if (layerHit == enemyLayer)
             {
                 var enemy = raycastHit.collider.gameObject;
-
                 //Check enemy is in range.
-                if ((enemy.transform.position - transform.position).magnitude > maxAttackRange)
-                {
-                    return;
-                }
-
-                currentTarget = enemy;
-                var enemyComponent = currentTarget.GetComponent<Enemy>();
-
-                if (Time.time - lastHitTime > actionSpeed)
-                {
-                    enemyComponent.TakeDamage(damagePerHit);
-                    lastHitTime = Time.time;
+                if (IsTargetInRange(enemy)) {
+                    AttackTarget(enemy);
                 }
             }
+        }
+
+        private void AttackTarget(GameObject target)
+        {
+            currentTarget = target;
+            var enemyComponent = currentTarget.GetComponent<Enemy>();
+
+            if (Time.time - lastHitTime > weaponInUse.ActionSpeed)
+            {
+                animator.SetTrigger("Attack");
+                enemyComponent.TakeDamage(damagePerHit);
+                lastHitTime = Time.time;
+            }
+        }
+
+        private bool IsTargetInRange(GameObject target)
+        {
+            float distanceToTarget = (target.transform.position - transform.position).magnitude;
+            return distanceToTarget <= weaponInUse.MaxAttackRange;
         }
 
         public float healthAsPercentage
@@ -129,15 +142,10 @@ namespace RPG.Characters
 
         }
 
-        public void TakeDamage(float damage)
-        {
-            currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
-        }
-
         void SetWeaponModifiersToPlayer()
         { //TODO we may want to modify the player stats instead?
-            damagePerHit = damagePerHit + damagePerHit * weaponInUse.AttackPercentageModifier;
-            actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
+            //damagePerHit = damagePerHit + damagePerHit * weaponInUse.AttackPercentageModifier;
+            //actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
         }
 
 

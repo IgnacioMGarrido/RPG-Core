@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d49e3422bbd7b4b824a984eade1daf, type: 3}
-  m_Name: Long Sword
+  m_Name: Medieval Mace
   m_EditorClassIdentifier: 
-  isTwoHanded: 1
-  weaponPrefab: {fileID: 1259495581303080, guid: 7be2dead40ea91e4493e2d2de84e9906,
+  isTwoHanded: 0
+  weaponPrefab: {fileID: 1482383418697892, guid: e6dd6731acfce7f4d879dc120f7dab74,
     type: 2}
-  attackAnimation: {fileID: 7400000, guid: dce280ced5e006c4cb0eb0fab2f51b75, type: 3}
-  grip: {fileID: 4134010774920244, guid: d82830f6eaff4c148b321098c9e2da2d, type: 2}
-  actionSpeed: 1.8
-  maxAttackRange: 2.4
+  attackAnimation: {fileID: 7400000, guid: 16ed03c4145b8dd488c8bc50fa6b2432, type: 3}
+  grip: {fileID: 4134010774920244, guid: 23b94f70034c6d94e95f984c7ede3b7f, type: 2}
+  actionSpeed: 1.6
+  maxAttackRange: 1.6

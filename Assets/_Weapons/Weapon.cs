@@ -11,9 +11,11 @@ namespace RPG.Weapons
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
         [SerializeField] Transform grip;
+        [SerializeField] float actionSpeed = 0.5f;
+        [SerializeField] float maxAttackRange = 1.5f;
 
-        [SerializeField] float attackPercentageModifier = 0.0f;
-        [SerializeField] float speedPenaltyPercentageModifier = 0.0f;
+  //      [SerializeField] float attackPercentageModifier = 0.0f;
+  //      [SerializeField] float speedPenaltyPercentageModifier = 0.0f;
 
         public GameObject WeaponPrefab
         {
@@ -28,7 +30,7 @@ namespace RPG.Weapons
             }
         }
 
-        public float AttackPercentageModifier
+/*        public float AttackPercentageModifier
         {
             get
             {
@@ -53,7 +55,7 @@ namespace RPG.Weapons
                 speedPenaltyPercentageModifier = value;
             }
         }
-
+*/
         public Transform Grip
         {
             get
@@ -66,6 +68,33 @@ namespace RPG.Weapons
                 grip = value;
             }
         }
+
+        public float ActionSpeed
+        {
+            get
+            {
+                return actionSpeed;
+            }
+
+            set
+            {
+                actionSpeed = value;
+            }
+        }
+
+        public float MaxAttackRange
+        {
+            get
+            {
+                return maxAttackRange;
+            }
+
+            set
+            {
+                maxAttackRange = value;
+            }
+        }
+
         public AnimationClip GetAttackAnimClip()
         {
             RemoveAnimationEvents();

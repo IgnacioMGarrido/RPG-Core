@@ -9,11 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d49e3422bbd7b4b824a984eade1daf, type: 3}
-  m_Name: Medieval Maze
+  m_Name: CrossBow
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 1482383418697892, guid: e6dd6731acfce7f4d879dc120f7dab74,
+  isTwoHanded: 1
+  weaponPrefab: {fileID: 1720113933079566, guid: a3603c146a767b046800cb1178826ed2,
     type: 2}
-  attackAnimation: {fileID: 7400000, guid: 16ed03c4145b8dd488c8bc50fa6b2432, type: 3}
-  grip: {fileID: 4134010774920244, guid: 23b94f70034c6d94e95f984c7ede3b7f, type: 2}
-  attackPercentageModifier: 0.5
-  speedPenaltyPercentageModifier: 0.15
+  attackAnimation: {fileID: 7400000, guid: 07b5bdab577331945902e7f97a1dbd85, type: 2}
+  grip: {fileID: 4134010774920244, guid: 973d28b0be6c6b542a78bfe2e826b582, type: 2}
+  actionSpeed: 3
+  maxAttackRange: 10
