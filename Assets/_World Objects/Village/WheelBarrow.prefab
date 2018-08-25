@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33903713017729104}
   - component: {fileID: 23449544071258568}
   - component: {fileID: 65721363969717050}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: WheelBarrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
