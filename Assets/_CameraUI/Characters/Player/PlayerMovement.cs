@@ -39,7 +39,7 @@ namespace RPG.Characters
             walkTarget = new GameObject("WalkTarget");
             currentDestination = transform.position;
 
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
+            cameraRaycaster.notifyLeftMouseClickObservers += ProcessMouseClick;
 
         }
 

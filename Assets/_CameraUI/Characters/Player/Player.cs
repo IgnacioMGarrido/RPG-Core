@@ -42,7 +42,7 @@ namespace RPG.Characters
         private void NotifyListeners()
         {
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
+            cameraRaycaster.notifyLeftMouseClickObservers += OnMouseClick;
         }
 
         private void InitializeCharacterStats()
