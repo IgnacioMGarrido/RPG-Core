@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec4b310ba7846247a999aa563aa2568, type: 3}
+  m_Name: Self Heal L1
+  m_EditorClassIdentifier: 
+  energyCost: 25
+  abilityAnimation: {fileID: 0}
+  healAmount: 40

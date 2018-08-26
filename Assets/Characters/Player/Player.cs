@@ -44,7 +44,10 @@ namespace RPG.Characters
 
             NotifyListeners();
             SetupRuntimeAnimator();
-            abilities[0].AttachComponentTo(gameObject);
+            foreach (SpecialAbility ability in abilities)
+            {
+                ability.AttachComponentTo(gameObject);
+            }
         }
 
         private void NotifyListeners()
@@ -102,7 +105,16 @@ namespace RPG.Characters
         // Update is called once per frame
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
 
+                AttemptSpecialAbility(1, gameObject.GetComponent<Player>());
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                AttemptSpecialAbility(2, gameObject.GetComponent<Player>());
+            }
         }
         public void TakeDamage(float damage)
         {
@@ -116,15 +128,16 @@ namespace RPG.Characters
                 AttackTarget(enemy);
             }else if (Input.GetMouseButtonDown(1))
             {
-                AttemptSpecialAbility(0,enemy);
+                AttemptSpecialAbility(0, enemy);
             }
         }
 
-        private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
+        private void AttemptSpecialAbility(int abilityIndex, IDamageable target)
         {
             if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
                 playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
-                abilities[abilityIndex].Use(new AbilityUseParams(enemy,baseDamage));
+                
+                abilities[abilityIndex].Use(new AbilityUseParams(target, baseDamage));
             }
         }
 
