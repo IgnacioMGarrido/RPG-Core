@@ -19,7 +19,7 @@ namespace RPG.Characters
         [SerializeField] float damagePerHit = 10f;
 
         //temporarily serialized for debugging.
-        [SerializeField] SpecialAbilityConfig ability1;
+        [SerializeField] SpecialAbilityConfig[] abilities;
 
 
         [SerializeField] AnimatorOverrideController animatorOverrideController;
@@ -44,7 +44,7 @@ namespace RPG.Characters
 
             NotifyListeners();
             SetupRuntimeAnimator();
-            ability1.AddComponent(gameObject);
+            abilities[0].AttachComponentTo(gameObject);
         }
 
         private void NotifyListeners()
@@ -116,15 +116,15 @@ namespace RPG.Characters
                 AttackTarget(enemy);
             }else if (Input.GetMouseButtonDown(1))
             {
-                AttemptSpecialAbility1(enemy);
+                AttemptSpecialAbility(0,enemy);
             }
         }
 
-        private void AttemptSpecialAbility1(Enemy enemy)
+        private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
         {
-            if (playerEnergy.IsEnergyAvailable(ability1.GetEnergyCost())) { 
-                playerEnergy.ConsumeEnergy(ability1.GetEnergyCost());
-                GetComponent<ISpecialAbility>().Use();
+            if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
+                playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
+                abilities[abilityIndex].Use();
             }
         }
 

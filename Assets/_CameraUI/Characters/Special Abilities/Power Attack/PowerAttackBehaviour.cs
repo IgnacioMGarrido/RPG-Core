@@ -27,6 +27,7 @@ namespace RPG.Characters
         public void Use()
         {
             print("Using Power Attack behaviour - " + gameObject.name);
+
         }
     }
 }
