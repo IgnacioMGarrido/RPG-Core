@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4589480684366890}
   - component: {fileID: 114828353007043326}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 23116650887003596}
   - component: {fileID: 95755547268738970}
   - component: {fileID: 65393719334984240}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PT_Medieval_Quiver_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 23466030437418084}
   - component: {fileID: 95804843966892544}
   - component: {fileID: 65203734295362572}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PT_Medieval_Crossbow_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

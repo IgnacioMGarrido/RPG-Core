@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 23180683221433672}
   - component: {fileID: 95094778429849068}
   - component: {fileID: 65503921991152160}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PT_Medieval_Dagger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4514736535402430}
   - component: {fileID: 114762270394129076}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +968,7 @@ GameObject:
   - component: {fileID: 23683583203529688}
   - component: {fileID: 95804201567551348}
   - component: {fileID: 65891213291401494}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PT_Medieval_Dagger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,8 +13,6 @@ namespace RPG.Characters
     public class PlayerMovement : MonoBehaviour
     {
 
-        const int enemyLayerNumber = 10;
-        const int walkableLayerNumber = 9;
 
         //  [SerializeField] float walkMoveStopRadius = .2f;
         //  [SerializeField] float attackMoveStopRadius = 5f;
@@ -23,7 +21,7 @@ namespace RPG.Characters
         ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
         AICharacterControl aiCharacterControl = null;
 
-        CameraRaycaster cameraRaycaster;
+        RPGCursor cameraRaycaster;
         Vector3 currentDestination, clickPoint;
 
 
@@ -33,14 +31,14 @@ namespace RPG.Characters
 
         private void Start()
         {
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            cameraRaycaster = Camera.main.GetComponent<RPGCursor>();
             thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
             aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("WalkTarget");
             currentDestination = transform.position;
 
-            cameraRaycaster.notifyLeftMouseClickObservers += ProcessMouseClick;
             cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
 
         }
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
@@ -51,25 +49,12 @@ namespace RPG.Characters
                 aiCharacterControl.SetTarget(walkTarget.transform);
             }
         }
-        void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        void OnMouseOverEnemy(Enemy enemy)
         {
-
-            switch (layerHit)
+            if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
             {
-                case walkableLayerNumber:
-                    walkTarget.transform.position = raycastHit.point;
-                    aiCharacterControl.SetTarget(walkTarget.transform);
-                    break;
-                case enemyLayerNumber:
-                    GameObject enemy = raycastHit.collider.gameObject;
-                    aiCharacterControl.SetTarget(enemy.transform);
-                    break;
-                default:
-                    Debug.Log("Unexpected Layer Found.");
-                    return;
+                aiCharacterControl.SetTarget(enemy.transform);
             }
-
-            //WalkToDestination();
         }
 
 

@@ -25,7 +25,7 @@ namespace RPG.Characters
         [SerializeField] Weapon weaponInUse = null;
 
         GameObject currentTarget = null;
-        CameraRaycaster cameraRaycaster;
+        RPGCursor cameraRaycaster;
         CharacterStats characterStats;
 
         [SerializeField] float currenthealthPoints = 100f;
@@ -41,8 +41,8 @@ namespace RPG.Characters
 
         private void NotifyListeners()
         {
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            cameraRaycaster.notifyLeftMouseClickObservers += OnMouseClick;
+            cameraRaycaster = Camera.main.GetComponent<RPGCursor>();
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
         }
 
         private void InitializeCharacterStats()
@@ -101,23 +101,17 @@ namespace RPG.Characters
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
         }
         //TODO: Refactor to reduce number of lines.
-        void OnMouseClick(RaycastHit raycastHit, int layerHit)
-        {
-            //TODO: check dependencies.
-            if (layerHit == enemyLayer)
+
+        void OnMouseOverEnemy(Enemy enemy) {
+            if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
             {
-                var enemy = raycastHit.collider.gameObject;
-                //Check enemy is in range.
-                if (IsTargetInRange(enemy)) {
-                    AttackTarget(enemy);
-                }
+                AttackTarget(enemy);
             }
         }
 
-        private void AttackTarget(GameObject target)
+        private void AttackTarget(Enemy target)
         {
-            currentTarget = target;
-            var enemyComponent = currentTarget.GetComponent<Enemy>();
+            var enemyComponent = target;
 
             if (Time.time - lastHitTime > weaponInUse.ActionSpeed)
             {
@@ -127,7 +121,7 @@ namespace RPG.Characters
             }
         }
 
-        private bool IsTargetInRange(GameObject target)
+        private bool IsTargetInRange(Enemy target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= weaponInUse.MaxAttackRange;

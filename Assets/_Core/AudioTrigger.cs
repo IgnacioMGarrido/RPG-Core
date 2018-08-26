@@ -12,7 +12,6 @@ public class AudioTrigger : MonoBehaviour
 
     void Start()
     {
-        gameObject.layer = 0;
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.spatialBlend = 0.7f;
         audioSource.playOnAwake = false;

@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4466818079355010}
   - component: {fileID: 114092559492209104}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 23029168737178400}
   - component: {fileID: 95061472627282094}
   - component: {fileID: 65027694925499612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PT_Medieval_Shield_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 23214270684930078}
   - component: {fileID: 95551967297905814}
   - component: {fileID: 65620493142241174}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PT_Medieval_Pike_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1929,9 +1929,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264434816376686}
-  m_LocalRotation: {x: -0, y: -0.9990098, z: -0, w: 0.044492062}
-  m_LocalPosition: {x: -110.93323, y: 3.9919434, z: -190.99}
-  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_LocalRotation: {x: -0, y: -0.4163442, z: -0, w: 0.9092071}
+  m_LocalPosition: {x: -184.96507, y: 0, z: -194.12357}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4625059442940886}
   - {fileID: 4485789477695686}
