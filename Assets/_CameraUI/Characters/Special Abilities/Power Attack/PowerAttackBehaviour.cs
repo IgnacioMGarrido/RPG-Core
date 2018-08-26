@@ -15,7 +15,7 @@ namespace RPG.Characters
         // Use this for initialization
         void Start()
         {
-
+            print("Power Attack behaviour attached to " + gameObject.name);
         }
 
         // Update is called once per frame
@@ -26,7 +26,7 @@ namespace RPG.Characters
 
         public void Use()
         {
-            throw new System.NotImplementedException();
+            print("Using Power Attack behaviour - " + gameObject.name);
         }
     }
 }

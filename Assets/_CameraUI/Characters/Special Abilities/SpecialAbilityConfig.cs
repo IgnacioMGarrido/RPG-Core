@@ -11,5 +11,9 @@ namespace RPG.Characters
 
 
         abstract public ISpecialAbility AddComponent(GameObject gameObjectToAttachTo);
+
+        public float GetEnergyCost() {
+            return energyCost;
+        }
     }
 }
