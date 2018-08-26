@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ede79b3c028c0148ac7820084928b49, type: 3}
   m_Name: AoE L1
   m_EditorClassIdentifier: 
-  energyCost: 10
+  energyCost: 50
   abilityAnimation: {fileID: 0}
   radius: 5
   damageToEachTarget: 15

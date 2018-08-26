@@ -2218,7 +2218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyBar: {fileID: 0}
   maxEnergyPoints: 100
-  pointsPerHit: 10
+  regenPointsPerSecond: 10
 --- !u!114 &114764510337010976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2232,7 +2232,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLayer: 10
   maxHealthPoints: 100
-  damagePerHit: 10
+  baseDamage: 10
+  abilities:
+  - {fileID: 11400000, guid: ee4e1bc28563c5648b8aff1cd89b9cec, type: 2}
+  - {fileID: 11400000, guid: ccfc82561d8fe9f4892ba58149080ea1, type: 2}
+  - {fileID: 11400000, guid: 0c143ea4c90e5c247a121dfab07e4a32, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
     type: 2}
   weaponInUse: {fileID: 11400000, guid: 7279c885c67f45348a07832d49e64cfc, type: 2}
