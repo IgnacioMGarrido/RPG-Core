@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: Power Attack L1
   m_EditorClassIdentifier: 
   energyCost: 10
+  abilityAnimation: {fileID: 7400000, guid: fcc82476d966e864da60dc606a6adcb0, type: 3}
   extraDamage: 10

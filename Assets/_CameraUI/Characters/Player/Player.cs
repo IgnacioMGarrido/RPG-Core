@@ -16,10 +16,10 @@ namespace RPG.Characters
         // Use this for initialization
         [SerializeField] int enemyLayer = 10;
         [SerializeField] float maxHealthPoints = 100f;
-        [SerializeField] float damagePerHit = 10f;
+        [SerializeField] float baseDamage = 10f;
 
         //temporarily serialized for debugging.
-        [SerializeField] SpecialAbilityConfig[] abilities;
+        [SerializeField] SpecialAbility[] abilities;
 
 
         [SerializeField] AnimatorOverrideController animatorOverrideController;
@@ -61,7 +61,7 @@ namespace RPG.Characters
             {
                 maxHealthPoints = characterStats.Health;
                 currenthealthPoints = maxHealthPoints;
-                damagePerHit = characterStats.Damage;
+                baseDamage = characterStats.Damage;
                 //weaponInUse.ActionSpeed += characterStats.ActionSpeedPercentage;
             }
         }
@@ -124,7 +124,7 @@ namespace RPG.Characters
         {
             if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
                 playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
-                abilities[abilityIndex].Use();
+                abilities[abilityIndex].Use(new AbilityUseParams(enemy,baseDamage));
             }
         }
 
@@ -135,7 +135,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.ActionSpeed)
             {
                 animator.SetTrigger("Attack");
-                enemyComponent.TakeDamage(damagePerHit);
+                enemyComponent.TakeDamage(baseDamage);
                 lastHitTime = Time.time;
             }
         }
@@ -157,7 +157,7 @@ namespace RPG.Characters
 
         void SetWeaponModifiersToPlayer()
         { //TODO we may want to modify the player stats instead?
-            damagePerHit = damagePerHit + damagePerHit * weaponInUse.AttackPercentageModifier;
+            baseDamage = baseDamage + baseDamage * weaponInUse.AttackPercentageModifier;
             //actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
         }
 

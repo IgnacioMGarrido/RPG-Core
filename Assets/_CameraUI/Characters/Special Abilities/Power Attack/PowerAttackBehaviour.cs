@@ -24,10 +24,10 @@ namespace RPG.Characters
 
         }
 
-        public void Use()
+        public void Use(AbilityUseParams abilityUseParams)
         {
-            print("Using Power Attack behaviour - " + gameObject.name);
-
+            print("Using Power Attack extra damage - " + config.GetExtraDamage() + abilityUseParams.baseDamage);
+            abilityUseParams.target.TakeDamage(abilityUseParams.baseDamage + config.GetExtraDamage());
         }
     }
 }
