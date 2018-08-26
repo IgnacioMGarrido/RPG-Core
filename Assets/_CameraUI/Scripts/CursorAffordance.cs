@@ -38,9 +38,6 @@ namespace RPG.CameraUI
                 case uiLayerNumber: // TODO make cameraRaycaster member variables
                     Cursor.SetCursor(buttonCursor, cursorHotspot, CursorMode.Auto);
                     break;
-                case walkableLayerNumber:
-                    Cursor.SetCursor(walkCursor, cursorHotspot, CursorMode.Auto);
-                    break;
                 case enemyLayerNumber:
                     Cursor.SetCursor(targetCursor, cursorHotspot, CursorMode.Auto);
                     break;

@@ -6802,6 +6802,26 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: -3.13
       objectReference: {fileID: 0}
+    - target: {fileID: 114091951698713358, guid: 881a01b0940711e47a66876d87a9f19e,
+        type: 2}
+      propertyPath: walkCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 5232dff125d2a477abda5091702a1a15, type: 3}
+    - target: {fileID: 114091951698713358, guid: 881a01b0940711e47a66876d87a9f19e,
+        type: 2}
+      propertyPath: unknownCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: f583eee83e4fa44ca9ae7aad88224fc5, type: 3}
+    - target: {fileID: 114091951698713358, guid: 881a01b0940711e47a66876d87a9f19e,
+        type: 2}
+      propertyPath: targetCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 9b582cc5a05de4a6b828c8e72df8fc39, type: 3}
+    - target: {fileID: 114091951698713358, guid: 881a01b0940711e47a66876d87a9f19e,
+        type: 2}
+      propertyPath: buttonCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: b2aa98cd561424a8681ab320dbc7c67e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 881a01b0940711e47a66876d87a9f19e, type: 2}
   m_IsPrefabAsset: 0

@@ -40,9 +40,17 @@ namespace RPG.Characters
             currentDestination = transform.position;
 
             cameraRaycaster.notifyLeftMouseClickObservers += ProcessMouseClick;
+            cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
 
         }
-
+        void OnMouseOverPotentiallyWalkable(Vector3 destination)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                walkTarget.transform.position = destination;
+                aiCharacterControl.SetTarget(walkTarget.transform);
+            }
+        }
         void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
         {
 

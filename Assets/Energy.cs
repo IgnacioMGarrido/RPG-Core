@@ -12,10 +12,9 @@ namespace RPG.Characters
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float pointsPerHit = 10;
 
-        private int enemyLayer = 10;
+       // private int enemyLayer = 10;
         private CameraRaycaster cameraRaycaster;
         float currentEnergyPoints;
-        bool isChanged = false;
         // Use this for initialization
         void Start()
         {
@@ -25,16 +24,9 @@ namespace RPG.Characters
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             cameraRaycaster.notifyRightMouseClickObservers += ProcessRightClick;
         }
-        private void Update()
-        {
-           // if (isChanged) {
-           // }
-            isChanged = false;
-        }
         void ProcessRightClick(RaycastHit raycastHit, int layerHit)
         {
             Debug.Log("Notified");
-            isChanged = true;
             float newEnergyPoints = currentEnergyPoints - pointsPerHit;
             currentEnergyPoints = Mathf.Clamp(newEnergyPoints, 0, maxEnergyPoints);
             UpdateEnergyBar();
