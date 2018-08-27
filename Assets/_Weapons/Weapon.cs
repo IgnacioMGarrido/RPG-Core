@@ -12,7 +12,6 @@ namespace RPG.Weapons
         [SerializeField] AnimationClip attackAnimation;
         [SerializeField] Transform grip;
         [SerializeField] float damageModifier = 0.15f;
-        //TODO: Change the action speed to be a modifier over the base action speed of the player character.
         [SerializeField] float actionSpeedModifier = 0.5f;
         [SerializeField] float maxAttackRange = 1.5f;
 

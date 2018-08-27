@@ -642,6 +642,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy_Bruiser (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114373530622781524, guid: ff224a4fffabfe045b986975976cf55c,
+        type: 2}
+      propertyPath: resolve
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
   m_IsPrefabAsset: 0
@@ -1128,6 +1133,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 7d0fcdc062a9f8b4887fa7091040285c,
         type: 2}
+    - target: {fileID: 114517200868660366, guid: 904d00cbeff41e340a42ca207699210c,
+        type: 2}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904d00cbeff41e340a42ca207699210c, type: 2}
   m_IsPrefabAsset: 0

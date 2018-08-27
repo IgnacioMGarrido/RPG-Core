@@ -12,7 +12,7 @@ namespace RPG.Characters
 
         [SerializeField] float maxHealthPoints = 100f;
         [SerializeField] float damagePerShot = 15.0f;
-        [SerializeField] float secondsBetweenShots = 0.5f;
+        [SerializeField] float actionSpeed = 0.5f;
 
         [SerializeField] float chaseRadius = 5.0f;
         [SerializeField] float attackRadius = 7.0f;
@@ -33,6 +33,7 @@ namespace RPG.Characters
 
         GameObject spawnPosition;
 
+        float lastHitTime = 0f;
         private void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
@@ -42,12 +43,12 @@ namespace RPG.Characters
             {
                 maxHealthPoints = characterStats.GetHealth();
                 damagePerShot = characterStats.GetDamage();
-                secondsBetweenShots = characterStats.GetActionSpeed();
+                actionSpeed = characterStats.GetActionSpeed();
             }
             currenthealthPoints = maxHealthPoints;
             spawnPosition = new GameObject("SpawnPosition");
             spawnPosition.transform.position = transform.position;
-            spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform; // TODO: Change this so is the enemy empty gameObject who creates this object
+            spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform; 
 
         }
 
@@ -59,7 +60,7 @@ namespace RPG.Characters
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
-                InvokeRepeating("FireProjectile", 0f, secondsBetweenShots); //TODO: Switch to coroutines
+                InvokeRepeating("AttackTarget", 0f, actionSpeed); //TODO: Switch to coroutines
             }
             if (distanceToPlayer > attackRadius)
             {
@@ -89,13 +90,54 @@ namespace RPG.Characters
             float projectileSpeed = projectileComponent.getDefaultLaunchSpeed();
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
         }
+
+        private void AttackTarget()
+        {
+            var playerComponent = player.GetComponent<Player>();
+
+            if (Time.time - lastHitTime > characterStats.GetActionSpeed())
+            {
+                //animator.SetTrigger("Attack");
+                FireProjectile();
+                float hitValue = CalculateHitProbability(characterStats.GetDamage(),player.GetComponent<Player>());
+                playerComponent.TakeDamage(hitValue);
+                lastHitTime = Time.time;
+            }
+        }
+
         public void TakeDamage(float damage)
         {
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
             if (currenthealthPoints <= 0)
             {
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
+        }
+
+        public float CalculateHitProbability(float damage, IDamageable target)
+        {
+            int score = Random.Range(1, 101);
+            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - player.GetComponent<CharacterStats>().GetDeflection();
+            float attackRoll = score + damageDealerNewAccuracy;
+            //print("------------------------------------------------------------------------------");
+            //print("Attack Roll: " + score + " + " + damageDealerNewAccuracy + " = " + attackRoll);
+            if (attackRoll > 25 && attackRoll <= 50)
+            {
+                damage = damage / 2;
+            //    print("This hit was a GRAZE. Damage = " + damage);
+            }
+            else if (attackRoll > 100)
+            {
+                damage = damage * 1.25f;
+            //    print("This hit was a CRIT HIT. Damage = " + damage);
+
+            }
+            else
+            {
+            //    print("This hit was a NORMAL HIT. Damage = " + damage);
+            }
+
+            return damage;
         }
 
         public float healthAsPercentage
@@ -124,5 +166,6 @@ namespace RPG.Characters
                }
            */
         }
+
     }
 }

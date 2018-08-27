@@ -57,19 +57,6 @@ namespace RPG.Characters
             }
         }
 
-
-        //TODO: Make this called again. (Don't know yet if I want to implement gamepad movement)
-        private void ProcessDirectMovement()
-        {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-
-            Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-            Vector3 move = v * camForward + h * Camera.main.transform.right;
-
-            if (Input.GetKey(KeyCode.LeftShift)) move *= 0.5f;
-            thirdPersonCharacter.Move(move, false, false);
-        }
         private void WalkToDestination()
         {
             var playerToClickPoint = currentDestination - transform.position;

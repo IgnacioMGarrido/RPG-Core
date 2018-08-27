@@ -29,10 +29,12 @@ namespace RPG.Characters
             );
             foreach (RaycastHit hit in hits) {
                 var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
+                
                 if (damageable != null)
                 {
                     if (damageable.Equals(abilityUseParams.target) == false)
                     {
+                        abilityUseParams.baseDamage = abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, damageable);
                         damageable.TakeDamage(abilityUseParams.baseDamage + config.GetDamageToEachTarget());
                     }
                 }

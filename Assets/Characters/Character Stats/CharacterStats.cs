@@ -122,6 +122,14 @@ namespace RPG.Characters
             return health;
         }
 
+        public float GetAccuracy()
+        {
+            return accuracy;
+        }
+        public float GetDeflection() {
+            return deflection;
+        }
+
         public float GetHealing()
         {
             return healing;
@@ -137,5 +145,6 @@ namespace RPG.Characters
         public void SetDamage(float percentage) {
             damage += baseDamage * percentage;
         }
+
     }
 }

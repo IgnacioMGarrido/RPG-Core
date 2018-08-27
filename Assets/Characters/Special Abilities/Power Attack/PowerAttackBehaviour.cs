@@ -26,7 +26,7 @@ namespace RPG.Characters
 
         public void Use(AbilityUseParams abilityUseParams)
         {
-            print("Using Power Attack extra damage - " + config.GetExtraDamage() + abilityUseParams.baseDamage);
+            print("Using Power Attack extra damage - " + config.GetExtraDamage() + " + " + abilityUseParams.baseDamage);
             abilityUseParams.target.TakeDamage(abilityUseParams.baseDamage + config.GetExtraDamage());
         }
     }

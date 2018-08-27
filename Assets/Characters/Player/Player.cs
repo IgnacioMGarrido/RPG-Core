@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -144,8 +143,15 @@ namespace RPG.Characters
         {
             if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
                 playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
-                
-                abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
+                if (abilityIndex == 0)
+                {
+                    float damageAmount = CalculateHitProbability(amount, target);
+
+                    abilities[abilityIndex].Use(new AbilityUseParams(target, damageAmount));
+                }
+                else
+                    abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
+
             }
         }
 
@@ -155,18 +161,48 @@ namespace RPG.Characters
 
             if (Time.time - lastHitTime > characterStats.GetActionSpeed())
             {
+
                 animator.SetTrigger("Attack");
-                enemyComponent.TakeDamage(characterStats.GetDamage());
+                float hitValue = CalculateHitProbability(characterStats.GetDamage(), target);
+                enemyComponent.TakeDamage(hitValue);
                 lastHitTime = Time.time;
             }
         }
+        //TODO: Fix this so it is dependent and the IDamageable Interface
+        public float CalculateHitProbability(float damage, IDamageable target)
+        {
+            int score = Random.Range(1, 101);
+            Enemy enemy = target as Enemy;
+            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - enemy.GetComponent<CharacterStats>().GetDeflection();
+            float attackRoll = score + damageDealerNewAccuracy;
+            print("------------------------------------------------------------------------------");
+            print("Attack Roll: " + score + "(score) + " + damageDealerNewAccuracy + " (Player Accuracy - Enemy Deflection) " + " = " + attackRoll);
+            if (attackRoll > 25 && attackRoll <= 50)
+            {
+                damage = damage / 2;
+                print("This hit was a GRAZE. Damage/2 = " + damage);
+            }
+            else if (attackRoll > 0 && attackRoll < 25) {
+                damage = 0;
+            }
+            else if (attackRoll > 100)
+            {
+                damage = damage * 1.25f;
+                print("This hit was a CRIT HIT. Damage * 1.25 = " + damage);
 
+            }
+            else
+            {
+                print("This hit was a NORMAL HIT. Damage = " + damage);
+            }
+
+            return damage;
+        }
         private bool IsTargetInRange(Enemy target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= weaponInUse.MaxAttackRange;
         }
-
         public float healthAsPercentage
         {
             get
@@ -177,14 +213,13 @@ namespace RPG.Characters
         }
 
         void SetWeaponModifiersToPlayer()
-        { //TODO we may want to modify the player stats instead?
+        { 
             if (characterStats != null)
             {
                 characterStats.SetActionSpeed(weaponInUse.ActionSpeedModifier);
                 characterStats.SetDamage(weaponInUse.DamageModifier);
             }
         }
-
 
 
     }
