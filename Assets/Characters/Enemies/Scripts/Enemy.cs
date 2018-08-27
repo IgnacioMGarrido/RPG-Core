@@ -40,9 +40,9 @@ namespace RPG.Characters
             characterStats = GetComponent<CharacterStats>();
             if (characterStats)
             {
-                maxHealthPoints = characterStats.Health;
-                damagePerShot = characterStats.Damage;
-                secondsBetweenShots = characterStats.ActionSpeed;
+                maxHealthPoints = characterStats.GetHealth();
+                damagePerShot = characterStats.GetDamage();
+                secondsBetweenShots = characterStats.GetActionSpeed();
             }
             currenthealthPoints = maxHealthPoints;
             spawnPosition = new GameObject("SpawnPosition");

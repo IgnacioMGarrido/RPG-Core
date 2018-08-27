@@ -2300,27 +2300,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6ff589c7e0a164c87b8c7f0fd3705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  might: 13
-  constitution: 8
-  dexterity: 8
-  perception: 14
-  intellect: 8
+  level: 1
+  might: 11
+  constitution: 6
+  dexterity: 7
+  perception: 15
+  intellect: 5
   resolve: 6
+  deflection: 0
   fortitude: 0
   reflex: 0
-  deflection: 0
   will: 0
-  classHealthMutiplier: 5
-  endurance: 20
-  health: 0
-  concentration: 33
+  accuracy: 0
   damage: 10
   healing: 7
   actionSpeed: 3
-  interrupt: 0
-  accuarcy: 0
-  areaOfEffect: 7
+  AoEIncrease: 0
   duration: 3
+  health: 0
 --- !u!114 &114499141438552120
 MonoBehaviour:
   m_ObjectHideFlags: 1

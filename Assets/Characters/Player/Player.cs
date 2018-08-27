@@ -16,7 +16,7 @@ namespace RPG.Characters
         // Use this for initialization
         [SerializeField] int enemyLayer = 10;
         [SerializeField] float maxHealthPoints = 100f;
-        [SerializeField] float baseDamage = 10f;
+       // [SerializeField] float baseDamage = 10f;
 
         //temporarily serialized for debugging.
         [SerializeField] SpecialAbility[] abilities;
@@ -62,9 +62,9 @@ namespace RPG.Characters
             characterStats = GetComponent<CharacterStats>();
             if (characterStats != null)
             {
-                maxHealthPoints = characterStats.Health;
+                maxHealthPoints = characterStats.GetHealth();
                 currenthealthPoints = maxHealthPoints;
-                baseDamage = characterStats.Damage;
+                //baseDamage = characterStats.GetDamage();
                 //weaponInUse.ActionSpeed += characterStats.ActionSpeedPercentage;
             }
         }
@@ -105,15 +105,16 @@ namespace RPG.Characters
         // Update is called once per frame
         void Update()
         {
+            //healing
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
 
-                AttemptSpecialAbility(1, gameObject.GetComponent<Player>());
+                AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing());
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                AttemptSpecialAbility(2, gameObject.GetComponent<Player>());
+                AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
             }
         }
         public void TakeDamage(float damage)
@@ -128,16 +129,16 @@ namespace RPG.Characters
                 AttackTarget(enemy);
             }else if (Input.GetMouseButtonDown(1))
             {
-                AttemptSpecialAbility(0, enemy);
+                AttemptSpecialAbility(0, enemy, characterStats.GetDamage());
             }
         }
 
-        private void AttemptSpecialAbility(int abilityIndex, IDamageable target)
+        private void AttemptSpecialAbility(int abilityIndex, IDamageable target, float amount)
         {
             if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
                 playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
                 
-                abilities[abilityIndex].Use(new AbilityUseParams(target, baseDamage));
+                abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
             }
         }
 
@@ -148,7 +149,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.ActionSpeed)
             {
                 animator.SetTrigger("Attack");
-                enemyComponent.TakeDamage(baseDamage);
+                enemyComponent.TakeDamage(characterStats.GetDamage());
                 lastHitTime = Time.time;
             }
         }
@@ -170,7 +171,7 @@ namespace RPG.Characters
 
         void SetWeaponModifiersToPlayer()
         { //TODO we may want to modify the player stats instead?
-            baseDamage = baseDamage + baseDamage * weaponInUse.AttackPercentageModifier;
+           // baseDamage = baseDamage + baseDamage * weaponInUse.AttackPercentageModifier;
             //actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
         }
 

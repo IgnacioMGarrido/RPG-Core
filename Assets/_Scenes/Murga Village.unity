@@ -1079,11 +1079,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: abilities.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4540744190431842, guid: 904d00cbeff41e340a42ca207699210c, type: 2}
       propertyPath: m_LocalPosition.x
       value: -167.34671
@@ -1127,30 +1122,16 @@ Prefab:
       propertyPath: energyBar
       value: 
       objectReference: {fileID: 419550893}
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
+    - target: {fileID: 114517200868660366, guid: 904d00cbeff41e340a42ca207699210c,
         type: 2}
-      propertyPath: ability1
-      value: 
-      objectReference: {fileID: 11400000, guid: ee4e1bc28563c5648b8aff1cd89b9cec,
+      propertyPath: dexterity
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114517200868660366, guid: 904d00cbeff41e340a42ca207699210c,
         type: 2}
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: abilities.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: ee4e1bc28563c5648b8aff1cd89b9cec,
-        type: 2}
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: abilities.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: ccfc82561d8fe9f4892ba58149080ea1,
-        type: 2}
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: abilities.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0c143ea4c90e5c247a121dfab07e4a32,
-        type: 2}
+      propertyPath: perception
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904d00cbeff41e340a42ca207699210c, type: 2}
   m_IsPrefabAsset: 0
