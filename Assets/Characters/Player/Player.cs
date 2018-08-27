@@ -47,6 +47,14 @@ namespace RPG.Characters
             foreach (SpecialAbility ability in abilities)
             {
                 ability.AttachComponentTo(gameObject);
+                ModifyAoERadius(ability);
+            }
+        }
+
+        private void ModifyAoERadius(SpecialAbility ability)
+        {
+            if (ability.GetType() == typeof(AoEBehaviour)) {
+                //TODO: check radius
             }
         }
 
@@ -64,8 +72,6 @@ namespace RPG.Characters
             {
                 maxHealthPoints = characterStats.GetHealth();
                 currenthealthPoints = maxHealthPoints;
-                //baseDamage = characterStats.GetDamage();
-                //weaponInUse.ActionSpeed += characterStats.ActionSpeedPercentage;
             }
         }
 
@@ -106,13 +112,13 @@ namespace RPG.Characters
         void Update()
         {
             //healing
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
             {
 
                 AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing());
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
             {
                 AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
             }
@@ -127,7 +133,8 @@ namespace RPG.Characters
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
             {
                 AttackTarget(enemy);
-            }else if (Input.GetMouseButtonDown(1))
+            }
+            else if (Input.GetMouseButtonDown(1))
             {
                 AttemptSpecialAbility(0, enemy, characterStats.GetDamage());
             }
@@ -146,7 +153,7 @@ namespace RPG.Characters
         {
             var enemyComponent = target;
 
-            if (Time.time - lastHitTime > weaponInUse.ActionSpeed)
+            if (Time.time - lastHitTime > characterStats.GetActionSpeed())
             {
                 animator.SetTrigger("Attack");
                 enemyComponent.TakeDamage(characterStats.GetDamage());
@@ -171,8 +178,11 @@ namespace RPG.Characters
 
         void SetWeaponModifiersToPlayer()
         { //TODO we may want to modify the player stats instead?
-           // baseDamage = baseDamage + baseDamage * weaponInUse.AttackPercentageModifier;
-            //actionSpeed = actionSpeed + actionSpeed * weaponInUse.SpeedPenaltyPercentageModifier;
+            if (characterStats != null)
+            {
+                characterStats.SetActionSpeed(weaponInUse.ActionSpeedModifier);
+                characterStats.SetDamage(weaponInUse.DamageModifier);
+            }
         }
 
 

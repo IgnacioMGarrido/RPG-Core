@@ -11,9 +11,9 @@ namespace RPG.Weapons
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
         [SerializeField] Transform grip;
-        [SerializeField] float attackPercentageModifier = 0.15f;
+        [SerializeField] float damageModifier = 0.15f;
         //TODO: Change the action speed to be a modifier over the base action speed of the player character.
-        [SerializeField] float actionSpeed = 0.5f;
+        [SerializeField] float actionSpeedModifier = 0.5f;
         [SerializeField] float maxAttackRange = 1.5f;
 
   //      [SerializeField] float attackPercentageModifier = 0.0f;
@@ -32,16 +32,16 @@ namespace RPG.Weapons
             }
         }
 
-        public float AttackPercentageModifier
+        public float DamageModifier
         {
             get
             {
-                return attackPercentageModifier;
+                return damageModifier;
             }
 
             private set
             {
-                attackPercentageModifier = value;
+                damageModifier = value;
             }
         }
 /*
@@ -71,16 +71,16 @@ namespace RPG.Weapons
             }
         }
 
-        public float ActionSpeed
+        public float ActionSpeedModifier
         {
             get
             {
-                return actionSpeed;
+                return actionSpeedModifier;
             }
 
             set
             {
-                actionSpeed = value;
+                actionSpeedModifier = value;
             }
         }
 

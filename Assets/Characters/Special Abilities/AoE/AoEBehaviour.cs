@@ -33,13 +33,10 @@ namespace RPG.Characters
                 {
                     if (damageable.Equals(abilityUseParams.target) == false)
                     {
-                        print("=+=+=+=+=+=+");
                         damageable.TakeDamage(abilityUseParams.baseDamage + config.GetDamageToEachTarget());
                     }
                 }
             }
-            //if damageable
-                //deal damage to target + player base damage
         }
     }
 }

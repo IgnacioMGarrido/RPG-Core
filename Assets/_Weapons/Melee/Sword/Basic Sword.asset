@@ -16,6 +16,6 @@ MonoBehaviour:
     type: 2}
   attackAnimation: {fileID: 7400000, guid: e4b91d917c30b684da298509cd8822ac, type: 3}
   grip: {fileID: 4134010774920244, guid: 1b009033ae2c0324b8dfd80ef8908c60, type: 2}
-  attackPercentageModifier: 0.33
-  actionSpeed: 0.5
+  damageModifier: 0.19
+  actionSpeedModifier: 0.03
   maxAttackRange: 1.7

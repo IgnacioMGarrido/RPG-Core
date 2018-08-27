@@ -1122,16 +1122,12 @@ Prefab:
       propertyPath: energyBar
       value: 
       objectReference: {fileID: 419550893}
-    - target: {fileID: 114517200868660366, guid: 904d00cbeff41e340a42ca207699210c,
+    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
         type: 2}
-      propertyPath: dexterity
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114517200868660366, guid: 904d00cbeff41e340a42ca207699210c,
+      propertyPath: weaponInUse
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d0fcdc062a9f8b4887fa7091040285c,
         type: 2}
-      propertyPath: perception
-      value: 19
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904d00cbeff41e340a42ca207699210c, type: 2}
   m_IsPrefabAsset: 0

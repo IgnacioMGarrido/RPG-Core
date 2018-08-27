@@ -130,5 +130,12 @@ namespace RPG.Characters
         {
             return actionSpeed;
         }
+        public void SetActionSpeed(float percentage)
+        {
+            actionSpeed += actionSpeed * percentage;
+        }
+        public void SetDamage(float percentage) {
+            damage += baseDamage * percentage;
+        }
     }
 }

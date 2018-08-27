@@ -2175,8 +2175,8 @@ MonoBehaviour:
   level: 1
   might: 17
   constitution: 19
-  dexterity: 17
-  perception: 18
+  dexterity: 15
+  perception: 19
   intellect: 16
   resolve: 18
   deflection: 0
@@ -2235,7 +2235,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c143ea4c90e5c247a121dfab07e4a32, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
     type: 2}
-  weaponInUse: {fileID: 11400000, guid: 7279c885c67f45348a07832d49e64cfc, type: 2}
+  weaponInUse: {fileID: 11400000, guid: 9a59e110d0efb8c49a6c802477876497, type: 2}
   currenthealthPoints: 100
 --- !u!114 &114928364904231760
 MonoBehaviour:
@@ -2276,7 +2276,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Height: 1.7980366
   m_Direction: 1
   m_Center: {x: 0, y: 0.8990183, z: -0}
@@ -2388,7 +2388,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1406900039251628}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
