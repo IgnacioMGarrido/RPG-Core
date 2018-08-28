@@ -34,8 +34,10 @@ namespace RPG.Characters
                 {
                     if (damageable.Equals(abilityUseParams.target) == false)
                     {
-                        abilityUseParams.baseDamage = abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, damageable);
-                        damageable.TakeDamage(abilityUseParams.baseDamage + config.GetDamageToEachTarget());
+                        
+                        float damage = abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, damageable);
+                        AbilityUseParams aux = new AbilityUseParams(abilityUseParams.target,damage);
+                        damageable.TakeDamage(aux.baseDamage + config.GetDamageToEachTarget());
                     }
                 }
             }

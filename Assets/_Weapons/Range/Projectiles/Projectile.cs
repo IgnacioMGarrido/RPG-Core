@@ -22,7 +22,11 @@ namespace RPG.Weapons
                 DamageIfDamageable(collision);
             }
         }
+        private void Start()
+        {
+            Destroy(this.gameObject, DESTROY_DELAY);
 
+        }
         private void DamageIfDamageable(Collider collision)
         {
             Component damagable = collision.gameObject.GetComponent(typeof(IDamageable));

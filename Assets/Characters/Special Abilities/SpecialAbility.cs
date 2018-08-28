@@ -5,7 +5,8 @@ using RPG.Core;
 namespace RPG.Characters
 {
 
-    public struct AbilityUseParams {
+    public struct AbilityUseParams
+    {
         public IDamageable target;
         public float baseDamage;
 

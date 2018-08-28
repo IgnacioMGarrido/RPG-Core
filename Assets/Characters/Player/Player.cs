@@ -133,7 +133,7 @@ namespace RPG.Characters
             {
                 AttackTarget(enemy);
             }
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
             {
                 AttemptSpecialAbility(0, enemy, characterStats.GetDamage());
             }
@@ -177,6 +177,7 @@ namespace RPG.Characters
             float attackRoll = score + damageDealerNewAccuracy;
             print("------------------------------------------------------------------------------");
             print("Attack Roll: " + score + "(score) + " + damageDealerNewAccuracy + " (Player Accuracy - Enemy Deflection) " + " = " + attackRoll);
+            
             if (attackRoll > 25 && attackRoll <= 50)
             {
                 damage = damage / 2;
@@ -184,6 +185,7 @@ namespace RPG.Characters
             }
             else if (attackRoll > 0 && attackRoll < 25) {
                 damage = 0;
+                print("This hit was a MISS. Damage =" + damage);
             }
             else if (attackRoll > 100)
             {

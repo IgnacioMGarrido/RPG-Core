@@ -15,9 +15,6 @@ namespace RPG.Weapons
         [SerializeField] float actionSpeedModifier = 0.5f;
         [SerializeField] float maxAttackRange = 1.5f;
 
-  //      [SerializeField] float attackPercentageModifier = 0.0f;
-  //      [SerializeField] float speedPenaltyPercentageModifier = 0.0f;
-
         public GameObject WeaponPrefab
         {
             get
@@ -43,20 +40,6 @@ namespace RPG.Weapons
                 damageModifier = value;
             }
         }
-/*
-        public float SpeedPenaltyPercentageModifier
-        {
-            get
-            {
-                return speedPenaltyPercentageModifier;
-            }
-
-            private set
-            {
-                speedPenaltyPercentageModifier = value;
-            }
-        }
-*/
         public Transform Grip
         {
             get
