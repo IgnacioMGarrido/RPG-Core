@@ -2371,7 +2371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   might: 10
-  constitution: 16
+  constitution: 9
   dexterity: 4
   perception: 8
   intellect: 6
@@ -2444,7 +2444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   damagePerShot: 5
-  secondsBetweenShots: 6
+  actionSpeed: 0.5
   chaseRadius: 7
   attackRadius: 3
   stopChasingRadius: 20

@@ -22,6 +22,8 @@ namespace RPG.CameraUI
 
         Vector2 cursorHotspot = new Vector2(0, 0);
 
+
+        Rect screenRectAtStartPlay = new Rect(0, 0, Screen.width, Screen.height);
         void Update()
         {
             // Check if pointer is over an interactable UI element
@@ -35,10 +37,14 @@ namespace RPG.CameraUI
             }
         }
         void PerformRaycast() {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //Priority Order
-            if (RaycastForEnemy(ray)) { return; }
-            if (RaycastForWalkable(ray)) { return; }
+            if (screenRectAtStartPlay.Contains(Input.mousePosition))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                //Priority Order
+                if (RaycastForEnemy(ray)) { return; }
+                if (RaycastForWalkable(ray)) { return; }
+            }
+
         }
         private bool RaycastForEnemy(Ray ray)
         {

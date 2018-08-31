@@ -8,8 +8,9 @@ namespace RPG.Characters
     [RequireComponent(typeof(ThirdPersonCharacter))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(AICharacterControl))]
+    [RequireComponent(typeof(Player))]
 
-
+    //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
     public class PlayerMovement : MonoBehaviour
     {
 
@@ -17,7 +18,7 @@ namespace RPG.Characters
         //  [SerializeField] float walkMoveStopRadius = .2f;
         //  [SerializeField] float attackMoveStopRadius = 5f;
 
-
+        Player player = null;
         ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
         AICharacterControl aiCharacterControl = null;
 
@@ -31,6 +32,7 @@ namespace RPG.Characters
 
         private void Start()
         {
+            player = GetComponent<Player>();
             cameraRaycaster = Camera.main.GetComponent<RPGCursor>();
             thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
             aiCharacterControl = GetComponent<AICharacterControl>();
@@ -43,17 +45,30 @@ namespace RPG.Characters
         }
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
         {
-            if (Input.GetMouseButton(0))
+            if (player.isDead == false)
             {
-                walkTarget.transform.position = destination;
+                if (Input.GetMouseButton(0))
+                {
+                    walkTarget.transform.position = destination;
+                    aiCharacterControl.SetTarget(walkTarget.transform);
+                }
+            }
+            else {
+                walkTarget.transform.position = this.transform.position;
                 aiCharacterControl.SetTarget(walkTarget.transform);
             }
         }
         void OnMouseOverEnemy(Enemy enemy)
         {
-            if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
+            if (player.isDead == false)
             {
-                aiCharacterControl.SetTarget(enemy.transform);
+                if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
+                {
+                    aiCharacterControl.SetTarget(enemy.transform);
+                }
+            }
+            else {
+                aiCharacterControl.SetTarget(this.transform);
             }
         }
 

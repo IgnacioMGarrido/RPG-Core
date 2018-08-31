@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 using RPG.CameraUI;
 using RPG.Weapons;
@@ -13,28 +14,35 @@ namespace RPG.Characters
     {
 
         // Use this for initialization
-        [SerializeField] int enemyLayer = 10;
         [SerializeField] float maxHealthPoints = 100f;
-       // [SerializeField] float baseDamage = 10f;
+        float currenthealthPoints = 100f;
 
+        // [SerializeField] float baseDamage = 10f;
+
+        [Header("Special Abilities")]
         //temporarily serialized for debugging.
         [SerializeField] SpecialAbility[] abilities;
 
-
+        [Header("Animator")]
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         Animator animator;
 
+        [Header("Weapon")]
         [SerializeField] Weapon weaponInUse = null;
+        [Header("Audio")]
+        [SerializeField] AudioClip[] hitSounds;
+        [SerializeField] AudioClip[] deathSounds;
+
 
         GameObject currentTarget = null;
         RPGCursor cameraRaycaster;
         CharacterStats characterStats;
 
-        [SerializeField] float currenthealthPoints = 100f;
         float lastHitTime = 0f;
 
         Energy playerEnergy;
         int energyPointsPerHit = 10;
+        public bool isDead = false;
         void Start()
         {
             playerEnergy = GetComponent<Energy>();
@@ -110,32 +118,72 @@ namespace RPG.Characters
         // Update is called once per frame
         void Update()
         {
-            //healing
-            if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
+            if (isDead == false)
             {
+                //healing
+                if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
+                {
 
-                AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing());
-            }
+                    AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing());
+                }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
-            {
-                AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
+                if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
+                {
+                    AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
+                }
             }
         }
         public void TakeDamage(float damage)
         {
+            if (currenthealthPoints - damage > 0)
+            {
+                ReduceHealth(damage);
+            }
+            else
+            {
+                ReduceHealth(damage);
+                //Player Dies
+                if(isDead == false)
+                    StartCoroutine(KillPlayer());
+               
+            }
+        }
+        IEnumerator KillPlayer() {
+            isDead = true;
+            print("Play Death Sound");
+            //trigger death animation
+            print("Trigger animation");
+            animator.SetTrigger("Death");
+            //wait length of animation and sound
+            this.enabled = false;
+            //float duration = audioSource.clip.length > animator.GetCurrentAnimatorClipInfo(0).Length ? audioSource.clip.length : animator.GetCurrentAnimatorClipInfo(0).Length;
+            yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorClipInfo(0).Length + 2); //Animation Length;
+
+            //Reload Scene and reset components
+            this.enabled = true;
+            print("Scene Reloaded");
+            SceneManager.LoadScene(0); //TODO: Do this from a Scene Manager and remove String reference.
+            animator.SetTrigger("Death");
+            isDead = false;
+        }
+        private void ReduceHealth(float damage)
+        {
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
         }
+
         //TODO: Refactor to reduce number of lines.
 
         void OnMouseOverEnemy(Enemy enemy) {
-            if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
+            if (isDead == false)
             {
-                AttackTarget(enemy);
-            }
-            else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
-            {
-                AttemptSpecialAbility(0, enemy, characterStats.GetDamage());
+                if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
+                {
+                    AttackTarget(enemy);
+                }
+                else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
+                {
+                    AttemptSpecialAbility(0, enemy, characterStats.GetDamage());
+                }
             }
         }
 
@@ -146,7 +194,6 @@ namespace RPG.Characters
                 if (abilityIndex == 0)
                 {
                     float damageAmount = CalculateHitProbability(amount, target);
-
                     abilities[abilityIndex].Use(new AbilityUseParams(target, damageAmount));
                 }
                 else
