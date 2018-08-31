@@ -30,6 +30,7 @@ namespace RPG.Characters
         [Header("Weapon")]
         [SerializeField] Weapon weaponInUse = null;
         [Header("Audio")]
+        AudioSource audioSource = null;
         [SerializeField] AudioClip[] hitSounds;
         [SerializeField] AudioClip[] deathSounds;
 
@@ -46,6 +47,7 @@ namespace RPG.Characters
         void Start()
         {
             playerEnergy = GetComponent<Energy>();
+            audioSource = GetComponent<AudioSource>();
             InitializeCharacterStats();
             PutWeaponInHand();
 
@@ -137,35 +139,46 @@ namespace RPG.Characters
         {
             if (currenthealthPoints - damage > 0)
             {
+                PlayRandomClip(hitSounds);
                 ReduceHealth(damage);
             }
             else
             {
                 ReduceHealth(damage);
                 //Player Dies
-                if(isDead == false)
+                if (isDead == false)
+                {
+                    PlayRandomClip(deathSounds);
                     StartCoroutine(KillPlayer());
-               
+                }
             }
         }
-        IEnumerator KillPlayer() {
+        private void PlayRandomClip(AudioClip[] clips)
+        {
+            audioSource.clip = clips[(int)Random.Range(0, clips.Length)];
+            if(!audioSource.isPlaying)
+                audioSource.Play();
+        }
+        IEnumerator KillPlayer()
+        {
             isDead = true;
-            print("Play Death Sound");
-            //trigger death animation
-            print("Trigger animation");
             animator.SetTrigger("Death");
-            //wait length of animation and sound
-            this.enabled = false;
-            //float duration = audioSource.clip.length > animator.GetCurrentAnimatorClipInfo(0).Length ? audioSource.clip.length : animator.GetCurrentAnimatorClipInfo(0).Length;
-            yield return new WaitForSecondsRealtime(animator.GetCurrentAnimatorClipInfo(0).Length + 2); //Animation Length;
+            float duration = audioSource.clip.length > animator.GetCurrentAnimatorClipInfo(0).Length ? audioSource.clip.length : animator.GetCurrentAnimatorClipInfo(0).Length;
 
+            yield return new WaitForSecondsRealtime(duration + 2); //Animation Length;
+
+            ReloadScene();
+        }
+
+        private void ReloadScene() //TODO: Set this form a Game/Scene Manager Empty GameObject
+        {
             //Reload Scene and reset components
-            this.enabled = true;
             print("Scene Reloaded");
-            SceneManager.LoadScene(0); //TODO: Do this from a Scene Manager and remove String reference.
+            SceneManager.LoadScene(0); 
             animator.SetTrigger("Death");
             isDead = false;
         }
+
         private void ReduceHealth(float damage)
         {
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
@@ -270,6 +283,9 @@ namespace RPG.Characters
             }
         }
 
+        public bool GetIsDead() {
+            return this.isDead;
+        }
 
     }
 }

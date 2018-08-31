@@ -13,11 +13,6 @@ namespace RPG.Characters
     //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
     public class PlayerMovement : MonoBehaviour
     {
-
-
-        //  [SerializeField] float walkMoveStopRadius = .2f;
-        //  [SerializeField] float attackMoveStopRadius = 5f;
-
         Player player = null;
         ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
         AICharacterControl aiCharacterControl = null;
@@ -45,7 +40,7 @@ namespace RPG.Characters
         }
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
         {
-            if (player.isDead == false)
+            if (player.GetIsDead() == false)
             {
                 if (Input.GetMouseButton(0))
                 {
@@ -60,7 +55,7 @@ namespace RPG.Characters
         }
         void OnMouseOverEnemy(Enemy enemy)
         {
-            if (player.isDead == false)
+            if (player.GetIsDead() == false)
             {
                 if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
                 {

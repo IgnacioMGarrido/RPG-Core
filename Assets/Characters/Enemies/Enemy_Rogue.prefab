@@ -2532,7 +2532,7 @@ MonoBehaviour:
   damagePerShot: 10
   actionSpeed: 0.5
   chaseRadius: 5
-  attackRadius: 1.5
+  attackRadius: 1.7
   stopChasingRadius: 15
   projectileToUse: {fileID: 1983299024820686, guid: 12afe62582921c546a2fb1bcd767cbd8,
     type: 2}
