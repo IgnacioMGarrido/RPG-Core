@@ -116,7 +116,10 @@ namespace RPG.Characters
         {
             return damage;
         }
-
+        public void SetDamage(float percentage)
+        {
+            damage += baseDamage * percentage;
+        }
         public float GetHealth()
         {
             return health;
@@ -142,8 +145,9 @@ namespace RPG.Characters
         {
             actionSpeed += actionSpeed * percentage;
         }
-        public void SetDamage(float percentage) {
-            damage += baseDamage * percentage;
+
+        public float GetAoEModifier() {
+            return this.AoEIncrease;
         }
 
     }

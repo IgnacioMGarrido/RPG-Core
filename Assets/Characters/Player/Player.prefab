@@ -2273,7 +2273,7 @@ MonoBehaviour:
   constitution: 19
   dexterity: 15
   perception: 19
-  intellect: 16
+  intellect: 11
   resolve: 18
   deflection: 0
   fortitude: 0
@@ -2330,13 +2330,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c143ea4c90e5c247a121dfab07e4a32, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
     type: 2}
-  weaponInUse: {fileID: 11400000, guid: 7279c885c67f45348a07832d49e64cfc, type: 2}
+  weaponInUse: {fileID: 11400000, guid: 9a59e110d0efb8c49a6c802477876497, type: 2}
   hitSounds:
   - {fileID: 8300000, guid: 26892a2ab85819f42ad159e7ffb87c70, type: 3}
   - {fileID: 8300000, guid: 446c24cf9f86eb14194d2fe98196e2c0, type: 3}
   - {fileID: 8300000, guid: 47e86d3fb110e82489bef406e18904f6, type: 3}
   deathSounds:
   - {fileID: 8300000, guid: 227318d66d2af0041a73412064860ed2, type: 3}
+  - {fileID: 8300000, guid: b2cd1d51eabf0c24db96e19d2e44ce8c, type: 3}
   isDead: 0
 --- !u!114 &114928364904231760
 MonoBehaviour:

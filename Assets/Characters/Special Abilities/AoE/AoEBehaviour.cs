@@ -7,9 +7,10 @@ namespace RPG.Characters
     public class AoEBehaviour : MonoBehaviour, ISpecialAbility
     {
         AoEConfig config;
-
+        float radius;
         public void SetConfig(AoEConfig configToSet) {
             config = configToSet;
+            radius = config.GetRadius();
         }
 
         // Use this for initialization
@@ -17,15 +18,19 @@ namespace RPG.Characters
         {
             print("AoE behaviour attached to " + gameObject.name);
         }
-
+        public void SetRadiusModifier(float abilityRadiusModifier)
+        {
+            radius =config.GetRadius() * abilityRadiusModifier;
+        }
         public void Use(AbilityUseParams abilityUseParams)
         {
+            print(radius);
             //sphere cast to radius
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position,
-                config.GetRadius(),
+                radius,
                 Vector3.up,
-                config.GetRadius()
+                radius
             );
             foreach (RaycastHit hit in hits) {
                 var damageable = hit.collider.gameObject.GetComponent<IDamageable>();

@@ -17,9 +17,8 @@ namespace RPG.Characters
         [SerializeField] float maxHealthPoints = 100f;
         float currenthealthPoints = 100f;
 
-        // [SerializeField] float baseDamage = 10f;
-
         [Header("Special Abilities")]
+        
         //temporarily serialized for debugging.
         [SerializeField] SpecialAbility[] abilities;
 
@@ -29,6 +28,7 @@ namespace RPG.Characters
 
         [Header("Weapon")]
         [SerializeField] Weapon weaponInUse = null;
+
         [Header("Audio")]
         AudioSource audioSource = null;
         [SerializeField] AudioClip[] hitSounds;
@@ -43,27 +43,39 @@ namespace RPG.Characters
 
         Energy playerEnergy;
         int energyPointsPerHit = 10;
-        public bool isDead = false;
+        bool isDead = false;
+  
         void Start()
         {
             playerEnergy = GetComponent<Energy>();
             audioSource = GetComponent<AudioSource>();
+
             InitializeCharacterStats();
             PutWeaponInHand();
 
             NotifyListeners();
             SetupRuntimeAnimator();
+            AttachAbilitiesToPlayer();
+
+
+            ModifyAoERadius();
+        }
+
+        private void AttachAbilitiesToPlayer()
+        {
             foreach (SpecialAbility ability in abilities)
             {
                 ability.AttachComponentTo(gameObject);
-                ModifyAoERadius(ability);
             }
         }
 
-        private void ModifyAoERadius(SpecialAbility ability)
+        private void ModifyAoERadius()
         {
-            if (ability.GetType() == typeof(AoEBehaviour)) {
-                //TODO: check radius
+            AoEBehaviour[] AoEAbilities = GetComponents<AoEBehaviour>();
+            if (AoEAbilities.Length > 0) {
+                foreach (AoEBehaviour AoEability in AoEAbilities) {
+                    AoEability.SetRadiusModifier(characterStats.GetAoEModifier());
+                }
             }
         }
 
@@ -139,7 +151,7 @@ namespace RPG.Characters
         {
             if (currenthealthPoints - damage > 0)
             {
-                PlayRandomClip(hitSounds);
+                PlayRandomAudioClip(hitSounds);
                 ReduceHealth(damage);
             }
             else
@@ -148,12 +160,12 @@ namespace RPG.Characters
                 //Player Dies
                 if (isDead == false)
                 {
-                    PlayRandomClip(deathSounds);
+                    PlayRandomAudioClip(deathSounds);
                     StartCoroutine(KillPlayer());
                 }
             }
         }
-        private void PlayRandomClip(AudioClip[] clips)
+        private void PlayRandomAudioClip(AudioClip[] clips)
         {
             audioSource.clip = clips[(int)Random.Range(0, clips.Length)];
             if(!audioSource.isPlaying)
@@ -183,8 +195,6 @@ namespace RPG.Characters
         {
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
         }
-
-        //TODO: Refactor to reduce number of lines.
 
         void OnMouseOverEnemy(Enemy enemy) {
             if (isDead == false)
@@ -228,7 +238,6 @@ namespace RPG.Characters
                 lastHitTime = Time.time;
             }
         }
-        //TODO: Fix this so it is dependent and the IDamageable Interface
         public float CalculateHitProbability(float damage, IDamageable target)
         {
             int score = Random.Range(1, 101);
@@ -265,7 +274,7 @@ namespace RPG.Characters
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= weaponInUse.MaxAttackRange;
         }
-        public float healthAsPercentage
+        public float HealthAsPercentage
         {
             get
             {

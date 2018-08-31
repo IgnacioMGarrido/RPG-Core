@@ -21,6 +21,9 @@ namespace RPG.Characters
         public float GetRadius() {
             return radius;
         }
+        public void SetRadiusModifier(float abilityRadiusModifier) {
+            this.radius *= abilityRadiusModifier;
+        }
         public float GetDamageToEachTarget()
         {
             return damageToEachTarget;
