@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 using RPG.Weapons;
 using RPG.Core;
@@ -22,6 +23,11 @@ namespace RPG.Characters
 
         [SerializeField] GameObject projectileSocket;
 
+        [Header("Weapon")]
+        [SerializeField] Weapon weaponInUse = null;
+
+        [SerializeField] AnimatorOverrideController animatorOverrideController;
+        Animator animator;
 
         bool isAttacking = false;
 
@@ -36,6 +42,7 @@ namespace RPG.Characters
         float lastHitTime = 0f;
         private void Start()
         {
+
             player = GameObject.FindGameObjectWithTag("Player");
             aiCharacterController = GetComponent<AICharacterControl>();
             characterStats = GetComponent<CharacterStats>();
@@ -48,10 +55,35 @@ namespace RPG.Characters
             currenthealthPoints = maxHealthPoints;
             spawnPosition = new GameObject("SpawnPosition");
             spawnPosition.transform.position = transform.position;
-            spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform; 
+            spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform;
 
+            PutWeaponInHand();
+            SetupRuntimeAnimator();
+        }
+        void PutWeaponInHand()
+        {
+
+            GameObject weapon = Instantiate(weaponInUse.WeaponPrefab); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
+            GameObject dominantHandSocket = RequestDominantHand();
+            weapon.transform.SetParent(dominantHandSocket.transform);
+            weapon.transform.localPosition = weaponInUse.Grip.localPosition;
+            weapon.transform.localRotation = weaponInUse.Grip.localRotation;
+
+            //SetWeaponModifiersToEnemy(); //TODO: Set Enemy Weapon modifiers.
         }
 
+        private GameObject RequestDominantHand()
+        {
+            var dominantHands = GetComponentsInChildren<DominantHand>();
+            int numDominantHands = dominantHands.Length;
+            //Handle 0 hands
+            Assert.IsFalse(numDominantHands <= 0, "No dominant hand found on Player. Please add one");
+            //handle more than one hand
+            Assert.IsFalse(numDominantHands > 1, "Multiple Dominant hand Scripts on player, pleasse remove one");
+
+            return dominantHands[0].gameObject;
+
+        }
         private void Update()
         {
             float distanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
@@ -78,6 +110,14 @@ namespace RPG.Characters
             }
         }
 
+        private void SetupRuntimeAnimator()
+        {
+
+            animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController["DEFAULT ATTACK"] = weaponInUse.GetAttackAnimClip(); //remove const
+        }
+
         //TODO: Start separating Character firing logic
         private void FireProjectile()
         {
@@ -98,6 +138,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > characterStats.GetActionSpeed())
             {
                 //animator.SetTrigger("Attack");
+                animator.SetTrigger("Attack");
                 FireProjectile();
                 float hitValue = CalculateHitProbability(characterStats.GetDamage(),player.GetComponent<Player>());
                 playerComponent.TakeDamage(hitValue);
@@ -157,14 +198,6 @@ namespace RPG.Characters
 
             Gizmos.color = new Color(255f, 0f, 0f, .5f);
             Gizmos.DrawWireSphere(transform.position, attackRadius);
-
-
-            /*   if (spawnPosition != null)
-               {
-                   Gizmos.color = new Color(255f, 255f, 0f, .5f);
-                   Gizmos.DrawWireSphere(spawnPosition.transform.position, stopChasingRadius);
-               }
-           */
         }
 
     }

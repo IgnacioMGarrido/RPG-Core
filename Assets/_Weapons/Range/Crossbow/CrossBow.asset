@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d49e3422bbd7b4b824a984eade1daf, type: 3}
+  m_Name: CrossBow
+  m_EditorClassIdentifier: 
+  isTwoHanded: 1
+  weaponPrefab: {fileID: 1720113933079566, guid: a3603c146a767b046800cb1178826ed2,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 07b5bdab577331945902e7f97a1dbd85, type: 2}
+  grip: {fileID: 4134010774920244, guid: 973d28b0be6c6b542a78bfe2e826b582, type: 2}
+  damageModifier: 0.15
+  actionSpeedModifier: 0.5
+  maxAttackRange: 10

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d49e3422bbd7b4b824a984eade1daf, type: 3}
+  m_Name: Pike
+  m_EditorClassIdentifier: 
+  isTwoHanded: 0
+  weaponPrefab: {fileID: 1392858319930070, guid: 6ecb5d4e19f0a94429af94a2ee0d95bc,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 96f8270c0e4678d4580d41b43babe823, type: 3}
+  grip: {fileID: 4134010774920244, guid: 9ee96459a57af6742b67d2d49dc24b6e, type: 2}
+  damageModifier: 0.15
+  actionSpeedModifier: 0.5
+  maxAttackRange: 1.5
