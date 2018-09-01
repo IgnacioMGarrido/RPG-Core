@@ -23,9 +23,10 @@ namespace RPG.CameraUI
         Vector2 cursorHotspot = new Vector2(0, 0);
 
 
-        Rect screenRectAtStartPlay = new Rect(0, 0, Screen.width, Screen.height);
+        Rect currentScreenRect;
         void Update()
         {
+            currentScreenRect = new Rect(0, 0, Screen.width, Screen.height);
             // Check if pointer is over an interactable UI element
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -37,7 +38,7 @@ namespace RPG.CameraUI
             }
         }
         void PerformRaycast() {
-            if (screenRectAtStartPlay.Contains(Input.mousePosition))
+            if (currentScreenRect.Contains(Input.mousePosition))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 //Priority Order

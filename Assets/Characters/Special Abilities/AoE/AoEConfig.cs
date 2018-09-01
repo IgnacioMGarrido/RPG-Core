@@ -9,7 +9,8 @@ namespace RPG.Characters
     {
         [Header("Power Attack Specific ")]
         [SerializeField] float radius = 5f;
-        [SerializeField]float damageToEachTarget = 15f;
+        [SerializeField] float damageToEachTarget = 15f;
+        
 
         public override void AttachComponentTo(GameObject gameObjectToAttachTo)
         {

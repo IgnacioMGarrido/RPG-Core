@@ -20,7 +20,7 @@ namespace RPG.Characters
         }
         public void SetRadiusModifier(float abilityRadiusModifier)
         {
-            radius =config.GetRadius() * abilityRadiusModifier;
+            radius = config.GetRadius() * abilityRadiusModifier;
         }
         public void Use(AbilityUseParams abilityUseParams)
         {
