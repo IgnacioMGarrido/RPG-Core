@@ -86,6 +86,11 @@ namespace RPG.Characters
         }
         private void Update()
         {
+            if (player.GetComponent<Player>().HealthAsPercentage <= Mathf.Epsilon) { //Stop Coroutines
+                StopAllCoroutines();
+                Destroy(this);
+            }
+
             float distanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
             float spawnDistanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, spawnPosition.transform.position));
 

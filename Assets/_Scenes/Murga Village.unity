@@ -3278,20 +3278,6 @@ Prefab:
       propertyPath: m_Name
       value: Enemy_Bruiser (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1939841245054686, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1229179708664198, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114789506143169814, guid: ff224a4fffabfe045b986975976cf55c,
-        type: 2}
-      propertyPath: animatorOverrideController
-      value: 
-      objectReference: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
   m_IsPrefabAsset: 0
@@ -3343,6 +3329,10 @@ Prefab:
     - target: {fileID: 4777287652936652, guid: 6a409aa117cac1a4eb92d54d34ada066, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373681026616238, guid: 6a409aa117cac1a4eb92d54d34ada066, type: 2}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a409aa117cac1a4eb92d54d34ada066, type: 2}
@@ -4376,7 +4366,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4380695376412492, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.0062256
+      value: 6.03
       objectReference: {fileID: 0}
     - target: {fileID: 4380695376412492, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4431,7 +4421,7 @@ Prefab:
         type: 2}
       propertyPath: animatorOverrideController
       value: 
-      objectReference: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
+      objectReference: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
@@ -4497,7 +4487,7 @@ Prefab:
         type: 2}
       propertyPath: animatorOverrideController
       value: 
-      objectReference: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
+      objectReference: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff224a4fffabfe045b986975976cf55c, type: 2}
@@ -5019,12 +5009,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 114658463110107228, guid: 6f78159c9907ab84980aa4fbfa50fc7e,
-        type: 2}
-      propertyPath: animatorOverrideController
-      value: 
-      objectReference: {fileID: 22100000, guid: f6444b6ce7772984aab62696e5d2f4ae,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f78159c9907ab84980aa4fbfa50fc7e, type: 2}
   m_IsPrefabAsset: 0

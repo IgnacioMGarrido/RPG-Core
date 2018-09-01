@@ -14,7 +14,7 @@ MonoBehaviour:
   isTwoHanded: 0
   weaponPrefab: {fileID: 1910106993185860, guid: e162af742aa17fb4fb881fac892280c7,
     type: 2}
-  attackAnimation: {fileID: 7400000, guid: 39b380f7b0a826d4bab9948086dd1ff1, type: 3}
+  attackAnimation: {fileID: 7400000, guid: e550e30a1b0df2c46b6fa4724955402f, type: 3}
   grip: {fileID: 4134010774920244, guid: 3c7dba1eb8f429d44b56ee7b14a32a4e, type: 2}
   damageModifier: 0.15
   actionSpeedModifier: 0.5

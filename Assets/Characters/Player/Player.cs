@@ -12,6 +12,8 @@ namespace RPG.Characters
 {
     public class Player : MonoBehaviour, IDamageable
     {
+        const string DEATH_TRIGGER = "Death";
+        const string ATTACK_TRIGGER = "Attack";
 
         // Use this for initialization
         [SerializeField] float maxHealthPoints = 100f;
@@ -174,7 +176,7 @@ namespace RPG.Characters
         IEnumerator KillPlayer()
         {
             isDead = true;
-            animator.SetTrigger("Death");
+            animator.SetTrigger(DEATH_TRIGGER);
             float duration = audioSource.clip.length > animator.GetCurrentAnimatorClipInfo(0).Length ? audioSource.clip.length : animator.GetCurrentAnimatorClipInfo(0).Length;
 
             yield return new WaitForSecondsRealtime(duration + 2); //Animation Length;
@@ -232,7 +234,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > characterStats.GetActionSpeed())
             {
 
-                animator.SetTrigger("Attack");
+                animator.SetTrigger(ATTACK_TRIGGER);
                 float hitValue = CalculateHitProbability(characterStats.GetDamage(), target);
                 enemyComponent.TakeDamage(hitValue);
                 lastHitTime = Time.time;
