@@ -20,6 +20,8 @@ namespace RPG.Characters
     {
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
+        [Header("Particle Effect")]
+        [SerializeField] GameObject particleSystemPrefab = null;
 
         protected ISpecialAbility behaviour;
         [SerializeField] AnimationClip abilityAnimation;
@@ -30,6 +32,10 @@ namespace RPG.Characters
         }
         public float GetEnergyCost() {
             return energyCost;
+        }
+
+        public GameObject GetParticlePrefab() {
+            return particleSystemPrefab;
         }
     }
     public interface ISpecialAbility
