@@ -9,7 +9,6 @@ namespace RPG.Characters
     public class AoEBehaviour : MonoBehaviour, ISpecialAbility
     {
         AoEConfig config;
-        ParticleSystem myParticleSystem = null;
         float radius;
         public void SetConfig(AoEConfig configToSet) {
             config = configToSet;
@@ -36,7 +35,8 @@ namespace RPG.Characters
         private void PlayParticleEffect()
         {
             if (config.GetParticlePrefab() != null){
-               GameObject go = Instantiate(config.GetParticlePrefab(), transform);
+                GameObject go = Instantiate(config.GetParticlePrefab(), transform);
+                ParticleSystem myParticleSystem = null;
                 myParticleSystem = go.GetComponent<ParticleSystem>();
 
                // ParticleSystem.ShapeModule shapeModule = myParticleSystem.shape;

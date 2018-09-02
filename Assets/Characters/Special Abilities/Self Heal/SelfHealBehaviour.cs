@@ -18,16 +18,33 @@ namespace RPG.Characters
             print("Self heal behaviour attached to " + gameObject.name);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void PlayParticleEffect()
         {
+            if (config.GetParticlePrefab() != null)
+            {
+                GameObject go = Instantiate(config.GetParticlePrefab(), transform);
+                ParticleSystem myParticleSystem = null;
+                myParticleSystem = go.GetComponent<ParticleSystem>();
 
+                // ParticleSystem.ShapeModule shapeModule = myParticleSystem.shape;
+                // shapeModule.radius = radius;
+
+                myParticleSystem.Play();
+                Destroy(go, 3);
+
+            }
         }
-
         public void Use(AbilityUseParams abilityUseParams)
         {
+            HealTarget(abilityUseParams);
+            PlayParticleEffect();
+        }
+
+        private void HealTarget(AbilityUseParams abilityUseParams)
+        {
             print("Using Self Heal - " + config.GetHealAmount());
-            abilityUseParams.target.TakeDamage(-config.GetHealAmount());
+            
+            abilityUseParams.target.TakeHeal(-config.GetHealAmount());
         }
     }
 }

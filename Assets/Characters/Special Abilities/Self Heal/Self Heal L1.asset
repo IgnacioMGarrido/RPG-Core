@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Self Heal L1
   m_EditorClassIdentifier: 
   energyCost: 25
-  particleSystem: {fileID: 1893237767981078, guid: 56b2e5849f32f4d4fb9cf2368f6efc85,
+  particleSystemPrefab: {fileID: 1212346412173966, guid: a8786783807dd024e90190ca0a2ac500,
     type: 2}
   abilityAnimation: {fileID: 0}
   healAmount: 40

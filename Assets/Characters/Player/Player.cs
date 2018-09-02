@@ -35,6 +35,7 @@ namespace RPG.Characters
         AudioSource audioSource = null;
         [SerializeField] AudioClip[] hitSounds;
         [SerializeField] AudioClip[] deathSounds;
+        [SerializeField] AudioClip[] healSounds;
 
 
         GameObject currentTarget = null;
@@ -154,11 +155,11 @@ namespace RPG.Characters
             if (currenthealthPoints - damage > 0)
             {
                 PlayRandomAudioClip(hitSounds);
-                ReduceHealth(damage);
+                UpdateHealth(damage);
             }
             else
             {
-                ReduceHealth(damage);
+                UpdateHealth(damage);
                 //Player Dies
                 if (isDead == false)
                 {
@@ -166,6 +167,13 @@ namespace RPG.Characters
                     StartCoroutine(KillPlayer());
                 }
             }
+        }
+
+        public void TakeHeal(float heal)
+        {
+            //heal = characterStats.GetHealing(); //TODO: change this so it can work for all IDamageable objects
+            PlayRandomAudioClip(healSounds);
+            UpdateHealth(heal);
         }
         private void PlayRandomAudioClip(AudioClip[] clips)
         {
@@ -193,7 +201,7 @@ namespace RPG.Characters
             isDead = false;
         }
 
-        private void ReduceHealth(float damage)
+        private void UpdateHealth(float damage)
         {
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
         }
@@ -297,6 +305,7 @@ namespace RPG.Characters
         public bool GetIsDead() {
             return this.isDead;
         }
+
 
     }
 }

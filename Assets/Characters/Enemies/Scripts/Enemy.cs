@@ -205,5 +205,9 @@ namespace RPG.Characters
             Gizmos.DrawWireSphere(transform.position, attackRadius);
         }
 
+        public void TakeHeal(float heal)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
