@@ -44,9 +44,10 @@ namespace RPG.Characters
         const float baseAoEIncrease = 0;
         const float baseDuration = 0;
 
+        [Header("Base Health")]
         // --- Base Passive Stats ---
-        const float baseHealth = 42;
-        const float healthPerLevel = 12;
+        [SerializeField]  float baseHealth = 42;
+        [SerializeField]  float healthPerLevel = 12;
 
         [Header("Defenses")]
         // -- Defenses --
