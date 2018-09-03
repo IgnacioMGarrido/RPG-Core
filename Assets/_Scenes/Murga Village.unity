@@ -2565,11 +2565,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: healSounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4540744190431842, guid: 904d00cbeff41e340a42ca207699210c, type: 2}
       propertyPath: m_LocalPosition.x
       value: -167.34671
@@ -2602,27 +2597,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114734338003116214, guid: 904d00cbeff41e340a42ca207699210c,
+        type: 2}
+      propertyPath: energyBar
+      value: 
+      objectReference: {fileID: 505941028}
     - target: {fileID: 136682139063410000, guid: 904d00cbeff41e340a42ca207699210c,
         type: 2}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1,
         type: 2}
-    - target: {fileID: 114734338003116214, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: energyBar
-      value: 
-      objectReference: {fileID: 505941028}
-    - target: {fileID: 114517200868660366, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: intellect
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114764510337010976, guid: 904d00cbeff41e340a42ca207699210c,
-        type: 2}
-      propertyPath: healSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: f8ae35a960206774f89f772cefa437b3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904d00cbeff41e340a42ca207699210c, type: 2}
   m_IsPrefabAsset: 0

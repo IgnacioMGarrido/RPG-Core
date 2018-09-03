@@ -2304,7 +2304,7 @@ MonoBehaviour:
   constitution: 19
   dexterity: 15
   perception: 19
-  intellect: 11
+  intellect: 12
   resolve: 18
   deflection: 0
   fortitude: 0
@@ -2369,6 +2369,8 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: b2cd1d51eabf0c24db96e19d2e44ce8c, type: 3}
   - {fileID: 8300000, guid: b2cd1d51eabf0c24db96e19d2e44ce8c, type: 3}
+  healSounds:
+  - {fileID: 8300000, guid: f8ae35a960206774f89f772cefa437b3, type: 3}
 --- !u!114 &114928364904231760
 MonoBehaviour:
   m_ObjectHideFlags: 1
