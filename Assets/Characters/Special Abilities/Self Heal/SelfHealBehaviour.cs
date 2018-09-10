@@ -6,34 +6,12 @@ namespace RPG.Characters
 {
     public class SelfHealBehaviour : AbilityBehaviour
     {
-        SelfHealConfig config;
 
-        public void SetConfig(SelfHealConfig configToSet) {
-            config = configToSet;
-        }
-
-        // Use this for initialization
         void Start()
         {
             print("Self heal behaviour attached to " + gameObject.name);
         }
 
-        private void PlayParticleEffect()
-        {
-            if (config.GetParticlePrefab() != null)
-            {
-                GameObject go = Instantiate(config.GetParticlePrefab(), transform);
-                ParticleSystem myParticleSystem = null;
-                myParticleSystem = go.GetComponent<ParticleSystem>();
-
-                // ParticleSystem.ShapeModule shapeModule = myParticleSystem.shape;
-                // shapeModule.radius = radius;
-
-                myParticleSystem.Play();
-                Destroy(go, 3);
-
-            }
-        }
         public override void Use(AbilityUseParams abilityUseParams)
         {
             HealTarget(abilityUseParams);
@@ -42,9 +20,9 @@ namespace RPG.Characters
 
         private void HealTarget(AbilityUseParams abilityUseParams)
         {
-            print("Using Self Heal - " + config.GetHealAmount());
+            print("Using Self Heal - " + (config as SelfHealConfig).GetHealAmount());
             
-            abilityUseParams.target.TakeHeal(-config.GetHealAmount());
+            abilityUseParams.target.TakeHeal(-(config as SelfHealConfig).GetHealAmount());
         }
     }
 }

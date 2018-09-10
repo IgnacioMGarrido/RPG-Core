@@ -39,7 +39,8 @@ namespace RPG.Characters
         }
 
         public AnimationClip GetAbilityAnimation() {
-            abilityAnimation.events = new AnimationEvent[0]; //TODO: Remove this if we finally use animation events.
+            if(abilityAnimation != null)
+                abilityAnimation.events = new AnimationEvent[0]; //TODO: Remove this if we finally use animation events.
             return abilityAnimation;
         }
     }

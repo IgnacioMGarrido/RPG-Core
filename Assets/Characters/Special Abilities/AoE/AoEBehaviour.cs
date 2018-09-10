@@ -8,14 +8,7 @@ namespace RPG.Characters
 {
     public class AoEBehaviour : AbilityBehaviour
     {
-        AoEConfig config;
         float radius;
-        AnimationClip aoeAnimation;
-        public void SetConfig(AoEConfig configToSet) {
-            config = configToSet;
-            radius = config.GetRadius();
-            aoeAnimation = config.GetAbilityAnimation();
-        }
 
         // Use this for initialization
         void Start()
@@ -25,33 +18,13 @@ namespace RPG.Characters
         }
         public void SetRadiusModifier(float abilityRadiusModifier)
         {
-            radius = config.GetRadius() * abilityRadiusModifier;
+            radius = (config as AoEConfig).GetRadius() * abilityRadiusModifier;
         }
         public override void Use(AbilityUseParams abilityUseParams)
         {
 
             DealRadialDamage(abilityUseParams);
             PlayParticleEffect();
-        }
-
-        public AnimationClip GetAoeAnimation() {
-            return aoeAnimation;
-        }
-        private void PlayParticleEffect()
-        {
-            if (config.GetParticlePrefab() != null){
-                GameObject go = Instantiate(config.GetParticlePrefab(), transform);
-                go.transform.parent = null;
-                //ParticleSystem myParticleSystem = null;
-                //myParticleSystem = go.GetComponent<ParticleSystem>();
-
-                // ParticleSystem.ShapeModule shapeModule = myParticleSystem.shape;
-                // shapeModule.radius = radius;
-
-                //myParticleSystem.Play();
-                Destroy(go, 5);
-
-            }
         }
         private void DealRadialDamage(AbilityUseParams abilityUseParams)
         {
@@ -72,7 +45,7 @@ namespace RPG.Characters
 
                         float damage = abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, damageable);
                         AbilityUseParams aux = new AbilityUseParams(abilityUseParams.target, damage);
-                        damageable.TakeDamage(aux.baseDamage + config.GetDamageToEachTarget());
+                        damageable.TakeDamage(aux.baseDamage + (config as AoEConfig).GetDamageToEachTarget());
                     }
                 }
             }
