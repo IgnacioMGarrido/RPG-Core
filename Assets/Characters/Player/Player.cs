@@ -22,7 +22,7 @@ namespace RPG.Characters
         [Header("Special Abilities")]
         
         //temporarily serialized for debugging.
-        [SerializeField] SpecialAbility[] abilities;
+        [SerializeField] AbilityConfig[] abilities;
 
         [Header("Animator")]
         [SerializeField] AnimatorOverrideController animatorOverrideController;
@@ -65,7 +65,7 @@ namespace RPG.Characters
 
         private void AttachAbilitiesToPlayer()
         {
-            foreach (SpecialAbility ability in abilities)
+            foreach (AbilityConfig ability in abilities)
             {
                 ability.AttachComponentTo(gameObject);
             }
@@ -251,7 +251,7 @@ namespace RPG.Characters
 
             }
         }
-        private void ChangeRuntimeAnimatorAbilityAnim(SpecialAbility ability)
+        private void ChangeRuntimeAnimatorAbilityAnim(AbilityConfig ability)
         {
 
             animator = GetComponent<Animator>();

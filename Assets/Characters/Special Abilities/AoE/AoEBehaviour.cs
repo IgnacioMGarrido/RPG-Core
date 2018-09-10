@@ -6,7 +6,7 @@ using System;
 
 namespace RPG.Characters
 {
-    public class AoEBehaviour : MonoBehaviour, ISpecialAbility
+    public class AoEBehaviour : AbilityBehaviour
     {
         AoEConfig config;
         float radius;
@@ -27,7 +27,7 @@ namespace RPG.Characters
         {
             radius = config.GetRadius() * abilityRadiusModifier;
         }
-        public void Use(AbilityUseParams abilityUseParams)
+        public override void Use(AbilityUseParams abilityUseParams)
         {
 
             DealRadialDamage(abilityUseParams);

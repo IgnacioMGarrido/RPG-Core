@@ -16,14 +16,14 @@ namespace RPG.Characters
             this.baseDamage = _baseDamage;
         }
     }
-    public abstract class SpecialAbility : ScriptableObject
+    public abstract class AbilityConfig : ScriptableObject
     {
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
         [Header("Particle Effect")]
         [SerializeField] GameObject particleSystemPrefab = null;
 
-        protected ISpecialAbility behaviour;
+        protected AbilityBehaviour behaviour;
         [SerializeField] AnimationClip abilityAnimation;
 
         abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
@@ -42,9 +42,5 @@ namespace RPG.Characters
             abilityAnimation.events = new AnimationEvent[0]; //TODO: Remove this if we finally use animation events.
             return abilityAnimation;
         }
-    }
-    public interface ISpecialAbility
-    {
-        void Use(AbilityUseParams abilityUseParams);
     }
 }

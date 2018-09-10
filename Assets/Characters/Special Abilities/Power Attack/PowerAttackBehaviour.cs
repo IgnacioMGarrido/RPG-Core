@@ -4,7 +4,7 @@ using UnityEngine;
 using RPG.Core;
 namespace RPG.Characters
 {
-    public class PowerAttackBehaviour : MonoBehaviour, ISpecialAbility
+    public class PowerAttackBehaviour : AbilityBehaviour
     {
         PowerAttackConfig config;
 
@@ -34,7 +34,7 @@ namespace RPG.Characters
 
             }
         }
-        public void Use(AbilityUseParams abilityUseParams)
+        public override void Use(AbilityUseParams abilityUseParams)
         {
             DealDamage(abilityUseParams);
             PlayParticleEffect();
