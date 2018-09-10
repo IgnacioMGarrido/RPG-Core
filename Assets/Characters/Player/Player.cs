@@ -153,6 +153,7 @@ namespace RPG.Characters
             if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
             {
                 AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
+
             }
         }
 
@@ -238,9 +239,24 @@ namespace RPG.Characters
                     abilities[abilityIndex].Use(new AbilityUseParams(target, damageAmount));
                 }
                 else
+                {
                     abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
+                  
+                }
+
+                if (abilities[abilityIndex].GetAbilityAnimation() != null) {
+                    ChangeRuntimeAnimatorAbilityAnim(abilities[abilityIndex]);
+                    animator.SetTrigger("AbilityAction");
+                }
 
             }
+        }
+        private void ChangeRuntimeAnimatorAbilityAnim(SpecialAbility ability)
+        {
+
+            animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController["DEFAULT ABILITY"] = ability.GetAbilityAnimation(); //remove const
         }
 
         private void AttackTarget()

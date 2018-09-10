@@ -37,6 +37,10 @@ namespace RPG.Characters
         public GameObject GetParticlePrefab() {
             return particleSystemPrefab;
         }
+
+        public AnimationClip GetAbilityAnimation() {
+            return abilityAnimation;
+        }
     }
     public interface ISpecialAbility
     {

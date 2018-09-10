@@ -10,16 +10,18 @@ namespace RPG.Characters
     {
         AoEConfig config;
         float radius;
+        AnimationClip aoeAnimation;
         public void SetConfig(AoEConfig configToSet) {
             config = configToSet;
             radius = config.GetRadius();
-           
+            aoeAnimation = config.GetAbilityAnimation();
         }
 
         // Use this for initialization
         void Start()
         {
             print("AoE behaviour attached to " + gameObject.name);
+           
         }
         public void SetRadiusModifier(float abilityRadiusModifier)
         {
@@ -32,18 +34,22 @@ namespace RPG.Characters
             PlayParticleEffect();
         }
 
+        public AnimationClip GetAoeAnimation() {
+            return aoeAnimation;
+        }
         private void PlayParticleEffect()
         {
             if (config.GetParticlePrefab() != null){
                 GameObject go = Instantiate(config.GetParticlePrefab(), transform);
-                ParticleSystem myParticleSystem = null;
-                myParticleSystem = go.GetComponent<ParticleSystem>();
+                go.transform.parent = null;
+                //ParticleSystem myParticleSystem = null;
+                //myParticleSystem = go.GetComponent<ParticleSystem>();
 
-               // ParticleSystem.ShapeModule shapeModule = myParticleSystem.shape;
-               // shapeModule.radius = radius;
+                // ParticleSystem.ShapeModule shapeModule = myParticleSystem.shape;
+                // shapeModule.radius = radius;
 
-                myParticleSystem.Play();
-                Destroy(go, 3);
+                //myParticleSystem.Play();
+                Destroy(go, 5);
 
             }
         }
