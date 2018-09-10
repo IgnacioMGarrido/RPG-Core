@@ -20,11 +20,13 @@ namespace RPG.Characters
     {
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
+
         [Header("Particle Effect")]
         [SerializeField] GameObject particleSystemPrefab = null;
 
         protected AbilityBehaviour behaviour;
-        [SerializeField] AnimationClip abilityAnimation;
+        [SerializeField] AnimationClip abilityAnimation = null;
+        [SerializeField] AudioClip[] abilityAudioClips = null;
 
         abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
         public void Use(AbilityUseParams abilityUseParams) {
@@ -38,6 +40,9 @@ namespace RPG.Characters
             return particleSystemPrefab;
         }
 
+        public AudioClip GetRandomAbilityAudioClip() {
+            return abilityAudioClips[Random.Range(0, abilityAudioClips.Length)];
+        }
         public AnimationClip GetAbilityAnimation() {
             if(abilityAnimation != null)
                 abilityAnimation.events = new AnimationEvent[0]; //TODO: Remove this if we finally use animation events.

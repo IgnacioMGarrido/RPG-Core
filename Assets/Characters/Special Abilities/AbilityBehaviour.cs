@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace RPG.Characters
 {
@@ -18,7 +15,6 @@ namespace RPG.Characters
             config = configToSet;
             animClip = config.GetAbilityAnimation();
         }
-
         protected void PlayParticleEffect()
         {
             if (config.GetParticlePrefab() != null)
@@ -31,7 +27,12 @@ namespace RPG.Characters
         }
         public abstract void Use(AbilityUseParams abilityUseParams);
 
-
-
+        protected void PlayAbilitySound()
+        {
+            var abilitySound = config.GetRandomAbilityAudioClip(); //TODO: change to random clip.
+            var audioSource = GetComponent<AudioSource>();
+            if(abilitySound != null)
+                audioSource.PlayOneShot(abilitySound);
+        }
     }
 }

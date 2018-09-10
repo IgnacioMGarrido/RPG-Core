@@ -1,30 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Core;
-using System;
 
 namespace RPG.Characters
 {
     public class AoEBehaviour : AbilityBehaviour
     {
         float radius;
-
-        // Use this for initialization
-        void Start()
-        {
-            print("AoE behaviour attached to " + gameObject.name);
-           
-        }
         public void SetRadiusModifier(float abilityRadiusModifier)
         {
             radius = (config as AoEConfig).GetRadius() * abilityRadiusModifier;
         }
         public override void Use(AbilityUseParams abilityUseParams)
         {
-
             DealRadialDamage(abilityUseParams);
             PlayParticleEffect();
+            PlayAbilitySound();
         }
         private void DealRadialDamage(AbilityUseParams abilityUseParams)
         {
@@ -42,7 +32,6 @@ namespace RPG.Characters
                 {
                     if (damageable.Equals(abilityUseParams.target) == false)
                     {
-
                         float damage = abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, damageable);
                         AbilityUseParams aux = new AbilityUseParams(abilityUseParams.target, damage);
                         damageable.TakeDamage(aux.baseDamage + (config as AoEConfig).GetDamageToEachTarget());

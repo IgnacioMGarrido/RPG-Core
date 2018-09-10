@@ -15,4 +15,6 @@ MonoBehaviour:
   particleSystemPrefab: {fileID: 1212346412173966, guid: a8786783807dd024e90190ca0a2ac500,
     type: 2}
   abilityAnimation: {fileID: 0}
+  abilityAudioClips:
+  - {fileID: 8300000, guid: f8ae35a960206774f89f772cefa437b3, type: 3}
   healAmount: 40
