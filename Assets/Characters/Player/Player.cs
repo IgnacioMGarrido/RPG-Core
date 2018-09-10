@@ -14,10 +14,10 @@ namespace RPG.Characters
     {
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
-
+        IDamageable target;
         // Use this for initialization
         [SerializeField] float maxHealthPoints = 100f;
-        float currenthealthPoints = 100f;
+        float currenthealthPoints = 0;
 
         [Header("Special Abilities")]
         
@@ -36,7 +36,6 @@ namespace RPG.Characters
         [SerializeField] AudioClip[] hitSounds;
         [SerializeField] AudioClip[] deathSounds;
         [SerializeField] AudioClip[] healSounds;
-
 
         GameObject currentTarget = null;
         RPGCursor cameraRaycaster;
@@ -137,19 +136,26 @@ namespace RPG.Characters
         {
             if (isDead == false)
             {
-                //healing
-                if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
-                {
-
-                    AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing());
-                }
-
-                if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
-                {
-                    AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
-                }
+                ScanForAbilityKey();
             }
         }
+
+        private void ScanForAbilityKey()
+        {
+            //TODO: abstract this to each class ( Maybe the ability is the one that needs to access the character stats )
+            //healing
+            if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
+            {
+
+                AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing()); 
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
+            {
+                AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
+            }
+        }
+
         public void TakeDamage(float damage)
         {
             if (currenthealthPoints - damage > 0)
@@ -206,16 +212,18 @@ namespace RPG.Characters
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
         }
 
-        void OnMouseOverEnemy(Enemy enemy) {
+        void OnMouseOverEnemy(Enemy enemyToSet) {
+
+            this.target = enemyToSet;
             if (isDead == false)
             {
-                if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
+                if (Input.GetMouseButton(0) && IsTargetInRange(this.target as Enemy))
                 {
-                    AttackTarget(enemy);
+                    AttackTarget();
                 }
-                else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
+                else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyToSet))
                 {
-                    AttemptSpecialAbility(0, enemy, characterStats.GetDamage());
+                    AttemptSpecialAbility(0, this.target, characterStats.GetDamage());
                 }
             }
         }
@@ -235,19 +243,19 @@ namespace RPG.Characters
             }
         }
 
-        private void AttackTarget(Enemy target)
+        private void AttackTarget()
         {
-            var enemyComponent = target;
 
             if (Time.time - lastHitTime > characterStats.GetActionSpeed())
             {
 
                 animator.SetTrigger(ATTACK_TRIGGER);
                 float hitValue = CalculateHitProbability(characterStats.GetDamage(), target);
-                enemyComponent.TakeDamage(hitValue);
+                target.TakeDamage(hitValue);
                 lastHitTime = Time.time;
             }
         }
+        //TODO: Clear this mess!
         public float CalculateHitProbability(float damage, IDamageable target)
         {
             int score = Random.Range(1, 101);
