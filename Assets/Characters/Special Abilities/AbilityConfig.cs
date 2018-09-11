@@ -28,7 +28,13 @@ namespace RPG.Characters
         [SerializeField] AnimationClip abilityAnimation = null;
         [SerializeField] AudioClip[] abilityAudioClips = null;
 
-        abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
+        public abstract AbilityBehaviour GetBehaviourComponent(GameObject objectToAttachTo);
+        public void AttachAbilityTo(GameObject objectToAttachTo)
+        {
+            var behaviourComponent = GetBehaviourComponent(objectToAttachTo);
+            behaviourComponent.SetConfig(this);
+            behaviour = behaviourComponent;
+        }
         public void Use(AbilityUseParams abilityUseParams) {
             behaviour.Use(abilityUseParams);
         }

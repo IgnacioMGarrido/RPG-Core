@@ -67,7 +67,7 @@ namespace RPG.Characters
         {
             foreach (AbilityConfig ability in abilities)
             {
-                ability.AttachComponentTo(gameObject);
+                ability.AttachAbilityTo(gameObject);
             }
         }
 

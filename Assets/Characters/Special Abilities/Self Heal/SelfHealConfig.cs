@@ -7,17 +7,13 @@ namespace RPG.Characters
     [CreateAssetMenu(menuName = ("RPG/Special Ability/Self heal"))]
     public class SelfHealConfig : AbilityConfig
     {
-        [Header("Power Attack Specific ")]
+        [Header("Self Heal Specific ")]
         [SerializeField]float healAmount = 10f;
 
-        public override void AttachComponentTo(GameObject gameObjectToAttachTo)
+        public override AbilityBehaviour GetBehaviourComponent(GameObject objectToAttachTo)
         {
-
-            var behaviourComponent = gameObjectToAttachTo.AddComponent<SelfHealBehaviour>();
-            behaviourComponent.SetConfig(this);
-            behaviour = behaviourComponent;
+            return objectToAttachTo.AddComponent<SelfHealBehaviour>();
         }
-
         public float GetHealAmount()
         {
             return healAmount;

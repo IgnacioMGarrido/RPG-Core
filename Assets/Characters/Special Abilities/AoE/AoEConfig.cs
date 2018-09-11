@@ -7,22 +7,20 @@ namespace RPG.Characters
     [CreateAssetMenu(menuName = ("RPG/Special Ability/Area of Effect"))]
     public class AoEConfig : AbilityConfig
     {
-        [Header("Power Attack Specific ")]
+        [Header("AoE Specific ")]
         [SerializeField] float radius = 5f;
         [SerializeField] float damageToEachTarget = 15f;
-        
 
-        public override void AttachComponentTo(GameObject gameObjectToAttachTo)
+        public override AbilityBehaviour GetBehaviourComponent(GameObject objectToAttachTo)
         {
-
-            var behaviourComponent = gameObjectToAttachTo.AddComponent<AoEBehaviour>();
-            behaviourComponent.SetConfig(this);
-            behaviour = behaviourComponent;
+            return objectToAttachTo.AddComponent<AoEBehaviour>();
         }
-        public float GetRadius() {
+        public float GetRadius()
+        {
             return radius;
         }
-        public void SetRadiusModifier(float abilityRadiusModifier) {
+        public void SetRadiusModifier(float abilityRadiusModifier)
+        {
             this.radius *= abilityRadiusModifier;
         }
         public float GetDamageToEachTarget()
