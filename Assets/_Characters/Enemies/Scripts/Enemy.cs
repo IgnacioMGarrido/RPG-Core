@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-using RPG.Weapons;
 using RPG.Core;
 
 namespace RPG.Characters

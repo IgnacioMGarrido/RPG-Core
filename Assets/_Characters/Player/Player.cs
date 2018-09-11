@@ -5,7 +5,6 @@ using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 using RPG.CameraUI;
-using RPG.Weapons;
 using RPG.Core;
 
 namespace RPG.Characters
@@ -14,6 +13,9 @@ namespace RPG.Characters
     {
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
+        const string ABILITY_ACTION_TRIGGER = "AbilityAction";
+        const string DEFAULT_ATTACK = "DEFAULT ATTACK";
+        const string DEFAULT_ABILITY = "DEFAULT ABILITY";
         IDamageable target;
         // Use this for initialization
         [SerializeField] float maxHealthPoints = 100f;
@@ -29,7 +31,8 @@ namespace RPG.Characters
         Animator animator;
 
         [Header("Weapon")]
-        [SerializeField] Weapon weaponInUse = null;
+        [SerializeField] Weapon currentWeaponConfig = null;
+        GameObject weaponGameObject;
 
         [Header("Audio")]
         AudioSource audioSource = null;
@@ -53,10 +56,10 @@ namespace RPG.Characters
             audioSource = GetComponent<AudioSource>();
 
             InitializeCharacterStats();
-            PutWeaponInHand();
+            PutWeaponInHand(currentWeaponConfig);
 
             NotifyListeners();
-            SetupRuntimeAnimator();
+            SetupAttackAnimation();
             AttachAbilitiesToPlayer();
 
 
@@ -98,26 +101,28 @@ namespace RPG.Characters
             }
         }
 
-        private void SetupRuntimeAnimator()
+        private void SetupAttackAnimation()
         {
             
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController["DEFAULT ATTACK"] = weaponInUse.GetAttackAnimClip(); //remove const
+            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip(); //remove const
         }
 
-        void PutWeaponInHand()
+        public void PutWeaponInHand(Weapon weaponToUse)
         {
-
-            GameObject weapon = Instantiate(weaponInUse.WeaponPrefab); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
+            currentWeaponConfig = weaponToUse;
+            var weaponPrefab = weaponToUse.WeaponPrefab;
             GameObject dominantHandSocket = RequestDominantHand();
-            weapon.transform.SetParent(dominantHandSocket.transform);
-            weapon.transform.localPosition = weaponInUse.Grip.localPosition;
-            weapon.transform.localRotation = weaponInUse.Grip.localRotation;
+            Destroy(weaponGameObject);
+            weaponGameObject = Instantiate(weaponToUse.WeaponPrefab, dominantHandSocket.transform); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
+            weaponGameObject.transform.localPosition = weaponToUse.Grip.localPosition;
+            weaponGameObject.transform.localRotation = weaponToUse.Grip.localRotation;
 
             SetWeaponModifiersToPlayer();
+            //TODO: Maybe do this everytime we attack instead??
+            SetupAttackAnimation();
         }
-
         private GameObject RequestDominantHand()
         {
             var dominantHands = GetComponentsInChildren<DominantHand>();
@@ -204,7 +209,7 @@ namespace RPG.Characters
             //Reload Scene and reset components
             print("Scene Reloaded");
             SceneManager.LoadScene(0); 
-            animator.SetTrigger("Death");
+            animator.SetTrigger(DEATH_TRIGGER);
             isDead = false;
         }
 
@@ -245,18 +250,18 @@ namespace RPG.Characters
                 }
 
                 if (abilities[abilityIndex].GetAbilityAnimation() != null) {
-                    ChangeRuntimeAnimatorAbilityAnim(abilities[abilityIndex]);
-                    animator.SetTrigger("AbilityAction");
+                    SetupAbilityAnimation(abilities[abilityIndex]);
+                    animator.SetTrigger(ABILITY_ACTION_TRIGGER);
                 }
 
             }
         }
-        private void ChangeRuntimeAnimatorAbilityAnim(AbilityConfig ability)
+        private void SetupAbilityAnimation(AbilityConfig ability)
         {
 
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController["DEFAULT ABILITY"] = ability.GetAbilityAnimation(); //remove const
+            animatorOverrideController[DEFAULT_ABILITY] = ability.GetAbilityAnimation(); //remove const
         }
 
         private void AttackTarget()
@@ -306,7 +311,7 @@ namespace RPG.Characters
         private bool IsTargetInRange(Enemy target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            return distanceToTarget <= weaponInUse.MaxAttackRange;
+            return distanceToTarget <= currentWeaponConfig.MaxAttackRange;
         }
         public float HealthAsPercentage
         {
@@ -321,8 +326,8 @@ namespace RPG.Characters
         { 
             if (characterStats != null)
             {
-                characterStats.SetActionSpeed(weaponInUse.ActionSpeedModifier);
-                characterStats.SetDamage(weaponInUse.DamageModifier);
+                characterStats.SetActionSpeed(currentWeaponConfig.ActionSpeedModifier);
+                characterStats.SetDamage(currentWeaponConfig.DamageModifier);
             }
         }
 

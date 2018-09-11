@@ -40,7 +40,7 @@ namespace RPG.Characters
         const float baseAccuracy = 20;
         const float baseDamage = 10;
         const float baseHealing = 10;
-        const float baseActionSpeed = 1;
+        float baseActionSpeed = 1;
         const float baseAoEIncrease = 0;
         const float baseDuration = 0;
 
@@ -117,9 +117,10 @@ namespace RPG.Characters
         {
             return damage;
         }
+        //TODO: Refactor
         public void SetDamage(float percentage)
         {
-            damage += baseDamage * percentage;
+            damage = baseDamage + baseDamage * (0.03f * (might - LEVEL_BASE) + percentage);
         }
         public float GetHealth()
         {
@@ -142,9 +143,10 @@ namespace RPG.Characters
         {
             return actionSpeed;
         }
+        //TODO: Refactor
         public void SetActionSpeed(float percentage)
         {
-            actionSpeed += actionSpeed * percentage;
+            actionSpeed = baseActionSpeed + baseActionSpeed * (-0.03f * (dexterity - LEVEL_BASE) + percentage) ;
         }
 
         public float GetAoEModifier() {
