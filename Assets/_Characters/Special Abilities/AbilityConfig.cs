@@ -6,16 +6,6 @@ using RPG.Core;
 namespace RPG.Characters
 {
 
-    public struct AbilityUseParams
-    {
-        public HealthSystem target;
-        public float baseDamage;
-
-        public AbilityUseParams(HealthSystem _target, float _baseDamage) {
-            this.target = _target;
-            this.baseDamage = _baseDamage;
-        }
-    }
     public abstract class AbilityConfig : ScriptableObject
     {
         [Header("Special Ability General")]
@@ -35,8 +25,8 @@ namespace RPG.Characters
             behaviourComponent.SetConfig(this);
             behaviour = behaviourComponent;
         }
-        public void Use(AbilityUseParams abilityUseParams) {
-            behaviour.Use(abilityUseParams);
+        public void Use(HealthSystem hs) {
+            behaviour.Use(hs);
         }
         public float GetEnergyCost() {
             return energyCost;

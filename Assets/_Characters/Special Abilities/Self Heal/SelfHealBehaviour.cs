@@ -8,16 +8,15 @@
         {
             player = GetComponent<Player>();
         }
-        public override void Use(AbilityUseParams abilityUseParams)
+        public override void Use(HealthSystem hs)
         {
-            HealTarget(abilityUseParams);
+            HealTarget(hs);
             PlayParticleEffect();
             PlayAbilitySound();
         }
-        private void HealTarget(AbilityUseParams abilityUseParams)
+        private void HealTarget(HealthSystem hs)
         {
-            var playerHealth = player.GetComponent<HealthSystem>();
-            playerHealth.Heal((config as SelfHealConfig).GetHealAmount());
+            hs.Heal((config as SelfHealConfig).GetHealAmount());
         }
     }
 }

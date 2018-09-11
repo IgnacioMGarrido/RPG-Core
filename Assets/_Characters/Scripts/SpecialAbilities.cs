@@ -56,11 +56,11 @@ namespace RPG.Characters
                 {
                     //float damageAmount = CalculateHitProbability(amount, target);
                     //TODO: remove AbilityUseParams.
-                    abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
+                    abilities[abilityIndex].Use(target);
                 }
                 else
                 {
-                    abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
+                    abilities[abilityIndex].Use(target);
 
                 }
 

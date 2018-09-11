@@ -10,13 +10,13 @@ namespace RPG.Characters
         {
             radius = (config as AoEConfig).GetRadius() * abilityRadiusModifier;
         }
-        public override void Use(AbilityUseParams abilityUseParams)
+        public override void Use(HealthSystem hs)
         {
-            DealRadialDamage(abilityUseParams);
+            DealRadialDamage(hs);
             PlayParticleEffect();
             PlayAbilitySound();
         }
-        private void DealRadialDamage(AbilityUseParams abilityUseParams)
+        private void DealRadialDamage(HealthSystem hs)
         {
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position,
@@ -30,12 +30,10 @@ namespace RPG.Characters
 
                 if (healthSystem != null)
                 {
-                    if (healthSystem.Equals(abilityUseParams.target) == false)
+                    if (healthSystem.Equals(hs) == false)
                     {
                         //TODO fix this to do the same as be4 when the architecture is completed
-                        float damage = 10;// abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, healthSystem);
-                        AbilityUseParams aux = new AbilityUseParams(abilityUseParams.target, damage);
-                        healthSystem.TakeDamage(aux.baseDamage + (config as AoEConfig).GetDamageToEachTarget());
+                        healthSystem.TakeDamage((config as AoEConfig).GetDamageToEachTarget());
                     }
                 }
             }

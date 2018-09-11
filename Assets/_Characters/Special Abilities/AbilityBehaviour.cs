@@ -25,7 +25,7 @@ namespace RPG.Characters
 
             }
         }
-        public abstract void Use(AbilityUseParams abilityUseParams);
+        public abstract void Use(HealthSystem hs);
 
         protected void PlayAbilitySound()
         {

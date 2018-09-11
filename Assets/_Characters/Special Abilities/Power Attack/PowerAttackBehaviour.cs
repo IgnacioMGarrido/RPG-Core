@@ -2,15 +2,15 @@
 {
     public class PowerAttackBehaviour : AbilityBehaviour
     {
-        public override void Use(AbilityUseParams abilityUseParams)
+        public override void Use(HealthSystem hs)
         {
-            DealDamage(abilityUseParams);
+            DealDamage(hs);
             PlayParticleEffect();
             PlayAbilitySound();
         }
-        private void DealDamage(AbilityUseParams abilityUseParams)
+        private void DealDamage(HealthSystem hs)
         {
-            abilityUseParams.target.TakeDamage(abilityUseParams.baseDamage + (config as PowerAttackConfig).GetExtraDamage());
+            hs.TakeDamage((config as PowerAttackConfig).GetExtraDamage());
         }
     }
 }
