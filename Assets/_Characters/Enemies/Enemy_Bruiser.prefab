@@ -925,6 +925,7 @@ GameObject:
   - component: {fileID: 195894390016807626}
   - component: {fileID: 114373530622781524}
   - component: {fileID: 114789506143169814}
+  - component: {fileID: 114247473875937146}
   m_Layer: 10
   m_Name: Enemy_Bruiser
   m_TagString: Enemy
@@ -2092,6 +2093,23 @@ MonoBehaviour:
   triggerRadius: 7
   isOneTimeOnly: 1
   hasPlayed: 0
+--- !u!114 &114247473875937146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939841245054686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d1c764f0c52f34c92a072a5687dd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  currenthealthPoints: 0
+  healthBar: {fileID: 0}
+  hitSounds: []
+  deathSounds: []
+  healSounds: []
 --- !u!114 &114373530622781524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2145,8 +2163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c214d763287ad3d4dbaeba9224692f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 85
-  damagePerShot: 40
   actionSpeed: 0.5
   chaseRadius: 4
   attackRadius: 1.7

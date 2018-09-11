@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 195746039115602316}
   - component: {fileID: 114098239761594236}
   - component: {fileID: 114937122672973552}
+  - component: {fileID: 114198094897415320}
   m_Layer: 10
   m_Name: Enemy_SpearMan
   m_TagString: Enemy
@@ -2283,6 +2284,23 @@ MonoBehaviour:
   AoEIncrease: 0
   duration: 3
   health: 0
+--- !u!114 &114198094897415320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264434816376686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d1c764f0c52f34c92a072a5687dd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  currenthealthPoints: 0
+  healthBar: {fileID: 0}
+  hitSounds: []
+  deathSounds: []
+  healSounds: []
 --- !u!114 &114602810326833552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2318,8 +2336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c214d763287ad3d4dbaeba9224692f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 100
-  damagePerShot: 5
   actionSpeed: 0.5
   chaseRadius: 7
   attackRadius: 3

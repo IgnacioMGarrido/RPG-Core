@@ -13,16 +13,15 @@ namespace RPG.Characters
     {
  
         const string ATTACK_TRIGGER = "Attack";
-        const string ABILITY_ACTION_TRIGGER = "AbilityAction";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
-        const string DEFAULT_ABILITY = "DEFAULT ABILITY";
+
         Enemy target;
         // Use this for initialization
 
         [Header("Special Abilities")]
         
         //temporarily serialized for debugging.
-        [SerializeField] AbilityConfig[] abilities;
+
 
         [Header("Animator")]
         [SerializeField] AnimatorOverrideController animatorOverrideController;
@@ -40,31 +39,22 @@ namespace RPG.Characters
 
         float lastHitTime = 0f;
 
-        Energy playerEnergy;
-        int energyPointsPerHit = 10;
+        SpecialAbilities playerAbilities;
         bool isDead = false;
   
         void Start()
         {
-            playerEnergy = GetComponent<Energy>();
+            playerAbilities = GetComponent<SpecialAbilities>();
             characterStats = GetComponent<CharacterStats>();
             PutWeaponInHand(currentWeaponConfig);
 
             NotifyListeners();
             SetupAttackAnimation();
-            AttachAbilitiesToPlayer();
-
 
             ModifyAoERadius();
         }
 
-        private void AttachAbilitiesToPlayer()
-        {
-            foreach (AbilityConfig ability in abilities)
-            {
-                ability.AttachAbilityTo(gameObject);
-            }
-        }
+
 
         private void ModifyAoERadius()
         {
@@ -133,12 +123,12 @@ namespace RPG.Characters
             //healing
             if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
             {
-                AttemptSpecialAbility(1, GetComponent<HealthSystem>(), characterStats.GetHealing()); 
+                playerAbilities.AttemptSpecialAbility(1, GetComponent<HealthSystem>(), characterStats.GetHealing()); 
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
             {
-               AttemptSpecialAbility(2, GetComponent<HealthSystem>(), characterStats.GetDamage());
+                playerAbilities.AttemptSpecialAbility(2, GetComponent<HealthSystem>(), characterStats.GetDamage());
 
             }
         }
@@ -155,39 +145,9 @@ namespace RPG.Characters
                 }
                 else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyToSet))
                 {
-                    AttemptSpecialAbility(0, this.target.GetComponent<HealthSystem>(), characterStats.GetDamage());
+                    playerAbilities.AttemptSpecialAbility(0, this.target.GetComponent<HealthSystem>(), characterStats.GetDamage());
                 }
             }
-        }
-
-        private void AttemptSpecialAbility(int abilityIndex, HealthSystem target, float amount)
-        {
-            if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
-                playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
-                if (abilityIndex == 0)
-                {
-                    float damageAmount = CalculateHitProbability(amount, target);
-                    abilities[abilityIndex].Use(new AbilityUseParams(target, damageAmount));
-                }
-                else
-                {
-                    abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
-                  
-                }
-
-                if (abilities[abilityIndex].GetAbilityAnimation() != null) {
-                    SetupAbilityAnimation(abilities[abilityIndex]);
-                    animator.SetTrigger(ABILITY_ACTION_TRIGGER);
-                }
-
-            }
-        }
-        private void SetupAbilityAnimation(AbilityConfig ability)
-        {
-
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController[DEFAULT_ABILITY] = ability.GetAbilityAnimation(); //remove const
         }
 
         private void AttackTarget()

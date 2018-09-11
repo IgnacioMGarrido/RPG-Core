@@ -23,6 +23,7 @@ namespace RPG.Characters
         Animator animator;
         AudioSource audioSource;
         CharacterMovement characterMovement;
+        CharacterStats characterStats;
         float deathBanishSeconds = 3;
 
         // Use this for initialization
@@ -30,12 +31,13 @@ namespace RPG.Characters
         {
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
+            characterStats = GetComponent<CharacterStats>();
             characterMovement = GetComponent<CharacterMovement>();
             InitializeCharacterHealthStats();
         }
         public void InitializeCharacterHealthStats()
         {
-            CharacterStats characterStats = GetComponent<CharacterStats>();
+           
             if (characterStats != null)
             {
                 maxHealthPoints = characterStats.GetHealth();
