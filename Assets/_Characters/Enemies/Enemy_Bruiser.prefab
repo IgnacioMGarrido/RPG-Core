@@ -924,7 +924,6 @@ GameObject:
   - component: {fileID: 136768034882619232}
   - component: {fileID: 195894390016807626}
   - component: {fileID: 114373530622781524}
-  - component: {fileID: 114905977851593746}
   - component: {fileID: 114789506143169814}
   m_Layer: 10
   m_Name: Enemy_Bruiser
@@ -2159,25 +2158,6 @@ MonoBehaviour:
   weaponInUse: {fileID: 11400000, guid: 934100258965c4048a17739c1b912878, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b,
     type: 2}
---- !u!114 &114905977851593746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1939841245054686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 6
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.7
-  m_AnimSpeedMultiplier: 0.7
-  m_GroundCheckDistance: 1
 --- !u!136 &136768034882619232
 CapsuleCollider:
   m_ObjectHideFlags: 1

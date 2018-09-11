@@ -16,7 +16,7 @@ namespace RPG.Characters
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
         [SerializeField] float moveSpeedMultiplier = 1.2f;
-        //TODO: Maybe adjust animation velocity depending on the move speed velocity
+        [SerializeField] float animatiorSpeedMultiplier = 1f;
 
         Player player;
 
@@ -34,11 +34,10 @@ namespace RPG.Characters
             player = GetComponent<Player>();
 
             myRigidbody = GetComponent<Rigidbody>();
-            myRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            myRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
             animator = GetComponent<Animator>();
-            animator.applyRootMotion = true;
-
+            animator.applyRootMotion = true; //TODO: Consider if needed.
 
             RPGCursor rpgCursor = Camera.main.GetComponent<RPGCursor>();
             currentDestination = transform.position;
@@ -119,12 +118,13 @@ namespace RPG.Characters
             forwardAmount = localMove.z;
         }
 
-        void UpdateAnimator()
+        private void UpdateAnimator()
         {
             animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
             animator.SetFloat("Turn", turnAmount, 0.1f, Time.deltaTime);
+            animator.speed = animatiorSpeedMultiplier;
         }
-        void ApplyExtraTurnRotation()
+        private void ApplyExtraTurnRotation()
         {
             // help the character turn faster (this is in addition to root rotation in the animation)
             float turnSpeed = Mathf.Lerp(stationaryTurnSpeed, movingTurnSpeed, forwardAmount);
