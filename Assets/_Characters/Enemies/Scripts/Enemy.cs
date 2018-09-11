@@ -30,7 +30,7 @@ namespace RPG.Characters
 
         bool isAttacking = false;
 
-        AICharacterControl aiCharacterController = null;
+      //  AICharacterControl aiCharacterController = null;
         CharacterStats characterStats;
         Transform originalTransform;
         GameObject player = null;
@@ -43,7 +43,7 @@ namespace RPG.Characters
         {
 
             player = GameObject.FindGameObjectWithTag("Player");
-            aiCharacterController = GetComponent<AICharacterControl>();
+           // aiCharacterController = GetComponent<AICharacterControl>();
             characterStats = GetComponent<CharacterStats>();
             if (characterStats)
             {
@@ -106,11 +106,11 @@ namespace RPG.Characters
 
             if (distanceToPlayer <= chaseRadius)
             {
-                aiCharacterController.SetTarget(player.transform);
+                //aiCharacterController.SetTarget(player.transform);
             }
             else if (spawnDistanceToPlayer >= stopChasingRadius)
             {
-                aiCharacterController.SetTarget(spawnPosition.transform);
+                //aiCharacterController.SetTarget(spawnPosition.transform);
             }
         }
 

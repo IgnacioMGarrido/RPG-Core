@@ -7,36 +7,44 @@ namespace RPG.Characters
 {
     [RequireComponent(typeof(ThirdPersonCharacter))]
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(AICharacterControl))]
     [RequireComponent(typeof(Player))]
 
     //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
-    public class PlayerMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour
     {
-        Player player = null;
-        ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
-        AICharacterControl aiCharacterControl = null;
+        [SerializeField] float stoppingDistance = 1f;
+        Player player;
+        ThirdPersonCharacter character;
 
-        RPGCursor cameraRaycaster;
         Vector3 currentDestination, clickPoint;
 
+        GameObject walkTarget;
 
-        GameObject walkTarget = null;
-        bool isInDirectMode = false;
-
+        NavMeshAgent agent;
 
         private void Start()
         {
             player = GetComponent<Player>();
-            cameraRaycaster = Camera.main.GetComponent<RPGCursor>();
-            thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-            aiCharacterControl = GetComponent<AICharacterControl>();
+            RPGCursor rpgCursor = Camera.main.GetComponent<RPGCursor>();
+            character = GetComponent<ThirdPersonCharacter>();
             walkTarget = new GameObject("WalkTarget");
             currentDestination = transform.position;
 
-            cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
-            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
+            agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updatePosition = true;
+            agent.stoppingDistance = stoppingDistance;
 
+            rpgCursor.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+            rpgCursor.onMouseOverEnemy += OnMouseOverEnemy;
+
+        }
+        private void Update()
+        {
+            if (agent.remainingDistance > agent.stoppingDistance)
+                character.Move(agent.desiredVelocity, false, false);
+            else
+                character.Move(Vector3.zero, false, false);
         }
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
         {
@@ -44,14 +52,11 @@ namespace RPG.Characters
             {
                 if (Input.GetMouseButton(0))
                 {
-                    walkTarget.transform.position = destination;
-                    aiCharacterControl.SetTarget(walkTarget.transform);
+                    agent.SetDestination(destination);
+
                 }
             }
-            else {
-                walkTarget.transform.position = this.transform.position;
-                aiCharacterControl.SetTarget(walkTarget.transform);
-            }
+
         }
         void OnMouseOverEnemy(Enemy enemy)
         {
@@ -59,11 +64,8 @@ namespace RPG.Characters
             {
                 if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
                 {
-                    aiCharacterControl.SetTarget(enemy.transform);
+                    agent.SetDestination(enemy.transform.position);
                 }
-            }
-            else {
-                aiCharacterControl.SetTarget(this.transform);
             }
         }
 
@@ -73,11 +75,11 @@ namespace RPG.Characters
 
             if (playerToClickPoint.magnitude >= 0)
             {
-                thirdPersonCharacter.Move(playerToClickPoint, false, false);
+                character.Move(playerToClickPoint, false, false);
             }
             else
             {
-                thirdPersonCharacter.Move(Vector3.zero, false, false);
+                character.Move(Vector3.zero, false, false);
             }
         }
 

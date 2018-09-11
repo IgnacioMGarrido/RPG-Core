@@ -758,7 +758,6 @@ GameObject:
   - component: {fileID: 54609458904031082}
   - component: {fileID: 136173172759739566}
   - component: {fileID: 195758765267784360}
-  - component: {fileID: 114963175317652990}
   - component: {fileID: 114471146982969502}
   - component: {fileID: 114436087945459482}
   - component: {fileID: 114658463110107228}
@@ -2402,6 +2401,8 @@ MonoBehaviour:
   perception: 15
   intellect: 7
   resolve: 4
+  baseHealth: 42
+  healthPerLevel: 12
   deflection: 0
   fortitude: 0
   reflex: 0
@@ -2465,18 +2466,6 @@ MonoBehaviour:
   triggerRadius: 5
   isOneTimeOnly: 1
   hasPlayed: 0
---- !u!114 &114963175317652990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1706424491471086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!136 &136173172759739566
 CapsuleCollider:
   m_ObjectHideFlags: 1

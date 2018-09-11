@@ -343,7 +343,6 @@ GameObject:
   - component: {fileID: 54420706441953824}
   - component: {fileID: 136602723243205100}
   - component: {fileID: 195746039115602316}
-  - component: {fileID: 114830126605199230}
   - component: {fileID: 114098239761594236}
   - component: {fileID: 114782369065082676}
   - component: {fileID: 114937122672973552}
@@ -2272,6 +2271,8 @@ MonoBehaviour:
   perception: 8
   intellect: 6
   resolve: 6
+  baseHealth: 42
+  healthPerLevel: 12
   deflection: 0
   fortitude: 0
   reflex: 0
@@ -2326,18 +2327,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.9
   m_AnimSpeedMultiplier: 0.9
   m_GroundCheckDistance: 0.9
---- !u!114 &114830126605199230
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1264434816376686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &114937122672973552
 MonoBehaviour:
   m_ObjectHideFlags: 1
