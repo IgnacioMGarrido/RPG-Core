@@ -12,7 +12,7 @@ namespace RPG.Characters
         const string DEATH_TRIGGER = "Death";
 
         [SerializeField] float maxHealthPoints = 100f;
-        float currenthealthPoints = 0;
+        [SerializeField] float currenthealthPoints = 0;
         [SerializeField] Image healthBar;
         [SerializeField] AudioClip[] hitSounds;
         [SerializeField] AudioClip[] deathSounds;
@@ -23,7 +23,6 @@ namespace RPG.Characters
         Animator animator;
         AudioSource audioSource;
         CharacterMovement characterMovement;
-        bool isDead = false;
         float deathBanishSeconds = 3;
 
         // Use this for initialization

@@ -144,27 +144,19 @@ namespace RPG.Characters
             }
         }
 
-        public float CalculateHitProbability(float damage, IDamageable target)
+        public float CalculateHitProbability(float damage, Player target)
         {
             int score = Random.Range(1, 101);
             float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - player.GetComponent<CharacterStats>().GetDeflection();
             float attackRoll = score + damageDealerNewAccuracy;
-            //print("------------------------------------------------------------------------------");
-            //print("Attack Roll: " + score + " + " + damageDealerNewAccuracy + " = " + attackRoll);
+
             if (attackRoll > 25 && attackRoll <= 50)
             {
                 damage = damage / 2;
-            //    print("This hit was a GRAZE. Damage = " + damage);
             }
             else if (attackRoll > 100)
             {
                 damage = damage * 1.25f;
-            //    print("This hit was a CRIT HIT. Damage = " + damage);
-
-            }
-            else
-            {
-            //    print("This hit was a NORMAL HIT. Damage = " + damage);
             }
 
             return damage;

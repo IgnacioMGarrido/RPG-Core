@@ -26,15 +26,16 @@ namespace RPG.Characters
             );
             foreach (RaycastHit hit in hits)
             {
-                var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
+                var healthSystem = hit.collider.gameObject.GetComponent<HealthSystem>();
 
-                if (damageable != null)
+                if (healthSystem != null)
                 {
-                    if (damageable.Equals(abilityUseParams.target) == false)
+                    if (healthSystem.Equals(abilityUseParams.target) == false)
                     {
-                        float damage = abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, damageable);
+                        //TODO fix this to do the same as be4 when the architecture is completed
+                        float damage = 10;// abilityUseParams.target.CalculateHitProbability(abilityUseParams.baseDamage, healthSystem);
                         AbilityUseParams aux = new AbilityUseParams(abilityUseParams.target, damage);
-                        damageable.TakeDamage(aux.baseDamage + (config as AoEConfig).GetDamageToEachTarget());
+                        healthSystem.TakeDamage(aux.baseDamage + (config as AoEConfig).GetDamageToEachTarget());
                     }
                 }
             }

@@ -19,7 +19,7 @@ namespace RPG.Characters
         {
             if (shooter && collision.gameObject.layer != shooter.layer)
             {
-                DamageIfDamageable(collision);
+                //DamageIfDamageable(collision);
             }
         }
         private void Start()
@@ -27,15 +27,15 @@ namespace RPG.Characters
             Destroy(this.gameObject, DESTROY_DELAY);
 
         }
-        private void DamageIfDamageable(Collider collision)
-        {
-            Component damagable = collision.gameObject.GetComponent(typeof(IDamageable));
-            if (damagable && damagable.gameObject.layer != shooter.layer)
-            {
-                (damagable as IDamageable).TakeDamage(damageCaused);
-            }
-            Destroy(this.gameObject, DESTROY_DELAY);
-        }
+        //private void DamageIfDamageable(Collider collision)
+        //{
+        //    Component damagable = collision.gameObject.GetComponent(typeof(IDamageable));
+        //    if (damagable && damagable.gameObject.layer != shooter.layer)
+        //    {
+        //        (damagable as IDamageable).TakeDamage(damageCaused);
+        //    }
+        //    Destroy(this.gameObject, DESTROY_DELAY);
+        //}
 
         public float getDefaultLaunchSpeed()
         {

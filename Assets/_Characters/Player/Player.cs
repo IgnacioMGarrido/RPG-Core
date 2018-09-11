@@ -82,8 +82,6 @@ namespace RPG.Characters
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
         }
 
-
-
         private void SetupAttackAnimation()
         {
             
@@ -135,13 +133,12 @@ namespace RPG.Characters
             //healing
             if (Input.GetKeyDown(KeyCode.Alpha1)) //Self Healing
             {
-
-                //AttemptSpecialAbility(1, gameObject.GetComponent<Player>(), characterStats.GetHealing()); 
+                AttemptSpecialAbility(1, GetComponent<HealthSystem>(), characterStats.GetHealing()); 
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))// AoEDamage
             {
-               // AttemptSpecialAbility(2, gameObject.GetComponent<Player>(), characterStats.GetDamage());
+               AttemptSpecialAbility(2, GetComponent<HealthSystem>(), characterStats.GetDamage());
 
             }
         }
@@ -158,23 +155,23 @@ namespace RPG.Characters
                 }
                 else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyToSet))
                 {
-                   // AttemptSpecialAbility(0, this.target, characterStats.GetDamage());
+                    AttemptSpecialAbility(0, this.target.GetComponent<HealthSystem>(), characterStats.GetDamage());
                 }
             }
         }
 
-        private void AttemptSpecialAbility(int abilityIndex, Enemy target, float amount)
+        private void AttemptSpecialAbility(int abilityIndex, HealthSystem target, float amount)
         {
             if (playerEnergy.IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost())) { 
                 playerEnergy.ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
                 if (abilityIndex == 0)
                 {
                     float damageAmount = CalculateHitProbability(amount, target);
-                   // abilities[abilityIndex].Use(new AbilityUseParams(target, damageAmount));
+                    abilities[abilityIndex].Use(new AbilityUseParams(target, damageAmount));
                 }
                 else
                 {
-                  //  abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
+                    abilities[abilityIndex].Use(new AbilityUseParams(target, amount));
                   
                 }
 
@@ -200,13 +197,13 @@ namespace RPG.Characters
             {
 
                 animator.SetTrigger(ATTACK_TRIGGER);
-                float hitValue = CalculateHitProbability(characterStats.GetDamage(), target);
+                float hitValue = CalculateHitProbability(characterStats.GetDamage(), target.GetComponent<HealthSystem>());
                 //target.TakeDamage(hitValue);
                 lastHitTime = Time.time;
             }
         }
         //TODO: Clear this mess!
-        public float CalculateHitProbability(float damage, Enemy enemy)
+        public float CalculateHitProbability(float damage, HealthSystem enemy)
         {
             int score = Random.Range(1, 101);
             
