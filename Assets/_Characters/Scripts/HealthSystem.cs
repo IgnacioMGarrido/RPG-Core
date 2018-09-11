@@ -22,7 +22,7 @@ namespace RPG.Characters
 
         Animator animator;
         AudioSource audioSource;
-        CharacterMovement characterMovement;
+        Character character;
         CharacterStats characterStats;
         float deathBanishSeconds = 3;
 
@@ -32,7 +32,7 @@ namespace RPG.Characters
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
             characterStats = GetComponent<CharacterStats>();
-            characterMovement = GetComponent<CharacterMovement>();
+            character = GetComponent<Character>();
             InitializeCharacterHealthStats();
         }
         public void InitializeCharacterHealthStats()
@@ -83,7 +83,7 @@ namespace RPG.Characters
         IEnumerator KillCharacter()
         {
             StopAllCoroutines();
-            characterMovement.Kill();
+            character.Kill();
             animator.SetTrigger(DEATH_TRIGGER);
 
             var playerComponent = GetComponent<Player>();

@@ -24,13 +24,17 @@ namespace RPG.Characters
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         Animator animator;
 
+        private void Awake()
+        {
+            AttachAbilitiesToCharacter();
+        }
+
         void Start()
         {
             energyBar = energyBar.GetComponent<Image>();
             audioSource = GetComponent<AudioSource>();
             currentEnergyPoints = maxEnergyPoints;
             animator = GetComponent<Animator>();
-            AttachAbilitiesToCharacter();
             UpdateEnergyBarImage();
         }
         private void Update()

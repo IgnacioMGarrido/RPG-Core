@@ -444,16 +444,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4540744190431842}
-  - component: {fileID: 95543528005122332}
-  - component: {fileID: 54107926589142042}
-  - component: {fileID: 136682139063410000}
   - component: {fileID: 195818527551339128}
   - component: {fileID: 82430124324836680}
   - component: {fileID: 114517200868660366}
   - component: {fileID: 114764510337010976}
   - component: {fileID: 114928364904231760}
-  - component: {fileID: 114966950527665414}
   - component: {fileID: 114734338003116214}
+  - component: {fileID: 114837111485293522}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -2088,21 +2085,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1402651156503688}
   m_Mesh: {fileID: 4300000, guid: 9385cec705bc08b4483f050c52be6dcc, type: 3}
---- !u!54 &54107926589142042
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406900039251628}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65523393619692504
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2222,24 +2204,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &95543528005122332
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406900039251628}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: acb10ce1410ed6f47ad42a82ce095f34, type: 3}
-  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95737670305966878
 Animator:
   serializedVersion: 3
@@ -2305,7 +2269,7 @@ MonoBehaviour:
   perception: 19
   intellect: 12
   resolve: 18
-  baseHealth: 50
+  baseHealth: 100
   healthPerLevel: 20
   deflection: 0
   fortitude: 0
@@ -2329,9 +2293,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88281762975f9714e85c25e80e1ec6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilities:
+  - {fileID: 11400000, guid: ee4e1bc28563c5648b8aff1cd89b9cec, type: 2}
+  - {fileID: 11400000, guid: ccfc82561d8fe9f4892ba58149080ea1, type: 2}
+  - {fileID: 11400000, guid: 0c143ea4c90e5c247a121dfab07e4a32, type: 2}
   energyBar: {fileID: 0}
   maxEnergyPoints: 100
   regenPointsPerSecond: 10
+  animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
+    type: 2}
 --- !u!114 &114764510337010976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2343,21 +2313,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42a67180d62f7849a971a032d3d8ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 100
-  abilities:
-  - {fileID: 11400000, guid: ee4e1bc28563c5648b8aff1cd89b9cec, type: 2}
-  - {fileID: 11400000, guid: ccfc82561d8fe9f4892ba58149080ea1, type: 2}
-  - {fileID: 11400000, guid: 0c143ea4c90e5c247a121dfab07e4a32, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
     type: 2}
   currentWeaponConfig: {fileID: 11400000, guid: 7d0fcdc062a9f8b4887fa7091040285c,
     type: 2}
+--- !u!114 &114837111485293522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1406900039251628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d1c764f0c52f34c92a072a5687dd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  currenthealthPoints: 0
+  healthBar: {fileID: 0}
   hitSounds:
   - {fileID: 8300000, guid: 26892a2ab85819f42ad159e7ffb87c70, type: 3}
   - {fileID: 8300000, guid: 446c24cf9f86eb14194d2fe98196e2c0, type: 3}
   - {fileID: 8300000, guid: 47e86d3fb110e82489bef406e18904f6, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: b2cd1d51eabf0c24db96e19d2e44ce8c, type: 3}
+  - {fileID: 8300000, guid: 227318d66d2af0041a73412064860ed2, type: 3}
   - {fileID: 8300000, guid: b2cd1d51eabf0c24db96e19d2e44ce8c, type: 3}
   healSounds:
   - {fileID: 8300000, guid: f8ae35a960206774f89f772cefa437b3, type: 3}
@@ -2372,38 +2351,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25536bfffb7fcb7418eb6fd31417cb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
+    type: 2}
+  characterAvatar: {fileID: 9000000, guid: 6312fb3bed4303745a76d0723c5ed14f, type: 3}
+  colliderRadius: 0.2
+  colliderHeight: 1.8
+  colliderCenter: {x: 0, y: 0.9, z: 0}
+  mass: 1
+  drag: 0
+  angularDrag: 0.05
   stoppingDistance: 1
   movingTurnSpeed: 1000
   stationaryTurnSpeed: 300
   moveThreshold: 1
   moveSpeedMultiplier: 1
---- !u!114 &114966950527665414
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406900039251628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movingTurnSpeed: 1000
-  stationaryTurnSpeed: 300
-  moveThreshold: 1
---- !u!136 &136682139063410000
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1406900039251628}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.7980366
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8990183, z: -0}
+  animatiorSpeedMultiplier: 1.2
 --- !u!137 &137536457732181456
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

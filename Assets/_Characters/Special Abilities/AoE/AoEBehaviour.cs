@@ -27,12 +27,10 @@ namespace RPG.Characters
             foreach (RaycastHit hit in hits)
             {
                 var healthSystem = hit.collider.gameObject.GetComponent<HealthSystem>();
-
                 if (healthSystem != null)
                 {
                     if (healthSystem.Equals(hs) == false)
                     {
-                        //TODO fix this to do the same as be4 when the architecture is completed
                         healthSystem.TakeDamage((config as AoEConfig).GetDamageToEachTarget());
                     }
                 }
