@@ -7,11 +7,9 @@ using RPG.Core;
 
 namespace RPG.Characters
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour
     {
 
-        [SerializeField] float maxHealthPoints = 100f;
-        [SerializeField] float damagePerShot = 15.0f;
         [SerializeField] float actionSpeed = 0.5f;
 
         [SerializeField] float chaseRadius = 5.0f;
@@ -34,7 +32,6 @@ namespace RPG.Characters
         CharacterStats characterStats;
         Transform originalTransform;
         GameObject player = null;
-        float currenthealthPoints = 100f;
 
         GameObject spawnPosition;
 
@@ -47,11 +44,8 @@ namespace RPG.Characters
             characterStats = GetComponent<CharacterStats>();
             if (characterStats)
             {
-                maxHealthPoints = characterStats.GetHealth();
-                damagePerShot = characterStats.GetDamage();
                 actionSpeed = characterStats.GetActionSpeed();
             }
-            currenthealthPoints = maxHealthPoints;
             spawnPosition = new GameObject("SpawnPosition");
             spawnPosition.transform.position = transform.position;
             spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform;
@@ -85,10 +79,10 @@ namespace RPG.Characters
         }
         private void Update()
         {
-            if (player.GetComponent<Player>().HealthAsPercentage <= Mathf.Epsilon) { //Stop Coroutines
-                StopAllCoroutines();
-                Destroy(this);
-            }
+            //if (player.GetComponent<Player>().HealthAsPercentage <= Mathf.Epsilon) { //Stop Coroutines
+            //    StopAllCoroutines();
+            //    Destroy(this);
+            //}
 
             float distanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
             float spawnDistanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, spawnPosition.transform.position));
@@ -129,7 +123,7 @@ namespace RPG.Characters
             Vector3 unitVectorToPlayer = (player.transform.position + AimOffset - projectileSocket.transform.position).normalized;
             var projectileComponent = newProjectile.GetComponent<Projectile>();
             projectileComponent.SetShooter(this.gameObject);
-            projectileComponent.SetDamage(damagePerShot);
+            //projectileComponent.SetDamage(damagePerShot);
 
             float projectileSpeed = projectileComponent.getDefaultLaunchSpeed();
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
@@ -144,18 +138,9 @@ namespace RPG.Characters
                 //animator.SetTrigger("Attack");
                 animator.SetTrigger("Attack");
                 FireProjectile();
-                float hitValue = CalculateHitProbability(characterStats.GetDamage(),player.GetComponent<Player>());
-                playerComponent.TakeDamage(hitValue);
+                //float hitValue = CalculateHitProbability(characterStats.GetDamage(),player.GetComponent<Player>());
+                //playerComponent.TakeDamage(hitValue);
                 lastHitTime = Time.time;
-            }
-        }
-
-        public void TakeDamage(float damage)
-        {
-            currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
-            if (currenthealthPoints <= 0)
-            {
-                Destroy(this.gameObject);
             }
         }
 
@@ -183,15 +168,6 @@ namespace RPG.Characters
             }
 
             return damage;
-        }
-
-        public float healthAsPercentage
-        {
-            get
-            {
-                return currenthealthPoints / (float)maxHealthPoints;
-            }
-
         }
 
         void OnDrawGizmos()

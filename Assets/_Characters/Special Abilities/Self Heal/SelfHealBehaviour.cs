@@ -3,6 +3,11 @@
     public class SelfHealBehaviour : AbilityBehaviour
     {
 
+        Player player;
+        private void Start()
+        {
+            player = GetComponent<Player>();
+        }
         public override void Use(AbilityUseParams abilityUseParams)
         {
             HealTarget(abilityUseParams);
@@ -11,7 +16,8 @@
         }
         private void HealTarget(AbilityUseParams abilityUseParams)
         {
-            abilityUseParams.target.TakeHeal(-(config as SelfHealConfig).GetHealAmount());
+            var playerHealth = player.GetComponent<HealthSystem>();
+            playerHealth.Heal((config as SelfHealConfig).GetHealAmount());
         }
     }
 }

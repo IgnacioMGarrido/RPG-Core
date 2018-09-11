@@ -69,6 +69,12 @@ namespace RPG.Characters
             }
 
         }
+
+        public void Kill()
+        {
+            //TO allow Death Signaling.
+        }
+
         void OnMouseOverEnemy(Enemy enemy)
         {
             if (player.GetIsDead() == false)
