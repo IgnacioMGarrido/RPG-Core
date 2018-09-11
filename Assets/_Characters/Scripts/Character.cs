@@ -5,7 +5,6 @@ using UnityEngine.AI;
 using RPG.CameraUI;
 namespace RPG.Characters
 {
-    [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Player))]
 
     //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
@@ -30,14 +29,25 @@ namespace RPG.Characters
         [SerializeField] float drag = 0;
         [SerializeField] float angularDrag = 0.05f;
 
+        [Header("AudioSource Settings")]
+        [SerializeField] [Range(0f, 1f)] float spatialBlend = .7f;
+
 
         NavMeshAgent agent;
         [Header("NavMeshAgent Settings")]
-        
+        [SerializeField] float steeringSpeed = 1;
+        [SerializeField] float angularSpeed = 120;
+        [SerializeField] float acceleration = 8;
+        [SerializeField] float stoppingDistance = 1.3f;
+        [SerializeField] float avoidanceRadius = .1f;
+        [SerializeField] float avoidanceHeight = 2f;
+
+
+
+
 
 
         [Header("Movement Properties")]
-        [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
@@ -46,11 +56,6 @@ namespace RPG.Characters
 
         Player player;
         Vector3 currentDestination, clickPoint;
-
-
-
-
-
 
         float turnAmount;
         float forwardAmount;
@@ -77,6 +82,17 @@ namespace RPG.Characters
             myRigidbody.angularDrag = angularDrag;
             myRigidbody.useGravity = true;
 
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.spatialBlend = spatialBlend;
+
+            agent = gameObject.AddComponent<NavMeshAgent>();
+            agent.speed = steeringSpeed;
+            agent.angularSpeed = angularSpeed;
+            agent.acceleration = acceleration;
+            agent.stoppingDistance = stoppingDistance;
+            agent.radius = avoidanceRadius;
+            agent.height = avoidanceHeight;
+            
 
         }
 
