@@ -32,7 +32,6 @@ namespace RPG.Characters
         [Header("AudioSource Settings")]
         [SerializeField] [Range(0f, 1f)] float spatialBlend = .7f;
 
-
         NavMeshAgent agent;
         [Header("NavMeshAgent Settings")]
         [SerializeField] float steeringSpeed = 1;
@@ -41,11 +40,6 @@ namespace RPG.Characters
         [SerializeField] float stoppingDistance = 1.3f;
         [SerializeField] float avoidanceRadius = .1f;
         [SerializeField] float avoidanceHeight = 2f;
-
-
-
-
-
 
         [Header("Movement Properties")]
         [SerializeField] float movingTurnSpeed = 360;
@@ -93,23 +87,17 @@ namespace RPG.Characters
             agent.radius = avoidanceRadius;
             agent.height = avoidanceHeight;
             
-
         }
 
         private void Start()
         {
             player = GetComponent<Player>();
-
-            myRigidbody = GetComponent<Rigidbody>();
             myRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-
-            animator = GetComponent<Animator>();
             animator.applyRootMotion = true; //TODO: Consider if needed.
 
             RPGCursor rpgCursor = Camera.main.GetComponent<RPGCursor>();
             currentDestination = transform.position;
 
-            agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
             agent.updatePosition = true;
             agent.stoppingDistance = stoppingDistance;
@@ -136,7 +124,6 @@ namespace RPG.Characters
             }
 
         }
-
         public void Kill()
         {
             //TO allow Death Signaling.
