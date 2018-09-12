@@ -3,10 +3,10 @@
     public class SelfHealBehaviour : AbilityBehaviour
     {
 
-        Player player;
+        PlayerControl player;
         private void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<PlayerControl>();
         }
         public override void Use(HealthSystem hs)
         {

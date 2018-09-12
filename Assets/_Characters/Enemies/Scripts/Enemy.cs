@@ -131,7 +131,7 @@ namespace RPG.Characters
 
         private void AttackTarget()
         {
-            var playerComponent = player.GetComponent<Player>();
+            var playerComponent = player.GetComponent<PlayerControl>();
 
             if (Time.time - lastHitTime > characterStats.GetActionSpeed())
             {
@@ -144,7 +144,7 @@ namespace RPG.Characters
             }
         }
 
-        public float CalculateHitProbability(float damage, Player target)
+        public float CalculateHitProbability(float damage, PlayerControl target)
         {
             int score = Random.Range(1, 101);
             float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - player.GetComponent<CharacterStats>().GetDeflection();

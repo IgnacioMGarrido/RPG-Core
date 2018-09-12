@@ -1,16 +1,18 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 
 using RPG.CameraUI;
 namespace RPG.Characters
 {
-    [RequireComponent(typeof(Player))]
+    [RequireComponent(typeof(PlayerControl))]
 
     //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
     public class Character : MonoBehaviour
     {
-
+        const string DEFAULT_ATTACK = "DEFAULT ATTACK";
+        const string ATTACK_TRIGGER = "Attack";
 
         Animator animator;
         [Header("Animator Settings")]
@@ -48,11 +50,21 @@ namespace RPG.Characters
         [SerializeField] float moveSpeedMultiplier = 1.2f;
         [SerializeField] float animatiorSpeedMultiplier = 1f;
 
-        Player player;
-        Vector3 currentDestination, clickPoint;
+        PlayerControl player;
+        CharacterStats characterStats;
+        [Header("Weapon")]
+        [SerializeField] Weapon currentWeaponConfig = null;
+        GameObject weaponGameObject;
+
+        float lastHitTime = 0f;
+
+
+        Vector3 currentDestination;
 
         float turnAmount;
         float forwardAmount;
+
+        bool isAlive = true;
 
         public void Awake()
         {
@@ -91,53 +103,39 @@ namespace RPG.Characters
 
         private void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<PlayerControl>();
+            characterStats = GetComponent<CharacterStats>();
+
+            if(currentWeaponConfig != null)
+                PutWeaponInHand(currentWeaponConfig);
+
+            ModifyAoERadius();
+            SetupAttackAnimation();
+
+
             myRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             animator.applyRootMotion = true; //TODO: Consider if needed.
 
-            RPGCursor rpgCursor = Camera.main.GetComponent<RPGCursor>();
             currentDestination = transform.position;
 
             agent.updateRotation = false;
             agent.updatePosition = true;
             agent.stoppingDistance = stoppingDistance;
 
-            rpgCursor.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
-            rpgCursor.onMouseOverEnemy += OnMouseOverEnemy;
+
 
         }
         private void Update()
         {
-            if (agent.remainingDistance > agent.stoppingDistance)
+            if (agent.remainingDistance > agent.stoppingDistance && isAlive)
                 Move(agent.desiredVelocity);
             else
                 Move(Vector3.zero);
         }
-        void OnMouseOverPotentiallyWalkable(Vector3 destination)
-        {
-            if (player.GetIsDead() == false)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    agent.SetDestination(destination);
-                }
-            }
 
-        }
         public void Kill()
         {
-            //TO allow Death Signaling.
-        }
-
-        void OnMouseOverEnemy(Enemy enemy)
-        {
-            if (player.GetIsDead() == false)
-            {
-                if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))
-                {
-                    agent.SetDestination(enemy.transform.position);
-                }
-            }
+            isAlive = false;
         }
 
         private void WalkToDestination()
@@ -160,7 +158,12 @@ namespace RPG.Characters
             return destination - reductionVector;
         }
 
-        public void Move(Vector3 movement)
+        public void SetDestination(Vector3 worldPosition)
+        {
+            agent.SetDestination(worldPosition);
+        }
+
+        private void Move(Vector3 movement)
         {
             SetForwardAndTurn(movement);
             ApplyExtraTurnRotation();
@@ -203,6 +206,118 @@ namespace RPG.Characters
                 myRigidbody.velocity = velocity;
             }
         }
+
+        void SetWeaponModifiersToPlayer()
+        {
+            if (characterStats != null)
+            {
+                characterStats.SetActionSpeed(currentWeaponConfig.ActionSpeedModifier);
+                characterStats.SetDamage(currentWeaponConfig.DamageModifier);
+            }
+        }
+
+        private void ModifyAoERadius()
+        {
+            AoEBehaviour[] AoEAbilities = GetComponents<AoEBehaviour>();
+            if (AoEAbilities.Length > 0)
+            {
+                foreach (AoEBehaviour aoEability in AoEAbilities)
+                {
+                    aoEability.SetRadiusModifier(characterStats.GetAoEModifier());
+                }
+            }
+        }
+
+        public void PutWeaponInHand(Weapon weaponToUse)
+        {
+            currentWeaponConfig = weaponToUse;
+            var weaponPrefab = weaponToUse.WeaponPrefab;
+            GameObject dominantHandSocket = RequestDominantHand();
+            Destroy(weaponGameObject);
+            weaponGameObject = Instantiate(weaponToUse.WeaponPrefab, dominantHandSocket.transform); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
+            weaponGameObject.transform.localPosition = weaponToUse.Grip.localPosition;
+            weaponGameObject.transform.localRotation = weaponToUse.Grip.localRotation;
+
+            SetWeaponModifiersToPlayer();
+            //TODO: Maybe do this everytime we attack instead??
+            SetupAttackAnimation();
+        }
+
+        private GameObject RequestDominantHand()
+        {
+            var dominantHands = GetComponentsInChildren<DominantHand>();
+            int numDominantHands = dominantHands.Length;
+            //Handle 0 hands
+            Assert.IsFalse(numDominantHands <= 0, "No dominant hand found on Player. Please add one");
+            //handle more than one hand
+            Assert.IsFalse(numDominantHands > 1, "Multiple Dominant hand Scripts on player, pleasse remove one");
+
+            return dominantHands[0].gameObject;
+
+        }
+
+        private void SetupAttackAnimation()
+        {
+
+            animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip(); //remove const
+        }
+
+        public Weapon GetCurrentWeaponConfig() {
+            return currentWeaponConfig;
+        }
+
+        public void AttackTarget(HealthSystem targetHealthSystem)
+        {
+            if (Time.time - lastHitTime > characterStats.GetActionSpeed())
+            {
+                animator.SetTrigger(ATTACK_TRIGGER);
+                float hitValue = CalculateHitProbability(characterStats.GetDamage(), targetHealthSystem);
+                //target.TakeDamage(hitValue);
+                lastHitTime = Time.time;
+            }
+        }
+
+        public bool IsTargetInRange(Character target)
+        {
+            float distanceToTarget = (target.transform.position - transform.position).magnitude;
+            return distanceToTarget <= GetComponent<Character>().GetCurrentWeaponConfig().MaxAttackRange;
+        }
+        //TODO: cleaqr this mess.
+        public float CalculateHitProbability(float damage, HealthSystem enemy)
+        {
+            int score = UnityEngine.Random.Range(1, 101);
+
+            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - enemy.GetComponent<CharacterStats>().GetDeflection();
+            float attackRoll = score + damageDealerNewAccuracy;
+            print("------------------------------------------------------------------------------");
+            print("Attack Roll: " + score + "(score) + " + damageDealerNewAccuracy + " (Player Accuracy - Enemy Deflection) " + " = " + attackRoll);
+
+            if (attackRoll > 25 && attackRoll <= 50)
+            {
+                damage = damage / 2;
+                print("This hit was a GRAZE. Damage/2 = " + damage);
+            }
+            else if (attackRoll > 0 && attackRoll < 25)
+            {
+                damage = 0;
+                print("This hit was a MISS. Damage =" + damage);
+            }
+            else if (attackRoll > 100)
+            {
+                damage = damage * 1.25f;
+                print("This hit was a CRIT HIT. Damage * 1.25 = " + damage);
+
+            }
+            else
+            {
+                print("This hit was a NORMAL HIT. Damage = " + damage);
+            }
+
+            return damage;
+        }
     }
+
 
 }
