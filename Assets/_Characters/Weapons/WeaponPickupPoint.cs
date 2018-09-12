@@ -40,10 +40,10 @@ namespace RPG.Characters {
             if (other.gameObject.tag == "Player" && hasPlayed == false)
             {
                 hasPlayed = true;
-                Character character = other.gameObject.GetComponent<Character>();
+                WeaponSystem weaponSystem = other.gameObject.GetComponent<WeaponSystem>();
 
-                character.PutWeaponInHand(weaponConfig);
-                var audioSource = character.GetComponent<AudioSource>();
+                weaponSystem.PutWeaponInHand(weaponConfig);
+                var audioSource = weaponSystem.GetComponent<AudioSource>();
                 if (audioSource.isPlaying == false)
                 { 
                     audioSource.PlayOneShot(weapongPickUpSoundEffect);

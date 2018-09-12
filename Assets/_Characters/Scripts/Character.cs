@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Assertions;
 
 using RPG.CameraUI;
 namespace RPG.Characters
@@ -9,15 +8,14 @@ namespace RPG.Characters
     [RequireComponent(typeof(PlayerControl))]
 
     //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
+    //TODO: Extract Weapon System.
     public class Character : MonoBehaviour
     {
-        const string DEFAULT_ATTACK = "DEFAULT ATTACK";
         const string ATTACK_TRIGGER = "Attack";
 
         Animator animator;
         [Header("Animator Settings")]
         [SerializeField] RuntimeAnimatorController animatorController;
-        [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Avatar characterAvatar;
 
         [Header("Collider Settings")]
@@ -52,9 +50,8 @@ namespace RPG.Characters
 
         PlayerControl player;
         CharacterStats characterStats;
-        [Header("Weapon")]
-        [SerializeField] Weapon currentWeaponConfig = null;
-        GameObject weaponGameObject;
+
+
 
         float lastHitTime = 0f;
 
@@ -106,11 +103,9 @@ namespace RPG.Characters
             player = GetComponent<PlayerControl>();
             characterStats = GetComponent<CharacterStats>();
 
-            if(currentWeaponConfig != null)
-                PutWeaponInHand(currentWeaponConfig);
+
 
             ModifyAoERadius();
-            SetupAttackAnimation();
 
 
             myRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -207,14 +202,7 @@ namespace RPG.Characters
             }
         }
 
-        void SetWeaponModifiersToPlayer()
-        {
-            if (characterStats != null)
-            {
-                characterStats.SetActionSpeed(currentWeaponConfig.ActionSpeedModifier);
-                characterStats.SetDamage(currentWeaponConfig.DamageModifier);
-            }
-        }
+
 
         private void ModifyAoERadius()
         {
@@ -228,45 +216,6 @@ namespace RPG.Characters
             }
         }
 
-        public void PutWeaponInHand(Weapon weaponToUse)
-        {
-            currentWeaponConfig = weaponToUse;
-            var weaponPrefab = weaponToUse.WeaponPrefab;
-            GameObject dominantHandSocket = RequestDominantHand();
-            Destroy(weaponGameObject);
-            weaponGameObject = Instantiate(weaponToUse.WeaponPrefab, dominantHandSocket.transform); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
-            weaponGameObject.transform.localPosition = weaponToUse.Grip.localPosition;
-            weaponGameObject.transform.localRotation = weaponToUse.Grip.localRotation;
-
-            SetWeaponModifiersToPlayer();
-            //TODO: Maybe do this everytime we attack instead??
-            SetupAttackAnimation();
-        }
-
-        private GameObject RequestDominantHand()
-        {
-            var dominantHands = GetComponentsInChildren<DominantHand>();
-            int numDominantHands = dominantHands.Length;
-            //Handle 0 hands
-            Assert.IsFalse(numDominantHands <= 0, "No dominant hand found on Player. Please add one");
-            //handle more than one hand
-            Assert.IsFalse(numDominantHands > 1, "Multiple Dominant hand Scripts on player, pleasse remove one");
-
-            return dominantHands[0].gameObject;
-
-        }
-
-        private void SetupAttackAnimation()
-        {
-
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip(); //remove const
-        }
-
-        public Weapon GetCurrentWeaponConfig() {
-            return currentWeaponConfig;
-        }
 
         public void AttackTarget(HealthSystem targetHealthSystem)
         {
@@ -282,7 +231,7 @@ namespace RPG.Characters
         public bool IsTargetInRange(Character target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            return distanceToTarget <= GetComponent<Character>().GetCurrentWeaponConfig().MaxAttackRange;
+            return distanceToTarget <= GetComponent<WeaponSystem>().GetCurrentWeaponConfig().MaxAttackRange;
         }
         //TODO: cleaqr this mess.
         public float CalculateHitProbability(float damage, HealthSystem enemy)
