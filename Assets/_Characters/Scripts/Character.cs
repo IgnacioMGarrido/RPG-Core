@@ -233,7 +233,7 @@ namespace RPG.Characters
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= GetComponent<WeaponSystem>().GetCurrentWeaponConfig().MaxAttackRange;
         }
-        //TODO: cleaqr this mess.
+        //TODO: cleaqr this mess, Maybe move to Weapon System??.
         public float CalculateHitProbability(float damage, HealthSystem enemy)
         {
             int score = UnityEngine.Random.Range(1, 101);
@@ -265,6 +265,15 @@ namespace RPG.Characters
             }
 
             return damage;
+        }
+
+        public bool GetIsAlive()
+        {
+            return isAlive;
+        }
+
+        public void SetIsAlive(bool _isAlive) {
+            this.isAlive = _isAlive;
         }
     }
 

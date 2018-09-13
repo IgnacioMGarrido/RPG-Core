@@ -65,6 +65,7 @@ namespace RPG.Characters
             audioSource.PlayOneShot(clip);
             if (characterDies)
             {
+                character.SetIsAlive(false);
                 StartCoroutine(KillCharacter());
             }
         }
