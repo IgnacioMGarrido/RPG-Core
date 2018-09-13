@@ -10,8 +10,6 @@ namespace RPG.Characters
     public class Enemy : MonoBehaviour
     {
 
-        [SerializeField] float actionSpeed = 0.5f;
-
         [SerializeField] float chaseRadius = 5.0f;
         [SerializeField] float attackRadius = 7.0f;
         [SerializeField] float stopChasingRadius = 20.0f;
@@ -20,18 +18,16 @@ namespace RPG.Characters
 
         [SerializeField] GameObject projectileSocket;
 
-        [Header("Weapon")]
-        [SerializeField] Weapon weaponInUse = null;
-
-        [SerializeField] AnimatorOverrideController animatorOverrideController;
         Animator animator;
 
         bool isAttacking = false;
 
-      //  AICharacterControl aiCharacterController = null;
-        CharacterStats characterStats;
         Transform originalTransform;
         GameObject player = null;
+
+        CharacterStats characterStats;
+        Character enemyCharacter;
+        SpecialAbilities enemyAbilities;
 
         GameObject spawnPosition;
 
@@ -40,49 +36,17 @@ namespace RPG.Characters
         {
 
             player = GameObject.FindGameObjectWithTag("Player");
-           // aiCharacterController = GetComponent<AICharacterControl>();
             characterStats = GetComponent<CharacterStats>();
-            if (characterStats)
-            {
-                actionSpeed = characterStats.GetActionSpeed();
-            }
+            enemyCharacter = GetComponent<Character>();
+            enemyAbilities = GetComponent<SpecialAbilities>();
+
             spawnPosition = new GameObject("SpawnPosition");
             spawnPosition.transform.position = transform.position;
             spawnPosition.transform.parent = GameObject.Find("SpawnPositions").transform;
-
-            PutWeaponInHand();
-            SetupRuntimeAnimator();
-        }
-        void PutWeaponInHand()
-        {
-
-            GameObject weapon = Instantiate(weaponInUse.WeaponPrefab); //, weaponSlot.position, weaponSlot.rotation) as GameObject;
-            GameObject dominantHandSocket = RequestDominantHand();
-            weapon.transform.SetParent(dominantHandSocket.transform);
-            weapon.transform.localPosition = weaponInUse.Grip.localPosition;
-            weapon.transform.localRotation = weaponInUse.Grip.localRotation;
-
-            //SetWeaponModifiersToEnemy(); //TODO: Set Enemy Weapon modifiers.
         }
 
-        private GameObject RequestDominantHand()
-        {
-            var dominantHands = GetComponentsInChildren<DominantHand>();
-            int numDominantHands = dominantHands.Length;
-            //Handle 0 hands
-            Assert.IsFalse(numDominantHands <= 0, "No dominant hand found on Player. Please add one");
-            //handle more than one hand
-            Assert.IsFalse(numDominantHands > 1, "Multiple Dominant hand Scripts on player, pleasse remove one");
-
-            return dominantHands[0].gameObject;
-
-        }
         private void Update()
         {
-            //if (player.GetComponent<Player>().HealthAsPercentage <= Mathf.Epsilon) { //Stop Coroutines
-            //    StopAllCoroutines();
-            //    Destroy(this);
-            //}
 
             float distanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
             float spawnDistanceToPlayer = Mathf.Abs(Vector3.Distance(player.transform.position, spawnPosition.transform.position));
@@ -90,7 +54,7 @@ namespace RPG.Characters
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
-                InvokeRepeating("AttackTarget", 0f, actionSpeed); //TODO: Switch to coroutines
+                InvokeRepeating("AttackTarget", 0f, characterStats.GetActionSpeed()); //TODO: Switch to coroutines
             }
             if (distanceToPlayer > attackRadius)
             {
@@ -100,23 +64,17 @@ namespace RPG.Characters
 
             if (distanceToPlayer <= chaseRadius)
             {
-                //aiCharacterController.SetTarget(player.transform);
+                enemyCharacter.SetDestination(player.transform.position);
             }
             else if (spawnDistanceToPlayer >= stopChasingRadius)
             {
-                //aiCharacterController.SetTarget(spawnPosition.transform);
+                enemyCharacter.SetDestination(spawnPosition.transform.position);
             }
         }
 
-        private void SetupRuntimeAnimator()
-        {
-
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController["DEFAULT ATTACK"] = weaponInUse.GetAttackAnimClip(); //remove const
+        void AttackTarget() {
+            enemyCharacter.AttackTarget(player.GetComponent<HealthSystem>());
         }
-
-        //TODO: Start separating Character firing logic
         private void FireProjectile()
         {
             GameObject newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position.normalized));
@@ -127,39 +85,6 @@ namespace RPG.Characters
 
             float projectileSpeed = projectileComponent.getDefaultLaunchSpeed();
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
-        }
-
-        private void AttackTarget()
-        {
-            var playerComponent = player.GetComponent<PlayerControl>();
-
-            if (Time.time - lastHitTime > characterStats.GetActionSpeed())
-            {
-                //animator.SetTrigger("Attack");
-                animator.SetTrigger("Attack");
-                FireProjectile();
-                //float hitValue = CalculateHitProbability(characterStats.GetDamage(),player.GetComponent<Player>());
-                //playerComponent.TakeDamage(hitValue);
-                lastHitTime = Time.time;
-            }
-        }
-
-        public float CalculateHitProbability(float damage, PlayerControl target)
-        {
-            int score = Random.Range(1, 101);
-            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - player.GetComponent<CharacterStats>().GetDeflection();
-            float attackRoll = score + damageDealerNewAccuracy;
-
-            if (attackRoll > 25 && attackRoll <= 50)
-            {
-                damage = damage / 2;
-            }
-            else if (attackRoll > 100)
-            {
-                damage = damage * 1.25f;
-            }
-
-            return damage;
         }
 
         void OnDrawGizmos()

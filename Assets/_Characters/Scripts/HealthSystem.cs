@@ -62,7 +62,9 @@ namespace RPG.Characters
             bool characterDies = (currenthealthPoints - damage) <= 0;
             currenthealthPoints = Mathf.Clamp(currenthealthPoints - damage, 0f, maxHealthPoints);
             var clip = hitSounds[(int)UnityEngine.Random.Range(0, hitSounds.Length)];
-            audioSource.PlayOneShot(clip);
+            audioSource.clip = clip;
+            audioSource.Play();
+            print("Audio Source Speed: " + audioSource.time);
             if (characterDies)
             {
                 character.SetIsAlive(false);

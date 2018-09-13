@@ -56,17 +56,7 @@ namespace RPG.Characters
             if (IsEnergyAvailable(abilities[abilityIndex].GetEnergyCost()))
             {
                 ConsumeEnergy(abilities[abilityIndex].GetEnergyCost());
-                if (abilityIndex == 0)
-                {
-                    //float damageAmount = CalculateHitProbability(amount, target);
-                    //TODO: remove AbilityUseParams.
-                    abilities[abilityIndex].Use(target);
-                }
-                else
-                {
-                    abilities[abilityIndex].Use(target);
-
-                }
+                abilities[abilityIndex].Use(target);
 
                 //Play Ability animation.
                 if (abilities[abilityIndex].GetAbilityAnimation() != null)

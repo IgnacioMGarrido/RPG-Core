@@ -148,7 +148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1255341865067632
 GameObject:
   m_ObjectHideFlags: 1
@@ -919,13 +919,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4380695376412492}
-  - component: {fileID: 95939229426259160}
-  - component: {fileID: 54893284934690936}
-  - component: {fileID: 136768034882619232}
-  - component: {fileID: 195894390016807626}
-  - component: {fileID: 114373530622781524}
-  - component: {fileID: 114789506143169814}
-  - component: {fileID: 114247473875937146}
+  - component: {fileID: 114669691237659532}
+  - component: {fileID: 114461645861695724}
+  - component: {fileID: 114130336140051808}
+  - component: {fileID: 114552396818199320}
+  - component: {fileID: 114579233831863174}
   m_Layer: 10
   m_Name: Enemy_Bruiser
   m_TagString: Enemy
@@ -2012,21 +2010,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1349660750436962}
   m_Mesh: {fileID: 4300004, guid: d288a0e4a2d923b46898986e979da643, type: 3}
---- !u!54 &54893284934690936
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1939841245054686}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!95 &95185034539942670
 Animator:
   serializedVersion: 3
@@ -2037,24 +2020,6 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
   m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &95939229426259160
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1939841245054686}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
-  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2090,10 +2055,10 @@ MonoBehaviour:
   clip:
   - {fileID: 8300000, guid: 640c7f10a201acc4f9c26b7d4b85ed53, type: 3}
   layerFilter: 11
-  triggerRadius: 7
+  triggerRadius: 7.85
   isOneTimeOnly: 1
   hasPlayed: 0
---- !u!114 &114247473875937146
+--- !u!114 &114130336140051808
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2107,10 +2072,91 @@ MonoBehaviour:
   maxHealthPoints: 100
   currenthealthPoints: 0
   healthBar: {fileID: 0}
-  hitSounds: []
-  deathSounds: []
-  healSounds: []
---- !u!114 &114373530622781524
+  hitSounds:
+  - {fileID: 8300000, guid: 26892a2ab85819f42ad159e7ffb87c70, type: 3}
+  - {fileID: 8300000, guid: 446c24cf9f86eb14194d2fe98196e2c0, type: 3}
+  - {fileID: 8300000, guid: 47e86d3fb110e82489bef406e18904f6, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 227318d66d2af0041a73412064860ed2, type: 3}
+  - {fileID: 8300000, guid: b2cd1d51eabf0c24db96e19d2e44ce8c, type: 3}
+  healSounds:
+  - {fileID: 8300000, guid: f8ae35a960206774f89f772cefa437b3, type: 3}
+--- !u!114 &114406540053549526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796500995617428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcd18a6820a3f742822b8e05adb6a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114461645861695724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939841245054686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e40b0e33680594fb4f6ab826c8740f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponConfig: {fileID: 11400000, guid: 934100258965c4048a17739c1b912878,
+    type: 2}
+  animatorOverrideController: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b,
+    type: 2}
+--- !u!114 &114552396818199320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939841245054686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25536bfffb7fcb7418eb6fd31417cb67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  characterAvatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+  colliderRadius: 0.2
+  colliderHeight: 1.8
+  colliderCenter: {x: 0, y: 0.9, z: 0}
+  mass: 1
+  drag: 0
+  angularDrag: 0.05
+  spatialBlend: 0.7
+  steeringSpeed: 1
+  angularSpeed: 120
+  acceleration: 8
+  stoppingDistance: 1.3
+  avoidanceRadius: 0.1
+  avoidanceHeight: 2
+  movingTurnSpeed: 400
+  stationaryTurnSpeed: 300
+  moveThreshold: 1
+  moveSpeedMultiplier: 1
+  animatiorSpeedMultiplier: 1
+--- !u!114 &114579233831863174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939841245054686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c214d763287ad3d4dbaeba9224692f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseRadius: 5
+  attackRadius: 1.7
+  stopChasingRadius: 20
+  projectileToUse: {fileID: 1983299024820686, guid: 12afe62582921c546a2fb1bcd767cbd8,
+    type: 2}
+  AimOffset: {x: 0, y: 1, z: 0}
+  projectileSocket: {fileID: 1893448537900876}
+--- !u!114 &114669691237659532
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2141,52 +2187,6 @@ MonoBehaviour:
   AoEIncrease: 0
   duration: 3
   health: 0
---- !u!114 &114406540053549526
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796500995617428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bcd18a6820a3f742822b8e05adb6a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114789506143169814
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1939841245054686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c214d763287ad3d4dbaeba9224692f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionSpeed: 0.5
-  chaseRadius: 4
-  attackRadius: 1.7
-  stopChasingRadius: 15
-  projectileToUse: {fileID: 1983299024820686, guid: 12afe62582921c546a2fb1bcd767cbd8,
-    type: 2}
-  AimOffset: {x: 0, y: 1, z: 0}
-  projectileSocket: {fileID: 1893448537900876}
-  weaponInUse: {fileID: 11400000, guid: 934100258965c4048a17739c1b912878, type: 2}
-  animatorOverrideController: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b,
-    type: 2}
---- !u!136 &136768034882619232
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1939841245054686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.8072436
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9036218, z: -0}
 --- !u!137 &137189845644072464
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2379,24 +2379,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000011920929, y: 0.8895276, z: -0.06334141}
     m_Extent: {x: 1.0256672, y: 0.9876334, z: 0.26265514}
   m_DirtyAABB: 0
---- !u!195 &195894390016807626
-NavMeshAgent:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1939841245054686}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 2
-  m_Acceleration: 10
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 1.8
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.8
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4

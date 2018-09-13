@@ -5,10 +5,6 @@ using UnityEngine.AI;
 using RPG.CameraUI;
 namespace RPG.Characters
 {
-    [RequireComponent(typeof(PlayerControl))]
-
-    //TODO: Maybe join Player Script and the PlayerMovementScript in the same Script
-    //TODO: Extract Weapon System.
     public class Character : MonoBehaviour
     {
         const string ATTACK_TRIGGER = "Attack";
@@ -48,7 +44,7 @@ namespace RPG.Characters
         [SerializeField] float moveSpeedMultiplier = 1.2f;
         [SerializeField] float animatiorSpeedMultiplier = 1f;
 
-        PlayerControl player;
+        //PlayerControl player;
         CharacterStats characterStats;
 
 
@@ -100,13 +96,9 @@ namespace RPG.Characters
 
         private void Start()
         {
-            player = GetComponent<PlayerControl>();
             characterStats = GetComponent<CharacterStats>();
 
-
-
             ModifyAoERadius();
-
 
             myRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             animator.applyRootMotion = true; //TODO: Consider if needed.
@@ -223,7 +215,7 @@ namespace RPG.Characters
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
                 float hitValue = CalculateHitProbability(characterStats.GetDamage(), targetHealthSystem);
-                //target.TakeDamage(hitValue);
+                targetHealthSystem.TakeDamage(hitValue);
                 lastHitTime = Time.time;
             }
         }
@@ -233,12 +225,12 @@ namespace RPG.Characters
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= GetComponent<WeaponSystem>().GetCurrentWeaponConfig().MaxAttackRange;
         }
-        //TODO: cleaqr this mess, Maybe move to Weapon System??.
-        public float CalculateHitProbability(float damage, HealthSystem enemy)
+        //TODO: cleaar this mess, Maybe move to Weapon System??.
+        public float CalculateHitProbability(float damage, HealthSystem targetToHit)
         {
             int score = UnityEngine.Random.Range(1, 101);
 
-            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - enemy.GetComponent<CharacterStats>().GetDeflection();
+            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - targetToHit.GetComponent<CharacterStats>().GetDeflection();
             float attackRoll = score + damageDealerNewAccuracy;
             print("------------------------------------------------------------------------------");
             print("Attack Roll: " + score + "(score) + " + damageDealerNewAccuracy + " (Player Accuracy - Enemy Deflection) " + " = " + attackRoll);
