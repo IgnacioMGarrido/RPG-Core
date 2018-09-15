@@ -6,18 +6,19 @@ namespace RPG.Characters
     public class PlayerControl : MonoBehaviour
     {
 
-        Enemy target;
+        EnemyAI target;
         RPGCursor rpgCursor;
 
         CharacterStats characterStats;
         Character playerCharacter;
         SpecialAbilities playerAbilities;
-          
+        WeaponSystem weaponSystem;
         void Start()
         {
             playerCharacter = GetComponent<Character>();
             playerAbilities = GetComponent<SpecialAbilities>();
             characterStats = GetComponent<CharacterStats>();
+            weaponSystem = GetComponent<WeaponSystem>();
 
             RegisterForMouseEvents();
 
@@ -36,7 +37,7 @@ namespace RPG.Characters
                 playerCharacter.SetDestination(destination);
             }
         }
-        void OnMouseOverEnemy(Enemy enemyToSet)
+        void OnMouseOverEnemy(EnemyAI enemyToSet)
         {
 
             this.target = enemyToSet;
@@ -44,7 +45,7 @@ namespace RPG.Characters
 
             if (Input.GetMouseButton(0) && playerCharacter.IsTargetInRange(enemyCharacterHealth.GetComponent<Character>()))
             {
-                playerCharacter.AttackTarget(enemyCharacterHealth);
+                weaponSystem.AttackTarget(enemyCharacterHealth);
             }
             else if (Input.GetMouseButtonDown(1) && playerCharacter.IsTargetInRange(enemyCharacterHealth.GetComponent<Character>()))
             {

@@ -13,7 +13,7 @@ namespace RPG.CameraUI
         public delegate void OnMouseOverPotentiallyWalkable(Vector3 destination);
         public event OnMouseOverPotentiallyWalkable onMouseOverPotentiallyWalkable;
 
-        public delegate void OnMouseOverEnemy(Enemy enemy);
+        public delegate void OnMouseOverEnemy(EnemyAI enemy);
         public event OnMouseOverEnemy onMouseOverEnemy;
 
         [SerializeField] Texture2D walkCursor = null;
@@ -54,7 +54,7 @@ namespace RPG.CameraUI
             {
 
                 GameObject gameObjectHit = hitInfo.collider.gameObject;
-                Enemy enemyHit = gameObjectHit.GetComponent<Enemy>();
+                EnemyAI enemyHit = gameObjectHit.GetComponent<EnemyAI>();
                 if (enemyHit)
                 {
                     Cursor.SetCursor(targetCursor, cursorHotspot, CursorMode.Auto);

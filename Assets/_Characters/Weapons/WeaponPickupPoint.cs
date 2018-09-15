@@ -44,10 +44,8 @@ namespace RPG.Characters {
 
                 weaponSystem.PutWeaponInHand(weaponConfig);
                 var audioSource = weaponSystem.GetComponent<AudioSource>();
-                if (audioSource.isPlaying == false)
-                { 
-                    audioSource.PlayOneShot(weapongPickUpSoundEffect);
-                }
+                audioSource.clip = weapongPickUpSoundEffect;
+                audioSource.Play();
                 Destroy(this.gameObject);
             }
         }

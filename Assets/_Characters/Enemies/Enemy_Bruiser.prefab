@@ -2047,7 +2047,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1229179708664198}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd5c2c86d90ad24a8cd318454bf6ebe, type: 3}
   m_Name: 
@@ -2105,8 +2105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeaponConfig: {fileID: 11400000, guid: 934100258965c4048a17739c1b912878,
     type: 2}
-  animatorOverrideController: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b,
-    type: 2}
 --- !u!114 &114552396818199320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2119,6 +2117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  overrideController: {fileID: 22100000, guid: 3650e0ba92d463b45adbed2087052c7b, type: 2}
   characterAvatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
   colliderRadius: 0.2
   colliderHeight: 1.8

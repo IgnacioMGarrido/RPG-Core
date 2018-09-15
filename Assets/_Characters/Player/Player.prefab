@@ -2157,8 +2157,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeaponConfig: {fileID: 11400000, guid: 9a59e110d0efb8c49a6c802477876497,
     type: 2}
-  animatorOverrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6,
-    type: 2}
 --- !u!114 &114305219025236312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2267,6 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  overrideController: {fileID: 22100000, guid: 2e27f0c9ed6591141bc7f07e9e3650a6, type: 2}
   characterAvatar: {fileID: 9000000, guid: 6312fb3bed4303745a76d0723c5ed14f, type: 3}
   colliderRadius: 0.2
   colliderHeight: 1.8

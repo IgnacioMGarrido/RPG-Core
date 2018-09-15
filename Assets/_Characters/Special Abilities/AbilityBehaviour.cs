@@ -29,10 +29,10 @@ namespace RPG.Characters
 
         protected void PlayAbilitySound()
         {
-            var abilitySound = config.GetRandomAbilityAudioClip(); //TODO: change to random clip.
+            var abilitySound = config.GetRandomAbilityAudioClip(); 
             var audioSource = GetComponent<AudioSource>();
-            if(abilitySound != null)
-                audioSource.PlayOneShot(abilitySound);
+            audioSource.clip = abilitySound;
+            audioSource.Play();
         }
     }
 }

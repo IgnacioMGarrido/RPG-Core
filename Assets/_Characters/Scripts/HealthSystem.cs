@@ -25,6 +25,7 @@ namespace RPG.Characters
         Character character;
         CharacterStats characterStats;
         float deathBanishSeconds = 3;
+        bool isAlive = true;
 
         // Use this for initialization
         void Start()
@@ -64,7 +65,6 @@ namespace RPG.Characters
             var clip = hitSounds[(int)UnityEngine.Random.Range(0, hitSounds.Length)];
             audioSource.clip = clip;
             audioSource.Play();
-            print("Audio Source Speed: " + audioSource.time);
             if (characterDies)
             {
                 character.SetIsAlive(false);
@@ -76,7 +76,8 @@ namespace RPG.Characters
         {
             currenthealthPoints = Mathf.Clamp(currenthealthPoints + healPoints, 0f, maxHealthPoints);
             var clip = healSounds[(int)UnityEngine.Random.Range(0, healSounds.Length)];
-            audioSource.PlayOneShot(clip);
+            audioSource.clip = clip;
+            audioSource.Play();
             
         }
         public float HealthAsPercentage{ get { return currenthealthPoints / (float)maxHealthPoints; } }
@@ -85,6 +86,7 @@ namespace RPG.Characters
 
         IEnumerator KillCharacter()
         {
+            isAlive = false;
             StopAllCoroutines();
             character.Kill();
             animator.SetTrigger(DEATH_TRIGGER);
@@ -93,8 +95,9 @@ namespace RPG.Characters
             if (playerComponent && playerComponent.isActiveAndEnabled)//If it is the player.
             {
                 audioSource.clip = deathSounds[(int)UnityEngine.Random.Range(0, deathSounds.Length)];
+                audioSource.pitch = 1;
                 audioSource.Play();
-                float duration = audioSource.clip.length > animator.GetCurrentAnimatorClipInfo(0).Length ? audioSource.clip.length : animator.GetCurrentAnimatorClipInfo(0).Length;
+                float duration = animator.GetCurrentAnimatorClipInfo(0).Length;
                 yield return new WaitForSecondsRealtime(duration + 2); //Animation Length;
                 SceneManager.LoadScene(0);
             }
@@ -103,6 +106,10 @@ namespace RPG.Characters
                 Destroy(gameObject, deathBanishSeconds);
             }
 
+        }
+
+        public bool GetIsAlive() {
+            return isAlive;
         }
     }
 }

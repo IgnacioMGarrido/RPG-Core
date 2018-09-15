@@ -7,17 +7,17 @@ namespace RPG.Characters
 {
     public class Character : MonoBehaviour
     {
-        const string ATTACK_TRIGGER = "Attack";
 
         Animator animator;
         [Header("Animator Settings")]
         [SerializeField] RuntimeAnimatorController animatorController;
+        [SerializeField] AnimatorOverrideController overrideController;
         [SerializeField] Avatar characterAvatar;
 
         [Header("Collider Settings")]
-        [SerializeField] float colliderRadius;
-        [SerializeField] float colliderHeight;
-        [SerializeField] Vector3 colliderCenter;
+        [SerializeField] float colliderRadius = .2f;
+        [SerializeField] float colliderHeight = 1.8f;
+        [SerializeField] Vector3 colliderCenter = new Vector3(0f,0.9f,0f);
 
         Rigidbody myRigidbody;
         [Header("Rigidbody Settings")]
@@ -46,11 +46,6 @@ namespace RPG.Characters
 
         //PlayerControl player;
         CharacterStats characterStats;
-
-
-
-        float lastHitTime = 0f;
-
 
         Vector3 currentDestination;
 
@@ -82,6 +77,7 @@ namespace RPG.Characters
             myRigidbody.useGravity = true;
 
             AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.pitch = 1;
             audioSource.spatialBlend = spatialBlend;
 
             agent = gameObject.AddComponent<NavMeshAgent>();
@@ -209,55 +205,13 @@ namespace RPG.Characters
         }
 
 
-        public void AttackTarget(HealthSystem targetHealthSystem)
-        {
-            if (Time.time - lastHitTime > characterStats.GetActionSpeed())
-            {
-                animator.SetTrigger(ATTACK_TRIGGER);
-                float hitValue = CalculateHitProbability(characterStats.GetDamage(), targetHealthSystem);
-                targetHealthSystem.TakeDamage(hitValue);
-                lastHitTime = Time.time;
-            }
-        }
-
         public bool IsTargetInRange(Character target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= GetComponent<WeaponSystem>().GetCurrentWeaponConfig().MaxAttackRange;
         }
         //TODO: cleaar this mess, Maybe move to Weapon System??.
-        public float CalculateHitProbability(float damage, HealthSystem targetToHit)
-        {
-            int score = UnityEngine.Random.Range(1, 101);
 
-            float damageDealerNewAccuracy = GetComponent<CharacterStats>().GetAccuracy() - targetToHit.GetComponent<CharacterStats>().GetDeflection();
-            float attackRoll = score + damageDealerNewAccuracy;
-            print("------------------------------------------------------------------------------");
-            print("Attack Roll: " + score + "(score) + " + damageDealerNewAccuracy + " (Player Accuracy - Enemy Deflection) " + " = " + attackRoll);
-
-            if (attackRoll > 25 && attackRoll <= 50)
-            {
-                damage = damage / 2;
-                print("This hit was a GRAZE. Damage/2 = " + damage);
-            }
-            else if (attackRoll > 0 && attackRoll < 25)
-            {
-                damage = 0;
-                print("This hit was a MISS. Damage =" + damage);
-            }
-            else if (attackRoll > 100)
-            {
-                damage = damage * 1.25f;
-                print("This hit was a CRIT HIT. Damage * 1.25 = " + damage);
-
-            }
-            else
-            {
-                print("This hit was a NORMAL HIT. Damage = " + damage);
-            }
-
-            return damage;
-        }
 
         public bool GetIsAlive()
         {
@@ -266,6 +220,13 @@ namespace RPG.Characters
 
         public void SetIsAlive(bool _isAlive) {
             this.isAlive = _isAlive;
+        }
+
+        public AnimatorOverrideController GetOverrideController() {
+            return overrideController;
+        }
+        public float GetAnimatorSpeedMultiplier() {
+            return animatiorSpeedMultiplier;
         }
     }
 
