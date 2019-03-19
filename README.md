@@ -11,6 +11,8 @@ RPG core is a personal projects with the porpouse of learning how Diablo style R
   <img src="https://i.imgur.com/I0Ev6iy.jpg" alt="Screenshot of the main character" />
 </p>
 
+Watch a gameplay [here](https://youtu.be/GEU_zMHVaCM)
+
 ## Dependencies ##
 
 - Unity3D. You can download Unity3D [here](https://unity.com/)
