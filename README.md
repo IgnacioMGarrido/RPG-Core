@@ -24,7 +24,6 @@ RPG core is a personal projects with the porpouse of learning how Diablo style R
 
 ### Core systems ###
 
-- LevelLoader, to load maps cleanly, keep the player's data around
 - Save and load system
 - Game object to handle pause and initialize the game at the start
 
